@@ -1,0 +1,285 @@
+{"kind": "Dataset", "name": "Natural Questions", "aliases": ["NaturalQuestions"], "paper_mentions": 8}
+{"kind": "Dataset", "name": "MMLU", "aliases": [], "paper_mentions": 7}
+{"kind": "Dataset", "name": "TriviaQA", "aliases": [], "paper_mentions": 2}
+{"kind": "Dataset", "name": "ALFWorld", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "arXiv", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "cloze tasks", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "Colossal Clean Crawled Corpus", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "DeBERTa", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "DMR", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "enwik8", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "Fever", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "GLUE", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "GPT-2", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "GPT-3", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "GraphQA", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "GSM8K", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "HotpotQA", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "HumanEval", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "KILT", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "labeler demonstrations of the desired model behavior", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "LoCoMo", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "LOCOMO benchmark", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "long-range arena", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "LongMemEval", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "MultiNLI", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "Path-256", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "Path-X", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "Pile", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "QuALITY", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "question-answering", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "rankings of model outputs", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "RoBERTa", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "SQuAD v1.1", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "SQuAD v2.0", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "STS", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "text8", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "translation", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "unscrambling words", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "using a novel word in a sentence", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "VINE", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "WebShop", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "WikiHop", "aliases": [], "paper_mentions": 1}
+{"kind": "Dataset", "name": "Wikipedia", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "RAG", "aliases": ["Retrieval Augmented Generation", "Retrieval-Augmented Generation (RAG)", "retrieval augmented generation (RAG)", "retrieval-augmented generation (RAG)"], "paper_mentions": 11}
+{"kind": "Method", "name": "GPT-3", "aliases": ["GPT-3 175B fine-tuned with Adam"], "paper_mentions": 5}
+{"kind": "Method", "name": "GPT-4", "aliases": [], "paper_mentions": 5}
+{"kind": "Method", "name": "BERT", "aliases": ["Bert"], "paper_mentions": 4}
+{"kind": "Method", "name": "Chain-of-Thought", "aliases": ["Chain of Thought", "chain of thought prompting"], "paper_mentions": 3}
+{"kind": "Method", "name": "Transformer", "aliases": ["Transformer architecture"], "paper_mentions": 3}
+{"kind": "Method", "name": "BM25", "aliases": ["Lucene-BM25"], "paper_mentions": 2}
+{"kind": "Method", "name": "Contriever", "aliases": [], "paper_mentions": 2}
+{"kind": "Method", "name": "InstructGPT", "aliases": [], "paper_mentions": 2}
+{"kind": "Method", "name": "Llama 2", "aliases": ["Llama 2 13B"], "paper_mentions": 2}
+{"kind": "Method", "name": "MD-QA", "aliases": ["multi-document question answering", "multi-document question answering (MD-QA)"], "paper_mentions": 2}
+{"kind": "Method", "name": "RoBERTa", "aliases": [], "paper_mentions": 2}
+{"kind": "Method", "name": "Adaptive-RAG", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Advanced RAG", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "APIs", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Atlas", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "AutoKG", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "autoregressive language model", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "BERT-large", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "block-sparse FlashAttention", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "capability of sharing and reacting to images", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "chain-of-thought reasoning", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "ChatGPT", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Chinchilla-70B", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "ColBERT", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "comprehensive evaluation benchmark for long-term memory", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "compressed finite state machines", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "cosine-similarity", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "CRAG", "aliases": ["Corrective Retrieval Augmented Generation", "Corrective Retrieval Augmented Generation (CRAG)"], "paper_mentions": 1}
+{"kind": "Method", "name": "decompose-then-recompose algorithm", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "dedicated memory management platform", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "dense retriever", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "dual-encoder framework", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "dual-level retrieval system", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "dynamic retrieval of memories for behavior planning", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "dynamic selection strategy", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "few-shot learning", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "FLARE", "aliases": ["Forward-Looking Active REtrieval augmented generation", "Forward-Looking Active REtrieval augmented generation (FLARE)"], "paper_mentions": 1}
+{"kind": "Method", "name": "FlashAttention", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "full-context approach", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "G-Retriever", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "generative agents", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "GNNs", "aliases": ["graph neural networks", "graph neural networks (GNNs)"], "paper_mentions": 1}
+{"kind": "Method", "name": "GPT-2", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "GPT-3 with a verifier", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "GQA", "aliases": ["grouped-query attention", "grouped-query attention (GQA)"], "paper_mentions": 1}
+{"kind": "Method", "name": "graph construction module", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Graph Question Answering (GraphQA) benchmark", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "graph structures", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "graph traversal module", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Graphiti", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "GraphRAG", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "HippoRAG", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "HyDE", "aliases": ["Hypothetical Document Embeddings", "Hypothetical Document Embeddings (HyDE)"], "paper_mentions": 1}
+{"kind": "Method", "name": "incremental update algorithm", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "IRCoT", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "iterative retrieval-augmented LLMs", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Jurassic-1", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "key-value retrieval", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "KG-enhanced LLMs", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "KGP", "aliases": ["Knowledge Graph Prompting", "Knowledge Graph Prompting (KGP)"], "paper_mentions": 1}
+{"kind": "Method", "name": "knowledge graphs", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "language modeling", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "large-scale web searches", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "LED", "aliases": ["Longformer-Encoder-Decoder", "Longformer-Encoder-Decoder (LED)"], "paper_mentions": 1}
+{"kind": "Method", "name": "LightRAG", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "lightweight retrieval evaluator", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "LLaMA", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Llama 1", "aliases": ["Llama 1 34B"], "paper_mentions": 1}
+{"kind": "Method", "name": "Llama 2-Chat", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "LLM based generation module", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "LLM-augmented KGs", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "LLM-based graph traversal agent", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "LLM\\otimes KG paradigm", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Longformer", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "LoRA", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "machine-human pipeline for generating very long-term dialogues", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "masked language modeling", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Mem0", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Mem0 with graph memory", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "MemGPT", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "memory storage using natural language", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Mistral", "aliases": ["Mistral 7B -- Instruct"], "paper_mentions": 1}
+{"kind": "Method", "name": "Modular RAG", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Naive RAG", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "next-token prediction", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "OD-QA", "aliases": ["open-domain question answering", "open-domain question answering (OD-QA)"], "paper_mentions": 1}
+{"kind": "Method", "name": "open-source memory solution", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "PaLM-540B", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Personalized PageRank", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "planning-retrieval-reasoning framework", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "post-training alignment", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "pre-trained neural retriever", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "pre-trained seq2seq model", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Prize-Collecting Steiner Tree optimization problem", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "proprietary model system", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "RadixAttention", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "RAGAs", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "RAPTOR", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "ReAct", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "REALM", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Reflexion", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "retrieval system", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "retrieval-augmented generation (RAG) for general textual graphs", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "retrieval-augmented Llama2-chat", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "retrieval-augmented LLMs", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "retrieve-and-generate setup", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "RETRO", "aliases": ["Retrieval-Enhanced Transformer", "Retrieval-Enhanced Transformer (RETRO)"], "paper_mentions": 1}
+{"kind": "Method", "name": "RLHF", "aliases": ["reinforcement learning from human feedback"], "paper_mentions": 1}
+{"kind": "Method", "name": "RoFormer", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "RoG", "aliases": ["reasoning on graphs", "reasoning on graphs (RoG)"], "paper_mentions": 1}
+{"kind": "Method", "name": "RoPE", "aliases": ["Rotary Position Embedding", "Rotary Position Embedding (RoPE)"], "paper_mentions": 1}
+{"kind": "Method", "name": "self-attention", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "self-attention formulation", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Self-RAG", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "self-supervised learning", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Sentence-BERT", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "SGLang", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "siamese network", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "single-step retrieval-augmented LLMs", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "smaller LM", "aliases": ["classifier", "classifier (smaller LM)"], "paper_mentions": 1}
+{"kind": "Method", "name": "soft prompting for graph understanding", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "SRoBERTa", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "supervised learning", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "SWA", "aliases": ["sliding window attention", "sliding window attention (SWA)"], "paper_mentions": 1}
+{"kind": "Method", "name": "Synergized LLMs + KGs", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "synthesis of memories into higher-level reflections", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "text interaction", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "text-to-text transformer", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "TF-IDF", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "ToG", "aliases": ["Think-on-Graph", "Think-on-Graph (ToG)"], "paper_mentions": 1}
+{"kind": "Method", "name": "Toolformer", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "ToT", "aliases": ["Tree of Thoughts", "Tree of Thoughts (ToT)"], "paper_mentions": 1}
+{"kind": "Method", "name": "traditional retrieval-augmented LMs", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "transfer learning", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "triplet network", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "unified framework", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "vector representations", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Wikipedia API", "aliases": [], "paper_mentions": 1}
+{"kind": "Method", "name": "Zep", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "open-domain question answering", "aliases": [], "paper_mentions": 15}
+{"kind": "Task", "name": "question answering", "aliases": ["question-answering"], "paper_mentions": 9}
+{"kind": "Task", "name": "fact verification", "aliases": [], "paper_mentions": 3}
+{"kind": "Task", "name": "commonsense reasoning", "aliases": ["common sense reasoning"], "paper_mentions": 2}
+{"kind": "Task", "name": "language generation", "aliases": [], "paper_mentions": 2}
+{"kind": "Task", "name": "multi-document question answering", "aliases": [], "paper_mentions": 2}
+{"kind": "Task", "name": "multi-hop question answering", "aliases": [], "paper_mentions": 2}
+{"kind": "Task", "name": "reasoning", "aliases": [], "paper_mentions": 2}
+{"kind": "Task", "name": "agent control", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "AI-generated content", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "aligning language models with human intent", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "arithmetic", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "arithmetic reasoning", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "arXiv summarization", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "assessment of generation quality", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "assessment of LLM passage exploitation", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "assessment of retrieval system relevance", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "autonomous social interaction", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "behavior adherence", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "bidirectional reasoning", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "character-level language modeling", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "cloze tasks", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "clustering", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "code generation", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "coding", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "contextual awareness", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "Creative Writing", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "cross-session information synthesis", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "deep and responsible reasoning", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "dialogue use cases", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "domain adaptation", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "emergent social behavior", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "English constituency parsing", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "entity and relation extraction", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "evaluation of retrieval augmented generation pipelines", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "event extraction", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "event summarization", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "fact checking", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "factual lookup", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "factuality assessment", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "following user intent", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "Game of 24", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "graph-to-text generation", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "helpfulness and safety evaluation", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "instruction following", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "interactive decision making", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "JSON decoding", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "key-value retrieval", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "knowledge completion", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "knowledge embedding", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "knowledge graph construction", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "knowledge graph question answering", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "knowledge graph reasoning", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "knowledge retrieval", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "knowledge-intensive tasks", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "language inference", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "language model adaptation", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "language reasoning", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "language understanding", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "link prediction", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "logical reasoning", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "long document tasks", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "long text classification", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "long-context Transformer training", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "long-document classification", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "long-form generation", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "long-form generations", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "long-form knowledge-intensive generation", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "long-term context maintenance", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "machine translation", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "mathematics", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "Mini Crosswords", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "multi-modal dialogue generation", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "multi-step reasoning", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "multi-turn chat", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "on-the-fly reasoning", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "open-domain QA", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "passage search", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "Path-256 challenge", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "Path-X challenge", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "planning and reflection in interactive environments", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "QA", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "query-focused summarization", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "reasoning processes", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "retrieval-augmented generation", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "retrieval-augmented generation pipelines", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "scene graph understanding", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "semantic textual similarity", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "sequential decision-making", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "short-form generation", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "simulated bar exam", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "simulating human behavior", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "single-hop question answering", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "summarization", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "symbolic reasoning", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "temporal question answering", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "temporal reasoning", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "text classification", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "textual graph understanding", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "tool usage", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "translation", "aliases": [], "paper_mentions": 1}
+{"kind": "Task", "name": "web search", "aliases": [], "paper_mentions": 1}

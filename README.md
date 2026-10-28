@@ -4,7 +4,7 @@
 
 PaperWeave is an agentic GraphRAG research assistant for AI/LLM papers. Ask a research question and a LangGraph agent combines a knowledge graph of papers, methods and datasets with semantic search and live arXiv search. It answers with citations and shows you the graph behind every answer.
 
-**Status:** 🚧 In development. Week 1 is the data pipeline and graph. Papers, authors and citations are loading into Neo4j; entity extraction and vector indexing are next.
+**Status:** 🚧 In development. Week 1 is the data pipeline and graph. Papers, authors, citations and LLM-extracted methods, datasets and tasks load into Neo4j, and papers are indexed in Qdrant for hybrid (dense + BM25) search. The rebuild script and the full 500-paper run are next.
 
 ## Planned features
 
@@ -49,9 +49,17 @@ python -m venv .venv
 
 .venv/Scripts/python pipeline/fetch_papers.py --max-papers 50   # → data/papers.jsonl
 .venv/Scripts/python pipeline/fetch_citations.py                # → data/citations.jsonl
+.venv/Scripts/python pipeline/extract_entities.py               # → data/entities_raw.jsonl (needs Ollama)
+.venv/Scripts/python pipeline/normalize.py                      # → data/entities.jsonl + entity_index.jsonl
 .venv/Scripts/python pipeline/load_neo4j.py                     # idempotent upsert
 .venv/Scripts/python pipeline/check_graph.py                    # sanity checks
+.venv/Scripts/python pipeline/load_qdrant.py                    # hybrid vector index (idempotent)
+.venv/Scripts/python pipeline/check_search.py                   # dense vs BM25 vs hybrid results
 ```
+
+Entity extraction runs a local LLM through [Ollama](https://ollama.com) (`qwen3:4b-instruct` by default; change `OLLAMA_MODEL` in `.env`). It takes about 15 seconds per paper on a 4 GB laptop GPU and is resumable: re-running skips papers already done. `normalize.py` merges spellings of the same entity (for example "Hotpot QA" and "HotpotQA", or "NQ" and "Natural Questions") and drops vague names. Review `data/entity_index.jsonl` to see what was merged.
+
+`load_qdrant.py` stores each paper's title and abstract as one point with two vectors: a MiniLM embedding (meaning) and a BM25 sparse vector (exact terms such as "HotpotQA"). Search runs both and merges the rankings with Reciprocal Rank Fusion. Locally, `fastembed` computes the vectors on your CPU; the first run downloads about 100 MB of models. On Qdrant Cloud, set `QDRANT_CLOUD_INFERENCE=true` and the server embeds the text instead, so the backend never loads a model.
 
 Paper metadata and citations come from the [Semantic Scholar API](https://api.semanticscholar.org). Topic searches are sorted by citation count, and every paper keeps its arXiv ID and links. Without an API key, Semantic Scholar allows about 100 requests per 5 minutes, which the scripts pace for automatically.
 

@@ -8,9 +8,17 @@ from dotenv import load_dotenv
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
 load_dotenv(ROOT / ".env")
+# Windows without Developer Mode can't symlink the model cache; it still works.
+os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS_WARNING", "1")
 
 PAPERS_FILE = DATA_DIR / "papers.jsonl"
 CITATIONS_FILE = DATA_DIR / "citations.jsonl"
+ENTITIES_RAW_FILE = DATA_DIR / "entities_raw.jsonl"  # LLM output, one row per paper
+ENTITIES_FILE = DATA_DIR / "entities.jsonl"  # normalized; what load_neo4j.py reads
+ENTITY_INDEX_FILE = DATA_DIR / "entity_index.jsonl"  # one row per entity with aliases
+
+OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
+OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen3:4b-instruct")
 
 S2_API_URL = "https://api.semanticscholar.org/graph/v1"
 
@@ -18,6 +26,15 @@ NEO4J_URI = os.getenv("NEO4J_URI", "bolt://localhost:7687")
 NEO4J_USER = os.getenv("NEO4J_USER", "neo4j")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD", "paperweave-dev")
 S2_API_KEY = os.getenv("S2_API_KEY") or None
+
+QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
+QDRANT_API_KEY = os.getenv("QDRANT_API_KEY") or None
+# true on Qdrant Cloud: the server embeds text, so nothing runs locally.
+# false (local docker): qdrant-client embeds with fastembed on this machine.
+QDRANT_CLOUD_INFERENCE = os.getenv("QDRANT_CLOUD_INFERENCE", "false").lower() == "true"
+QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "papers")
+DENSE_MODEL = "sentence-transformers/all-MiniLM-L6-v2"  # 384-dim, cosine
+SPARSE_MODEL = "Qdrant/bm25"  # keyword scores; Qdrant applies IDF
 
 # Landmark papers always included, so the graph has well-known anchors and
 # lineage questions ("what built on RAG?") have answers.

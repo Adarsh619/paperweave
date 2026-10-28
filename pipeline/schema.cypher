@@ -3,7 +3,8 @@
 //         Method, Dataset, Task    (added by entity extraction)
 // Edges:  (Author)-[:WROTE]->(Paper)
 //         (Paper)-[:CITES]->(Paper)
-//         (Paper)-[:PROPOSES]->(Method), (Paper)-[:EVALUATES_ON]->(Dataset),
+//         (Paper)-[:PROPOSES]->(Method), (Paper)-[:USES]->(Method),
+//         (Paper)-[:EVALUATES_ON]->(Dataset),
 //         (Paper)-[:ADDRESSES]->(Task), (Method)-[:IMPROVES_ON]->(Method)
 
 CREATE CONSTRAINT paper_id IF NOT EXISTS FOR (p:Paper) REQUIRE p.arxiv_id IS UNIQUE;
