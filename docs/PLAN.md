@@ -88,7 +88,7 @@ It then checks whether the evidence is enough, rewriting the query and retrying 
 
 ```
 OFFLINE (your PC; run once, refresh when you like)
- arXiv API ─► ~500 AI/LLM papers (2017–2026: RAG, agents, LLMs + landmark seed list)
+ Semantic Scholar ─► ~500 arXiv AI/LLM papers (2017–2026, most-cited per topic + landmark seed list)
  Semantic Scholar ─► citation edges between them
  Ollama ─► extract Methods / Datasets / Tasks / IMPROVES_ON (strict JSON schema, alias merging)
    ├─► data/ snapshot (JSON, committed to GitHub → used for rebuilds)
@@ -131,7 +131,7 @@ ONLINE (24/7)
 
 ## 6. Project layout (`D:\RAG Projects\paperweave\`)
 ```
-pipeline/   fetch_arxiv.py, fetch_citations.py, extract_entities.py, normalize.py,
+pipeline/   fetch_papers.py, fetch_citations.py, extract_entities.py, normalize.py,
             load_neo4j.py, load_qdrant.py, rebuild.py, schema.cypher, config.py
 data/       papers.jsonl, citations.jsonl, entities.jsonl   (snapshot for rebuilds)
 backend/    app/main.py (incl. /health), config.py, ratelimit.py, cache.py
@@ -205,4 +205,4 @@ README.md
   - Confirm a cold start recovers in under 60 seconds.
 
 ## First step after approval
-Scaffold `paperweave/` with docker-compose (Neo4j + Qdrant). Write `fetch_arxiv.py` and `fetch_citations.py`, then load a first 50-paper slice into the local graph to check the schema.
+Scaffold `paperweave/` with docker-compose (Neo4j + Qdrant). Write `fetch_papers.py` and `fetch_citations.py`, then load a first 50-paper slice into the local graph to check the schema.
