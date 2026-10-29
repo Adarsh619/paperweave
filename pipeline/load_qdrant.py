@@ -44,18 +44,14 @@ def to_point(paper: dict, entities: dict) -> models.PointStruct:
     )
 
 
-def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--recreate", action="store_true", help="drop and rebuild the collection")
-    args = parser.parse_args()
-
+def load(recreate: bool = False) -> None:
     papers = read_jsonl(PAPERS_FILE)
     if not papers:
         raise SystemExit(f"No papers found in {PAPERS_FILE}; run fetch_papers.py first")
     entities = {row["arxiv_id"]: row for row in read_jsonl(ENTITIES_FILE)}
 
     qdrant = client()
-    ensure_collection(qdrant, recreate=args.recreate)
+    ensure_collection(qdrant, recreate=recreate)
     print(f"Collection '{QDRANT_COLLECTION}' ready at {QDRANT_URL}")
 
     start = time.perf_counter()
@@ -66,6 +62,12 @@ def main() -> None:
 
     count = qdrant.count(QDRANT_COLLECTION, exact=True).count
     print(f"Indexed {len(papers)} papers in {time.perf_counter() - start:.1f}s; collection has {count} points")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--recreate", action="store_true", help="drop and rebuild the collection")
+    load(recreate=parser.parse_args().recreate)
 
 
 if __name__ == "__main__":

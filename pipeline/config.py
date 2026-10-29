@@ -1,6 +1,7 @@
 """Shared settings and corpus definition for the offline pipeline."""
 
 import os
+import sys
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -10,6 +11,8 @@ DATA_DIR = ROOT / "data"
 load_dotenv(ROOT / ".env")
 # Windows without Developer Mode can't symlink the model cache; it still works.
 os.environ.setdefault("HF_HUB_DISABLE_SYMLINKS_WARNING", "1")
+# Windows encodes redirected output as cp1252, which crashes on titles with "∞" etc.
+sys.stdout.reconfigure(encoding="utf-8")
 
 PAPERS_FILE = DATA_DIR / "papers.jsonl"
 CITATIONS_FILE = DATA_DIR / "citations.jsonl"

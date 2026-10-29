@@ -21,7 +21,7 @@ Writes:
 import re
 from collections import Counter, defaultdict
 
-from config import ENTITIES_FILE, ENTITIES_RAW_FILE, ENTITY_INDEX_FILE
+from config import ENTITIES_FILE, ENTITIES_RAW_FILE, ENTITY_INDEX_FILE, PAPERS_FILE
 from jsonl import read_jsonl, write_jsonl
 
 # Which raw fields share a namespace: a name in improves_on is a Method too.
@@ -64,6 +64,8 @@ GENERIC = {
     "existingbestresults", "previousmethods", "priorwork", "priormethods", "ensembles",
     "deeplearning", "neuralnetworks", "neuralnetwork", "machinelearning", "otherdatasets",
     "variousbenchmarks", "benchmarks", "datasets",
+    # A concept every KG paper mentions, not a method; as a node it would link everything.
+    "kg", "kgs", "knowledgegraph", "knowledgegraphs",
 }
 
 ABBREV_RE = re.compile(r"^(?P<long>.+?)\s*\((?P<short>[^()]{1,20})\)$")
@@ -130,9 +132,14 @@ def forms(name: str) -> list[str]:
 
     The combined string is never used itself, so a generic pair such as
     "large language models (LLMs)" is dropped when both parts are generic.
+    A parenthetical that can't be an abbreviation (different first letter, as in
+    "MS MARCO (V1)") is a qualifier and is dropped.
     """
     match = ABBREV_RE.match(name)
-    return [match["long"], match["short"]] if match else [name]
+    if not match:
+        return [name]
+    long, short = match["long"], match["short"]
+    return [long, short] if long[0].lower() == short[0].lower() else [long]
 
 
 def build_groups(rows: list[dict]) -> dict[str, dict]:
@@ -197,6 +204,9 @@ def main() -> None:
     raw_rows = read_jsonl(ENTITIES_RAW_FILE)
     if not raw_rows:
         raise SystemExit(f"No rows in {ENTITIES_RAW_FILE}; run extract_entities.py first")
+    # Extraction is append-only, so it may hold papers since dropped from the corpus.
+    corpus = {p["arxiv_id"] for p in read_jsonl(PAPERS_FILE)}
+    raw_rows = [r for r in raw_rows if r["arxiv_id"] in corpus]
 
     groups = build_groups(raw_rows)
     paper_counts: Counter = Counter()

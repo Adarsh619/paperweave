@@ -23,7 +23,7 @@ def client() -> httpx.Client:
 def request(http: httpx.Client, method: str, path: str, **kwargs) -> dict | list:
     """Send a request, pacing calls and backing off on 429/5xx throttling."""
     global _last_request
-    for attempt in range(6):
+    for attempt in range(8):  # up to ~6 min of backoff for the shared no-key limit
         wait = REQUEST_DELAY_S - (time.monotonic() - _last_request)
         if wait > 0:
             time.sleep(wait)

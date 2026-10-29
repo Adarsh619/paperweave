@@ -3,9 +3,11 @@
 Idempotent: every write is a MERGE, so re-running updates rather than duplicates.
 Works against local docker-compose Neo4j or AuraDB (set NEO4J_* in .env).
 
-    python pipeline/load_neo4j.py
+    python pipeline/load_neo4j.py            # upsert
+    python pipeline/load_neo4j.py --fresh    # delete everything, then load
 """
 
+import argparse
 from pathlib import Path
 
 from neo4j import GraphDatabase
@@ -91,7 +93,8 @@ def _write_batches(session, query: str, rows: list[dict]) -> None:
         session.execute_write(lambda tx, batch: tx.run(query, rows=batch).consume(), rows[i : i + BATCH_SIZE])
 
 
-def main() -> None:
+def load(fresh: bool = False) -> None:
+    """Upsert the snapshot into Neo4j. fresh=True deletes every node first."""
     papers = read_jsonl(PAPERS_FILE)
     if not papers:
         raise SystemExit(f"No papers found in {PAPERS_FILE}; run fetch_papers.py first")
@@ -102,6 +105,10 @@ def main() -> None:
     with GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD)) as driver:
         driver.verify_connectivity()
         with driver.session() as session:
+            if fresh:
+                # Batched so a large graph doesn't exhaust AuraDB Free's memory.
+                session.run("MATCH (n) CALL (n) { DETACH DELETE n } IN TRANSACTIONS OF 5000 ROWS").consume()
+                print("Deleted all nodes (fresh load)")
             for statement in _statements(SCHEMA_FILE.read_text(encoding="utf-8")):
                 session.run(statement).consume()
             print("Schema applied")
@@ -120,6 +127,12 @@ def main() -> None:
                 print(f"Rebuilt entities for {len(entities)} papers ({len(entity_index)} entities)")
             else:
                 print("No entities.jsonl yet; skipped entities (run extract_entities.py + normalize.py)")
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--fresh", action="store_true", help="delete every node before loading")
+    load(fresh=parser.parse_args().fresh)
 
 
 if __name__ == "__main__":

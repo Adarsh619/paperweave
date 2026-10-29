@@ -84,22 +84,23 @@ def main() -> None:
         if missing:
             print(f"  warning: seeds missing or without abstract: {missing}")
 
-        remaining = args.max_papers - len(corpus)
-        if remaining > 0:
-            # Over-fetch per topic: results overlap with seeds and with each other.
-            per_topic = max(10, -(-remaining // len(TOPIC_QUERIES)) * 2)
-            for query in TOPIC_QUERIES:
-                print(f"Searching: {query}")
-                added = 0
-                for rec in search_topic(http, query, per_topic):
-                    if len(corpus) >= args.max_papers:
-                        break
-                    if rec["arxiv_id"] not in corpus:
-                        corpus[rec["arxiv_id"]] = rec
-                        added += 1
-                print(f"  +{added} papers (corpus: {len(corpus)})")
-                if len(corpus) >= args.max_papers:
+        # Each topic gets an equal share of the remaining slots, so early topics
+        # can't crowd out later ones. Over-fetch 2x: results overlap with seeds
+        # and with each other; a topic that falls short leaves slots for the next.
+        for i, query in enumerate(TOPIC_QUERIES):
+            remaining = args.max_papers - len(corpus)
+            if remaining <= 0:
+                break
+            quota = -(-remaining // (len(TOPIC_QUERIES) - i))
+            print(f"Searching (up to {quota}): {query}")
+            added = 0
+            for rec in search_topic(http, query, max(10, quota * 2)):
+                if added >= quota:
                     break
+                if rec["arxiv_id"] not in corpus:
+                    corpus[rec["arxiv_id"]] = rec
+                    added += 1
+            print(f"  +{added} papers (corpus: {len(corpus)})")
 
     count = write_jsonl(PAPERS_FILE, sorted(corpus.values(), key=lambda p: p["arxiv_id"]))
     print(f"Wrote {count} papers to {PAPERS_FILE}")
