@@ -4,7 +4,7 @@
 
 PaperWeave is an agentic GraphRAG research assistant for AI/LLM papers. Ask a research question and a LangGraph agent combines a knowledge graph of papers, methods and datasets with semantic search and live arXiv search. It answers with citations and shows you the graph behind every answer.
 
-**Status:** 🚧 In development. Week 1 (data pipeline) is done. The graph holds 500 papers, 4,829 authors, 4,172 citations and 2,653 LLM-extracted methods, datasets and tasks in Neo4j. Papers are indexed in Qdrant for hybrid (dense + BM25) search, and `rebuild.py` restores both databases from the `data/` snapshot. Week 2 is the LangGraph agent and FastAPI backend.
+**Status:** 🚧 In development. Week 1 (data pipeline) is done. The graph holds 500 papers, 4,829 authors, 4,172 citations and 2,653 LLM-extracted methods, datasets and tasks in Neo4j. Papers are indexed in Qdrant for hybrid (dense + BM25) search, and `rebuild.py` restores both databases from the `data/` snapshot. Week 2 (agent + backend) is built: a LangGraph agent with graph, search and live arXiv tools behind a streaming FastAPI API. Week 3 is the Next.js frontend, evals and deployment.
 
 ## Planned features
 
@@ -27,14 +27,18 @@ PaperWeave is an agentic GraphRAG research assistant for AI/LLM papers. Ask a re
 | Data | arXiv API, Semantic Scholar API |
 | Evals | RAGAS, Langfuse |
 
-## Project structure (planned)
+## Project structure
 
 ```
 pipeline/   offline ingestion: fetch → extract entities → load graph + vectors
 data/       snapshot used to rebuild the databases
 playground/ toy LangGraph agent (learning step before the real backend)
-backend/    FastAPI + LangGraph agent and tools
-frontend/   Next.js app
+backend/    FastAPI + LangGraph agent
+  app/agent/  plan → retrieve → check → rewrite → answer → subgraph
+  app/tools/  hybrid search, Cypher templates + read-only guard, live arXiv
+  app/api/    /api/chat (SSE), /api/papers, /api/graph
+  tests/      pytest
+frontend/   Next.js app (Week 3)
 docs/       plan and architecture notes
 ```
 
@@ -75,6 +79,50 @@ python -m venv .venv
 .venv/Scripts/pip install -r playground/requirements.txt
 .venv/Scripts/python playground/toy_agent.py "What improved on RAG, and which datasets did those papers use?"
 ```
+
+## Backend: agent + API
+
+The backend is a LangGraph agent behind a FastAPI app that streams Server-Sent Events.
+
+```
+plan → retrieve → check ──(evidence thin, max 2 retries)──► rewrite → retrieve
+                       └──(enough)──► answer → subgraph
+```
+
+- **plan**: a fast LLM classifies the question (lineage, compare, dataset, top-cited, recent, graph or lookup) and pulls out the names it mentions. If the LLM fails, a keyword fallback takes over.
+- **retrieve**: code, not the LLM, runs the tools that fit the plan:
+  - Cypher templates for lineage, comparisons, dataset users and top-cited papers
+  - LLM-written Cypher for other graph questions, behind a read-only guard
+  - hybrid vector search
+  - live arXiv search for "latest" questions, with Semantic Scholar as a fallback
+- **check**: if the evidence is thin, the planner rewrites the query and tries again, up to 2 times.
+- **answer**: the strong LLM writes a cited answer, with a table for comparisons. Every `[arXiv ID]` is then checked against the evidence: garbled IDs are repaired and invented ones removed.
+- **subgraph**: returns the papers, methods and datasets behind the answer for the graph view.
+
+Safety and free-tier limits:
+- Every Cypher query runs in a read-only transaction with a 10-second timeout.
+- New questions are limited to 15 per hour per IP.
+- Repeat questions are served from a SQLite cache.
+- `/health` makes a real read on both databases, so uptime pings keep them from pausing.
+
+| Endpoint | What it returns |
+|---|---|
+| `POST /api/chat` `{"question": "..."}` | SSE stream: `step`, `token`, `answer`, `citations`, `subgraph`, `done` (or `error`) |
+| `GET /api/papers/{arxiv_id}` | Paper card: metadata, authors, methods, datasets, citation counts |
+| `GET /api/graph/paper/{arxiv_id}` | The paper's neighborhood as graph nodes and links |
+| `GET /health` | `200` when Neo4j and Qdrant both answer, else `503` |
+
+```bash
+.venv/Scripts/pip install -r backend/requirements-dev.txt
+cd backend
+../.venv/Scripts/python -m pytest                                   # 41 tests, no databases needed
+../.venv/Scripts/python -m app.agent.graph "Compare GraphRAG, RAPTOR and HippoRAG"   # CLI run
+../.venv/Scripts/python -m uvicorn app.main:app --reload --port 8010              # API + docs at /docs
+```
+
+LLMs are tried in order: Groq, then Gemini, then local Ollama. Put `GROQ_API_KEY` and/or `GOOGLE_API_KEY` in `.env`; with neither, everything runs on Ollama. That works, but takes 1–2 minutes per answer on a laptop GPU, compared with a few seconds on Groq. The production image (`backend/Dockerfile`) uses about 150 MB of RAM, within Render's 512 MB free tier.
+
+## Notes on the pipeline
 
 Entity extraction runs a local LLM through [Ollama](https://ollama.com) (`qwen3:4b-instruct` by default; change `OLLAMA_MODEL` in `.env`). It takes about 6–11 seconds per paper on a 4 GB laptop GPU (about 50 minutes for 500 papers) and is resumable: re-running skips papers already done. `normalize.py` merges spellings of the same entity (for example "Hotpot QA" and "HotpotQA", or "NQ" and "Natural Questions") and drops vague names. Review `data/entity_index.jsonl` to see what was merged.
 

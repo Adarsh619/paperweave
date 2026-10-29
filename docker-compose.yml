@@ -26,6 +26,28 @@ services:
     volumes:
       - qdrant_storage:/qdrant/storage
 
+  # Optional: run the API in Docker too (`docker compose --profile backend up -d --build`).
+  # Without it, run `uvicorn app.main:app --reload` from backend/.
+  backend:
+    profiles: [backend]
+    build:
+      context: ./backend
+      args:
+        LOCAL_EMBED: "true"
+    container_name: paperweave-backend
+    ports:
+      - "8000:8000"
+    env_file: .env
+    environment:
+      NEO4J_URI: bolt://neo4j:7687
+      QDRANT_URL: http://qdrant:6333
+      OLLAMA_URL: http://host.docker.internal:11434
+    depends_on:
+      neo4j:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+
 volumes:
   neo4j_data:
   qdrant_storage:

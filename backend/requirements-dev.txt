@@ -1,0 +1,4 @@
+-r requirements.txt
+# Local Qdrant has no cloud inference, so embed queries on your CPU.
+fastembed>=0.7
+pytest>=8

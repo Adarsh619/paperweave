@@ -32,3 +32,6 @@ qdrant_storage/
 Thumbs.db
 .vscode/
 .idea/
+
+# Backend answer cache
+backend/.cache/
