@@ -1,0 +1,23 @@
+# Backup keep-alive. UptimeRobot is the main pinger; this covers gaps.
+# GitHub may delay scheduled runs and disables them after 60 days without repo activity,
+# so don't rely on it alone. Set the repository variable BACKEND_URL
+# (Settings -> Secrets and variables -> Actions -> Variables), e.g. https://paperweave-api.onrender.com
+name: Keep warm
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    if: vars.BACKEND_URL != ''
+    steps:
+      - name: Ping /health (touches Neo4j and Qdrant)
+        run: |
+          for i in 1 2 3; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 "${{ vars.BACKEND_URL }}/health") && [ "$code" = "200" ] && exit 0
+            echo "attempt $i: HTTP $code"; sleep 20
+          done
+          exit 1

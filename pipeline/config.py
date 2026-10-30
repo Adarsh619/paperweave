@@ -36,8 +36,8 @@ QDRANT_API_KEY = os.getenv("QDRANT_API_KEY") or None
 # false (local docker): qdrant-client embeds with fastembed on this machine.
 QDRANT_CLOUD_INFERENCE = os.getenv("QDRANT_CLOUD_INFERENCE", "false").lower() == "true"
 QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "papers")
-DENSE_MODEL = "sentence-transformers/all-MiniLM-L6-v2"  # 384-dim, cosine
-SPARSE_MODEL = "Qdrant/bm25"  # keyword scores; Qdrant applies IDF
+DENSE_MODEL = os.getenv("QDRANT_DENSE_MODEL", "sentence-transformers/all-MiniLM-L6-v2")  # 384-dim, cosine
+SPARSE_MODEL = os.getenv("QDRANT_SPARSE_MODEL", "Qdrant/bm25")  # keyword scores; Qdrant applies IDF
 
 # Landmark papers always included, so the graph has well-known anchors and
 # lineage questions ("what built on RAG?") have answers.

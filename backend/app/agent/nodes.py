@@ -113,6 +113,13 @@ def retrieve(state: AgentState) -> dict:
             gaps.append(f"graph query failed: {exc}")
             steps.append(_step("graph", "Knowledge graph query failed; continuing with search"))
 
+    # Named methods/papers get their own small search: it finds the defining paper even when
+    # extraction named the method differently (the DPR paper's abstract never says "DPR").
+    if p["intent"] in ("compare", "lineage", "lookup"):
+        for name in p["entities"][:4]:
+            for h in vector_search.search(name, limit=2, min_year=p.get("min_year")):
+                papers.setdefault(h["arxiv_id"], {**h, "source": "entity"})
+
     # A generated-Cypher answer (authors, counts) stands on its own; unrelated search hits
     # would only distract the answer LLM.
     if not (p["intent"] == "graph" and facts and not gaps):
@@ -165,14 +172,18 @@ def rewrite(state: AgentState) -> dict:
     }
 
 
-def _context(state: AgentState) -> tuple[str, str]:
-    # Graph-sourced papers first (they back the facts), then search, then live results;
-    # "latest" questions put the live results first.
-    order = {"graph": 0, "search": 1, "live": 2}
+def context_papers(state: AgentState) -> list[dict]:
+    """The papers the answer LLM sees. Graph-sourced papers first (they back the facts),
+    then per-entity search, general search, then live results; "latest" questions put live first."""
+    order = {"graph": 0, "entity": 1, "search": 2, "live": 3}
     if state["plan"]["intent"] == "recent":
         order["live"] = -1
     papers = sorted(state["papers"].values(), key=lambda x: order.get(x.get("source"), 3))
-    papers = papers[: config.MAX_CONTEXT_PAPERS]
+    return papers[: config.MAX_CONTEXT_PAPERS]
+
+
+def _context(state: AgentState) -> tuple[str, str]:
+    papers = context_papers(state)
     paper_text = "\n\n".join(
         f"[{x['arxiv_id']}] {x['title']} ({x.get('year')}){' (live arXiv result)' if x.get('source') == 'live' else ''}\n"
         f"{(x.get('abstract') or '')[:700]}"

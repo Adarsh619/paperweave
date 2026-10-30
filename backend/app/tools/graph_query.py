@@ -20,9 +20,12 @@ class GraphResult:
         self.paper_ids.extend(i for i in ids if i and i not in self.paper_ids)
 
 
-def resolve_entity(name: str) -> dict | None:
-    """Map a name from the question to a graph entity: exact/alias match, then substring."""
-    rows = stores.read(T.RESOLVE_ENTITY, name=name) or stores.read(T.RESOLVE_ENTITY_FUZZY, name=name)
+def resolve_entity(name: str, prefer: str | None = None) -> dict | None:
+    """Map a name from the question to a graph entity: exact/alias match, then substring.
+    prefer ("Method", "Dataset", "Task") breaks ambiguity: "Retrieval-Augmented Generation"
+    is both a task and an alias of the RAG method."""
+    rows = (stores.read(T.RESOLVE_ENTITY, name=name, prefer=prefer)
+            or stores.read(T.RESOLVE_ENTITY_FUZZY, name=name, prefer=prefer))
     return rows[0] if rows else None
 
 
@@ -37,21 +40,40 @@ def _paper(row: dict) -> str:
     return f"{row['title']} ({row['year']}) [{row['arxiv_id']}]"
 
 
-def _origin(proposed_in: list[dict]) -> list[dict]:
+def _lucene_phrase(text: str) -> str:
+    return '"' + re.sub(r'(["\\])', r"\\\1", text) + '"'
+
+
+def _title_match(entity: dict) -> list[dict]:
+    """Find a method's defining paper by its name in paper titles, when extraction didn't
+    link it (the DPR paper's abstract says "dense retriever", never "DPR"). The earliest
+    matching paper wins: the original comes before follow-ups that reuse the name."""
+    names = {entity["name"], *(re.sub(r"\s*\([^)]*\)", "", a) for a in entity.get("aliases", []))}
+    hits: dict[str, dict] = {}
+    for name in sorted(n for n in names if len(n) >= 3)[:6]:
+        for row in stores.read(T.TITLE_MATCH, query=f"title:{_lucene_phrase(name)}"):
+            hits.setdefault(row["arxiv_id"], row)
+    return sorted(hits.values(), key=lambda p: (p["year"] or 9999, -p["score"]))[:1]
+
+
+def _origin(proposed_in: list[dict], entity: dict | None = None) -> list[dict]:
     """The earliest proposing paper. Extraction sometimes marks later papers that only
-    apply a method (e.g. RAG) as proposing it; the first one is the real origin."""
+    apply a method (e.g. RAG) as proposing it; the first one is the real origin.
+    With no proposing paper in the graph, fall back to a title match."""
     papers = sorted((p for p in proposed_in if p["arxiv_id"]), key=lambda p: p["year"] or 9999)
+    if not papers and entity:
+        return _title_match(entity)
     return papers[:1]
 
 
 def lineage(name: str) -> GraphResult:
     """What improved on a method; for a paper title, which corpus papers build on (cite) it."""
     out = GraphResult()
-    entity = resolve_entity(name)
+    entity = resolve_entity(name, prefer="Method")
     if entity and entity["label"] == "Method":
         method = entity["name"]
         origin = stores.read(T.METHOD_ORIGIN, name=method)[0]
-        for p in _origin(origin["proposed_in"]):
+        for p in _origin(origin["proposed_in"], entity):
             out.add(f"{method} was proposed in {_paper(p)}.", p["arxiv_id"])
         if origin["improves_on"]:
             out.add(f"{method} improves on: {', '.join(origin['improves_on'])}.")
@@ -59,7 +81,10 @@ def lineage(name: str) -> GraphResult:
         for r in rows:
             datasets = f"; evaluated on {', '.join(r['datasets'])}" if r["datasets"] else ""
             out.add(f"{r['method']} improves on {method}: proposed in {_paper(r)}{datasets}.", r["arxiv_id"])
-        if not rows:
+        users = [u for u in stores.read(T.USED_BY, name=method) if u["arxiv_id"] not in out.paper_ids]
+        for u in users[:6]:
+            out.add(f"{_paper(u)} uses {method} as a building block.", u["arxiv_id"])
+        if not rows and not users:
             out.add(f"No method in the graph is recorded as improving on {method}.")
         return out
 
@@ -75,12 +100,12 @@ def lineage(name: str) -> GraphResult:
 def compare(names: list[str]) -> GraphResult:
     out = GraphResult()
     for name in names:
-        entity = resolve_entity(name)
+        entity = resolve_entity(name, prefer="Method")
         if not entity or entity["label"] != "Method":
             out.add(f"'{name}' is not a method in the graph.")
             continue
         p = stores.read(T.METHOD_PROFILE, name=entity["name"])[0]
-        papers = _origin(p["proposed_in"])
+        papers = _origin(p["proposed_in"], entity)
         parts = [f"{p['method']}:"]
         if papers:
             parts.append("proposed in " + ", ".join(_paper(x) for x in papers) + ";")
@@ -95,7 +120,7 @@ def compare(names: list[str]) -> GraphResult:
 
 def dataset_users(name: str) -> GraphResult:
     out = GraphResult()
-    entity = resolve_entity(name)
+    entity = resolve_entity(name, prefer="Dataset")
     if not entity or entity["label"] != "Dataset":
         return out
     rows = stores.read(T.DATASET_USERS, name=entity["name"])

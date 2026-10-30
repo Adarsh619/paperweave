@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+:root {
+  --background: #fbfbfa;
+  --surface: #ffffff;
+  --foreground: #1c1c1e;
+  --muted: #6b6b70;
+  --border: #e6e5e1;
+  --accent: #4f46e5;
+  --accent-soft: #eef0ff;
+  --paper: #4f46e5;
+  --method: #9333ea;
+  --dataset: #d97706;
+  --task: #0d9488;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0e0f12;
+    --surface: #16181d;
+    --foreground: #ececee;
+    --muted: #9a9aa3;
+    --border: #2a2c33;
+    --accent: #8b8cf6;
+    --accent-soft: #1f2036;
+    --paper: #8b8cf6;
+    --method: #c084fc;
+    --dataset: #fbbf24;
+    --task: #2dd4bf;
+  }
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-paper: var(--paper);
+  --color-method: var(--method);
+  --color-dataset: var(--dataset);
+  --color-task: var(--task);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+/* Answer markdown */
+.prose-answer p {
+  margin: 0.6rem 0;
+  line-height: 1.7;
+}
+.prose-answer ul,
+.prose-answer ol {
+  margin: 0.6rem 0;
+  padding-left: 1.25rem;
+}
+.prose-answer ul {
+  list-style: disc;
+}
+.prose-answer ol {
+  list-style: decimal;
+}
+.prose-answer li {
+  margin: 0.3rem 0;
+  line-height: 1.65;
+}
+.prose-answer strong {
+  font-weight: 600;
+}
+.prose-answer h1,
+.prose-answer h2,
+.prose-answer h3 {
+  font-weight: 600;
+  margin: 1rem 0 0.4rem;
+}
+.prose-answer table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin: 1rem 0;
+}
+.prose-answer th,
+.prose-answer td {
+  border: 1px solid var(--border);
+  padding: 0.5rem 0.6rem;
+  text-align: left;
+  vertical-align: top;
+}
+.prose-answer th {
+  background: var(--accent-soft);
+  font-weight: 600;
+}
+.prose-answer code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}

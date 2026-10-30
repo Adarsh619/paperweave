@@ -16,9 +16,10 @@ QDRANT_URL = os.getenv("QDRANT_URL", "http://localhost:6333")
 QDRANT_API_KEY = os.getenv("QDRANT_API_KEY") or None
 QDRANT_CLOUD_INFERENCE = os.getenv("QDRANT_CLOUD_INFERENCE", "false").lower() == "true"
 QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "papers")
-# Must match pipeline/config.py, which built the index.
-DENSE_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
-SPARSE_MODEL = "Qdrant/bm25"
+# Must match pipeline/config.py, which built the index. Overridable in case Qdrant Cloud
+# Inference lists the same models under different names.
+DENSE_MODEL = os.getenv("QDRANT_DENSE_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
+SPARSE_MODEL = os.getenv("QDRANT_SPARSE_MODEL", "Qdrant/bm25")
 
 # LLM providers are tried in this order: Groq, Gemini, then local Ollama.
 # Ollama is used only when no cloud key is set, or when LLM_LOCAL_FALLBACK=true.

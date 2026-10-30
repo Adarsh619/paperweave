@@ -4,28 +4,46 @@
 
 PaperWeave is an agentic GraphRAG research assistant for AI/LLM papers. Ask a research question and a LangGraph agent combines a knowledge graph of papers, methods and datasets with semantic search and live arXiv search. It answers with citations and shows you the graph behind every answer.
 
-**Status:** 🚧 In development. Week 1 (data pipeline) is done. The graph holds 500 papers, 4,829 authors, 4,172 citations and 2,653 LLM-extracted methods, datasets and tasks in Neo4j. Papers are indexed in Qdrant for hybrid (dense + BM25) search, and `rebuild.py` restores both databases from the `data/` snapshot. Week 2 (agent + backend) is built: a LangGraph agent with graph, search and live arXiv tools behind a streaming FastAPI API. Week 3 is the Next.js frontend, evals and deployment.
+```mermaid
+flowchart LR
+  subgraph Offline["Offline pipeline (your PC)"]
+    S2[Semantic Scholar] --> P[papers + citations]
+    O[Ollama qwen3:4b] --> E[methods / datasets / tasks]
+    P --> D[(data/ snapshot)]
+    E --> D
+  end
+  D -->|rebuild.py| N[(Neo4j graph)]
+  D -->|rebuild.py| Q[(Qdrant vectors)]
+  U[Browser] --> V[Next.js on Vercel]
+  V -->|SSE| A[FastAPI + LangGraph on Render]
+  A --> N
+  A --> Q
+  A --> X[live arXiv]
+  A --> G[Groq / Gemini]
+```
 
-## Planned features
+**Status:** Weeks 1–3 are built. Week 1 (data pipeline) is done. The graph holds 500 papers, 4,829 authors, 4,172 citations and 2,653 LLM-extracted methods, datasets and tasks in Neo4j. Papers are indexed in Qdrant for hybrid (dense + BM25) search, and `rebuild.py` restores both databases from the `data/` snapshot. Week 2 (agent + backend) is built: a LangGraph agent with graph, search and live arXiv tools behind a streaming FastAPI API. Week 3 is the Next.js frontend, evals and deployment.
 
-- An agent that plans each question and picks its tools: hybrid vector search, knowledge-graph queries and live arXiv search.
-- A knowledge graph of about 500 AI/LLM papers, with citations, methods, datasets and "improves on" links.
-- Streaming answers with arXiv citations, plus comparison tables for "compare X vs Y" questions.
-- An interactive graph view of the papers and methods used in each answer.
-- Evals comparing the GraphRAG agent against vector-only RAG.
-- A public demo with no login, running 24/7 on free tiers.
+## Features
+
+- **Agent that plans before it retrieves.** Each question gets the right tools: knowledge-graph queries, hybrid vector search and live arXiv search. If the evidence is thin, it rewrites the query and retries.
+- **Knowledge graph of 500 influential AI/LLM papers**, with citations, methods, datasets, tasks and "improves on" links extracted by a local LLM.
+- **Streaming answers with verified arXiv citations.** Garbled IDs are repaired and invented ones removed. Comparison questions get a table.
+- **Interactive graph view** of the papers and methods behind each answer, with paper cards and per-paper citation graphs.
+- **Evals against vector-only RAG** on 30 golden questions (see [Results](#evaluation)).
+- **Public demo with no login**, built for free tiers: saved example answers work even while the backend sleeps.
 
 ## Tech stack
 
 | Layer | Tech |
 |---|---|
-| Frontend | Next.js, Tailwind, shadcn/ui, react-force-graph (Vercel) |
+| Frontend | Next.js 16, React 19, Tailwind CSS 4, react-force-graph, react-markdown (Vercel) |
 | Backend | FastAPI, LangGraph, Docker (Render) |
 | Graph DB | Neo4j AuraDB |
 | Vector DB | Qdrant Cloud (hybrid dense + BM25) |
 | LLM | Groq (Llama 3.3 70B), Gemini Flash fallback; Ollama for the offline graph build |
 | Data | arXiv API, Semantic Scholar API |
-| Evals | RAGAS, Langfuse |
+| Evals | Golden-question recall and citation recall vs vector-only RAG (`backend/evals`) |
 
 ## Project structure
 
@@ -38,8 +56,12 @@ backend/    FastAPI + LangGraph agent
   app/tools/  hybrid search, Cypher templates + read-only guard, live arXiv
   app/api/    /api/chat (SSE), /api/papers, /api/graph
   tests/      pytest
-frontend/   Next.js app (Week 3)
-docs/       plan and architecture notes
+  evals/      golden questions + agent vs vector-only comparison
+  scripts/    export_examples.py (saved answers for the frontend)
+frontend/   Next.js app: home, /ask (streaming answer + graph), /paper/[id]
+docs/       plan, deployment guide
+render.yaml Render blueprint for the backend
+.github/    CI (pytest, lint, build) and keep-warm cron
 ```
 
 ## Run the pipeline locally
@@ -121,6 +143,48 @@ cd backend
 ```
 
 LLMs are tried in order: Groq, then Gemini, then local Ollama. Put `GROQ_API_KEY` and/or `GOOGLE_API_KEY` in `.env`; with neither, everything runs on Ollama. That works, but takes 1–2 minutes per answer on a laptop GPU, compared with a few seconds on Groq. The production image (`backend/Dockerfile`) uses about 150 MB of RAM, within Render's 512 MB free tier.
+
+## Frontend
+
+A Next.js app with three pages:
+- **Home:** an ask box and 10 example questions.
+- **`/ask?q=...`:** the agent's steps stream in as a timeline, then a markdown answer with clickable citations, a sources list and the interactive graph behind the answer. Clicking a paper opens its card.
+- **`/paper/[id]`:** the paper's abstract, entities and citation neighborhood.
+
+Example questions are served from [`frontend/public/examples.json`](frontend/public/examples.json), generated by `backend/scripts/export_examples.py`. They load instantly and work even when the backend is asleep. If the backend takes more than 4 seconds to respond at all, a "waking up the server" banner explains the free-tier cold start.
+
+```bash
+cd frontend
+cp .env.example .env.local        # NEXT_PUBLIC_API_URL=http://localhost:8010
+npm install
+npm run dev                       # http://localhost:3000
+```
+
+## Evaluation
+
+[`backend/evals/golden.jsonl`](backend/evals/golden.jsonl) holds 30 questions: 10 lookups, 10 multi-hop and 10 comparisons. Each lists the papers a correct answer must draw on, chosen from what's known about the papers rather than from the extracted graph. Both systems get the same budget: the 12 papers shown to the answer LLM.
+
+- **Vector-only RAG:** the question goes straight into the same hybrid (MiniLM + BM25) search.
+- **PaperWeave agent:** planning, graph tools, per-entity search, then the evidence check and retries.
+
+EVAL_RESULTS_PLACEHOLDER
+
+```bash
+cd backend
+../.venv/Scripts/python -m evals.run_eval             # retrieval metrics only
+../.venv/Scripts/python -m evals.run_eval --answers   # also generate and score full answers
+```
+
+## Deployment
+
+The whole stack runs on free tiers:
+- Neo4j AuraDB and Qdrant Cloud for the databases
+- Render (Docker) for the backend
+- Vercel for the frontend
+- Groq for the LLM
+- UptimeRobot, which pings `/health` to keep everything awake
+
+Step-by-step guide: [docs/DEPLOY.md](docs/DEPLOY.md). The Render blueprint is [`render.yaml`](render.yaml).
 
 ## Notes on the pipeline
 

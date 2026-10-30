@@ -35,3 +35,6 @@ Thumbs.db
 
 # Backend answer cache
 backend/.cache/
+
+# Local Claude Code launch config
+.claude/

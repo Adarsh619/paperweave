@@ -1,0 +1,30 @@
+{"id": "L01", "category": "lookup", "question": "How does HyDE use hypothetical documents for zero-shot dense retrieval?", "gold": ["2212.10496"]}
+{"id": "L02", "category": "lookup", "question": "What do Self-RAG's reflection tokens do?", "gold": ["2310.11511"]}
+{"id": "L03", "category": "lookup", "question": "How does RAPTOR build its tree of summaries?", "gold": ["2401.18059"]}
+{"id": "L04", "category": "lookup", "question": "Why do language models miss information placed in the middle of long contexts?", "gold": ["2307.03172"]}
+{"id": "L05", "category": "lookup", "question": "How does ColBERT's late interaction work?", "gold": ["2004.12832"]}
+{"id": "L06", "category": "lookup", "question": "What does the retrieval evaluator in Corrective RAG do?", "gold": ["2401.15884"]}
+{"id": "L07", "category": "lookup", "question": "How does Toolformer teach itself to use tools?", "gold": ["2302.04761"]}
+{"id": "L08", "category": "lookup", "question": "How does Reflexion use verbal feedback instead of weight updates?", "gold": ["2303.11366"]}
+{"id": "L09", "category": "lookup", "question": "How does LightRAG index documents with graphs?", "gold": ["2410.05779"]}
+{"id": "L10", "category": "lookup", "question": "Which metrics does RAGAS propose for evaluating RAG pipelines?", "gold": ["2309.15217"]}
+{"id": "M01", "category": "multi-hop", "question": "Which methods improved on standard RAG?", "gold": ["2404.16130", "2405.14831", "2310.11511", "2401.15884", "2403.14403"]}
+{"id": "M02", "category": "multi-hop", "question": "Which papers in the corpus build on Attention Is All You Need?", "gold": ["1810.04805", "1910.10683", "2005.14165", "2004.05150", "2104.09864"]}
+{"id": "M03", "category": "multi-hop", "question": "Which retrieval-augmented models were evaluated on Natural Questions?", "gold": ["2005.11401", "2004.04906", "2007.01282", "2002.08909", "2208.03299"]}
+{"id": "M04", "category": "multi-hop", "question": "Which later methods build on Dense Passage Retrieval?", "gold": ["2007.00808", "2007.01282", "2005.11401"]}
+{"id": "M05", "category": "multi-hop", "question": "Which agent papers build on ReAct?", "gold": ["2303.11366"]}
+{"id": "M06", "category": "multi-hop", "question": "Which methods interleave retrieval with chain-of-thought reasoning for multi-hop questions?", "gold": ["2212.10509", "2210.03629", "2405.14831"]}
+{"id": "M07", "category": "multi-hop", "question": "Which papers since 2024 propose graph-based RAG methods?", "gold": ["2404.16130", "2405.14831", "2410.05779"]}
+{"id": "M08", "category": "multi-hop", "question": "What did Llama 2 build on?", "gold": ["2302.13971", "2203.02155"]}
+{"id": "M09", "category": "multi-hop", "question": "Which methods extend chain-of-thought prompting?", "gold": ["2201.11903", "2305.10601", "2210.03629"]}
+{"id": "M10", "category": "multi-hop", "question": "Which methods decide when to retrieve during generation?", "gold": ["2305.06983", "2310.11511", "2403.14403"]}
+{"id": "C01", "category": "comparison", "question": "Compare GraphRAG, RAPTOR and HippoRAG", "gold": ["2404.16130", "2401.18059", "2405.14831"]}
+{"id": "C02", "category": "comparison", "question": "Compare RAG and Fusion-in-Decoder", "gold": ["2005.11401", "2007.01282"]}
+{"id": "C03", "category": "comparison", "question": "Compare Self-RAG and Corrective RAG", "gold": ["2310.11511", "2401.15884"]}
+{"id": "C04", "category": "comparison", "question": "Compare DPR and ColBERT", "gold": ["2004.04906", "2004.12832"]}
+{"id": "C05", "category": "comparison", "question": "Compare ReAct and Reflexion", "gold": ["2210.03629", "2303.11366"]}
+{"id": "C06", "category": "comparison", "question": "Compare REALM, RAG and RETRO", "gold": ["2002.08909", "2005.11401", "2112.04426"]}
+{"id": "C07", "category": "comparison", "question": "Compare LightRAG and GraphRAG", "gold": ["2410.05779", "2404.16130"]}
+{"id": "C08", "category": "comparison", "question": "Compare Chain-of-Thought and Tree of Thoughts", "gold": ["2201.11903", "2305.10601"]}
+{"id": "C09", "category": "comparison", "question": "Compare Longformer and RoFormer for handling long sequences", "gold": ["2004.05150", "2104.09864"]}
+{"id": "C10", "category": "comparison", "question": "Compare Atlas and RETRO", "gold": ["2208.03299", "2112.04426"]}

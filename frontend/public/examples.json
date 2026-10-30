@@ -1,0 +1,2769 @@
+{
+ "generated": "2026-10-30T06:04:57+00:00",
+ "model": "ChatOllama",
+ "examples": [
+  {
+   "question": "What improved on RAG, and which datasets did those papers use?",
+   "events": [
+    {
+     "event": "step",
+     "data": {
+      "node": "plan",
+      "message": "Planned: lineage question; entities: RAG"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "graph",
+      "message": "Knowledge graph: traced lineage of RAG (14 facts)"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "search",
+      "message": "Searched 'improved on RAG dataset': 6 papers"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "check",
+      "message": "Evidence looks sufficient"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "answer",
+      "message": "Wrote the answer with 8 verified citations"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "subgraph",
+      "message": "Built a graph of 21 nodes and 18 links"
+     }
+    },
+    {
+     "event": "answer",
+     "data": {
+      "text": "Papers that improve on RAG include:\n\n- **GraphRAG** [2404.16130] and **GRAG** [2405.16506], which enhance RAG by handling networked documents and graph-structured knowledge, respectively. GraphRAG is designed for query-focused summarization over large corpora, while GRAG enables retrieval of textual subgraphs and integration of topological information.\n\n- **HippoRAG** [2405.14831], which introduces neurobiologically inspired long-term memory for efficient knowledge integration and avoiding catastrophic forgetting.\n\n- **CoA** [2406.02818], a chain-of-agents framework that enables multi-agent collaboration for long-context tasks, improving upon RAG\u2019s handling of long inputs.\n\n- **Self-Route** [2407.16833], which evaluates RAG and long-context LLMs on datasets including **Natural Questions** and **MMLU**.\n\n- **RAG-end2end** [2210.02627], which improves domain adaptation and is evaluated on **COVID-19**, **News**, and **Conversations** datasets.\n\nThese papers use diverse datasets to evaluate their approaches, with specific datasets listed above. Note: Self-RAG [2310.11511] and RAGAs [2309.15217] use RAG as a building block but do not improve on RAG itself."
+     }
+    },
+    {
+     "event": "citations",
+     "data": [
+      {
+       "arxiv_id": "2404.16130",
+       "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2404.16130",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2405.16506",
+       "title": "GRAG: Graph Retrieval-Augmented Generation",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2405.16506",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2405.14831",
+       "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2405.14831",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2406.02818",
+       "title": "Chain of Agents: Large Language Models Collaborating on Long-Context Tasks",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2406.02818",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2407.16833",
+       "title": "Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2407.16833",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2210.02627",
+       "title": "Improving the Domain Adaptation of Retrieval Augmented Generation (RAG) Models for Open Domain Question Answering",
+       "year": 2022,
+       "abs_url": "https://arxiv.org/abs/2210.02627",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2310.11511",
+       "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+       "year": 2023,
+       "abs_url": "https://arxiv.org/abs/2310.11511",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2309.15217",
+       "title": "RAGAs: Automated Evaluation of Retrieval Augmented Generation",
+       "year": 2023,
+       "abs_url": "https://arxiv.org/abs/2309.15217",
+       "source": "graph"
+      }
+     ]
+    },
+    {
+     "event": "subgraph",
+     "data": {
+      "nodes": [
+       {
+        "id": "paper:2404.16130",
+        "type": "Paper",
+        "label": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization",
+        "arxiv_id": "2404.16130",
+        "year": 2024
+       },
+       {
+        "id": "paper:2405.16506",
+        "type": "Paper",
+        "label": "GRAG: Graph Retrieval-Augmented Generation",
+        "arxiv_id": "2405.16506",
+        "year": 2024
+       },
+       {
+        "id": "paper:2405.14831",
+        "type": "Paper",
+        "label": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "arxiv_id": "2405.14831",
+        "year": 2024
+       },
+       {
+        "id": "paper:2406.02818",
+        "type": "Paper",
+        "label": "Chain of Agents: Large Language Models Collaborating on Long-Context Tasks",
+        "arxiv_id": "2406.02818",
+        "year": 2024
+       },
+       {
+        "id": "paper:2407.16833",
+        "type": "Paper",
+        "label": "Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach",
+        "arxiv_id": "2407.16833",
+        "year": 2024
+       },
+       {
+        "id": "paper:2210.02627",
+        "type": "Paper",
+        "label": "Improving the Domain Adaptation of Retrieval Augmented Generation (RAG) Models for Open Domain Question Answering",
+        "arxiv_id": "2210.02627",
+        "year": 2022
+       },
+       {
+        "id": "paper:2310.11511",
+        "type": "Paper",
+        "label": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+        "arxiv_id": "2310.11511",
+        "year": 2023
+       },
+       {
+        "id": "paper:2309.15217",
+        "type": "Paper",
+        "label": "RAGAs: Automated Evaluation of Retrieval Augmented Generation",
+        "arxiv_id": "2309.15217",
+        "year": 2023
+       },
+       {
+        "id": "method:CoA",
+        "type": "Method",
+        "label": "CoA"
+       },
+       {
+        "id": "method:GraphRAG",
+        "type": "Method",
+        "label": "GraphRAG"
+       },
+       {
+        "id": "method:divide-and-conquer strategy for textual subgraph retrieval",
+        "type": "Method",
+        "label": "divide-and-conquer strategy for textual subgraph retrieval"
+       },
+       {
+        "id": "method:RAGAs",
+        "type": "Method",
+        "label": "RAGAs"
+       },
+       {
+        "id": "method:Self-RAG",
+        "type": "Method",
+        "label": "Self-RAG"
+       },
+       {
+        "id": "dataset:COVID-19",
+        "type": "Dataset",
+        "label": "COVID-19"
+       },
+       {
+        "id": "method:RAG-end2end",
+        "type": "Method",
+        "label": "RAG-end2end"
+       },
+       {
+        "id": "dataset:News",
+        "type": "Dataset",
+        "label": "News"
+       },
+       {
+        "id": "dataset:Conversations",
+        "type": "Dataset",
+        "label": "Conversations"
+       },
+       {
+        "id": "method:HippoRAG",
+        "type": "Method",
+        "label": "HippoRAG"
+       },
+       {
+        "id": "method:Self-Route",
+        "type": "Method",
+        "label": "Self-Route"
+       },
+       {
+        "id": "dataset:Natural Questions",
+        "type": "Dataset",
+        "label": "Natural Questions"
+       },
+       {
+        "id": "dataset:MMLU",
+        "type": "Dataset",
+        "label": "MMLU"
+       }
+      ],
+      "links": [
+       {
+        "source": "paper:2406.02818",
+        "target": "method:CoA",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2405.16506",
+        "target": "method:GraphRAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2405.16506",
+        "target": "method:divide-and-conquer strategy for textual subgraph retrieval",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2309.15217",
+        "target": "method:RAGAs",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2310.11511",
+        "target": "method:Self-RAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2210.02627",
+        "target": "dataset:COVID-19",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2210.02627",
+        "target": "method:RAG-end2end",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2210.02627",
+        "target": "dataset:News",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2210.02627",
+        "target": "dataset:Conversations",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2405.14831",
+        "target": "method:HippoRAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.16833",
+        "target": "method:Self-Route",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.16833",
+        "target": "dataset:Natural Questions",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2407.16833",
+        "target": "dataset:MMLU",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2404.16130",
+        "target": "method:GraphRAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2404.16130",
+        "target": "paper:2309.15217",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2407.16833",
+        "target": "paper:2310.11511",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2405.14831",
+        "target": "paper:2404.16130",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2405.16506",
+        "target": "paper:2404.16130",
+        "type": "CITES"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "question": "Compare GraphRAG, RAPTOR and HippoRAG",
+   "events": [
+    {
+     "event": "step",
+     "data": {
+      "node": "plan",
+      "message": "Planned: compare question; entities: GraphRAG, RAPTOR, HippoRAG"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "graph",
+      "message": "Knowledge graph: compared GraphRAG, RAPTOR, HippoRAG (3 facts)"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "search",
+      "message": "Searched 'GraphRAG RAPTOR HippoRAG comparison': 6 papers"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "check",
+      "message": "Evidence looks sufficient"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "answer",
+      "message": "Wrote the answer with 3 verified citations"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "subgraph",
+      "message": "Built a graph of 7 nodes and 7 links"
+     }
+    },
+    {
+     "event": "answer",
+     "data": {
+      "text": "- **GraphRAG** focuses on query-focused summarization and multi-hop reasoning using textual graphs, leveraging graph structures to capture relational knowledge. It improves upon traditional RAG and is used in multiple corpus papers, emphasizing scalability and context-aware retrieval [2404.16130].  \n- **RAPTOR** introduces recursive summarization via a tree-structured retrieval system, enhancing multi-step reasoning and question answering by building hierarchical abstractions from text chunks. Evaluated on QuALITY, it improves holistic document understanding [2401.18059].  \n- **HippoRAG** is neurobiologically inspired, aiming to enable efficient long-term memory integration in LLMs, improving knowledge retention and updating without catastrophic forgetting. It enhances multi-hop question answering over RAG and IRCoT [2405.14831].\n\n| Method | Paper | Core idea | Evaluated on | Notes |\n|--------|-------|----------|-------------|-------|\n| GraphRAG | [2404.16130] | Graph-based retrieval for query-focused summarization and multi-hop reasoning | Query-focused summarization, textual graphs | Improves RAG; used in multiple corpus papers |\n| RAPTOR | [2401.18059] | Recursive abstractive processing via tree-structured summaries | QuALITY | Enhances multi-step reasoning and document context |\n| HippoRAG | [2405.14831] | Neurobiologically inspired long-term memory for knowledge integration | Multi-hop question answering | Improves on RAG and IRCoT; focuses on memory efficiency |"
+     }
+    },
+    {
+     "event": "citations",
+     "data": [
+      {
+       "arxiv_id": "2404.16130",
+       "title": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2404.16130",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2401.18059",
+       "title": "RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2401.18059",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2405.14831",
+       "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2405.14831",
+       "source": "graph"
+      }
+     ]
+    },
+    {
+     "event": "subgraph",
+     "data": {
+      "nodes": [
+       {
+        "id": "paper:2404.16130",
+        "type": "Paper",
+        "label": "From Local to Global: A Graph RAG Approach to Query-Focused Summarization",
+        "arxiv_id": "2404.16130",
+        "year": 2024
+       },
+       {
+        "id": "paper:2401.18059",
+        "type": "Paper",
+        "label": "RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval",
+        "arxiv_id": "2401.18059",
+        "year": 2024
+       },
+       {
+        "id": "paper:2405.14831",
+        "type": "Paper",
+        "label": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
+        "arxiv_id": "2405.14831",
+        "year": 2024
+       },
+       {
+        "id": "method:GraphRAG",
+        "type": "Method",
+        "label": "GraphRAG"
+       },
+       {
+        "id": "method:RAPTOR",
+        "type": "Method",
+        "label": "RAPTOR"
+       },
+       {
+        "id": "dataset:QuALITY",
+        "type": "Dataset",
+        "label": "QuALITY"
+       },
+       {
+        "id": "method:HippoRAG",
+        "type": "Method",
+        "label": "HippoRAG"
+       }
+      ],
+      "links": [
+       {
+        "source": "paper:2404.16130",
+        "target": "method:GraphRAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2401.18059",
+        "target": "method:RAPTOR",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2401.18059",
+        "target": "dataset:QuALITY",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2405.14831",
+        "target": "method:HippoRAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2405.14831",
+        "target": "paper:2404.16130",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2404.16130",
+        "target": "paper:2401.18059",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2405.14831",
+        "target": "paper:2401.18059",
+        "type": "CITES"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "question": "Which papers in the corpus build on Attention Is All You Need?",
+   "events": [
+    {
+     "event": "step",
+     "data": {
+      "node": "plan",
+      "message": "Planned: lineage question; entities: Attention Is All You Need"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "graph",
+      "message": "Knowledge graph: traced lineage of Attention Is All You Need (16 facts)"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "search",
+      "message": "Searched 'Attention Is All You Need lineage': 6 papers"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "check",
+      "message": "Evidence looks sufficient"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "answer",
+      "message": "Wrote the answer with 13 verified citations"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "subgraph",
+      "message": "Built a graph of 54 nodes and 83 links"
+     }
+    },
+    {
+     "event": "answer",
+     "data": {
+      "text": "Papers in the corpus that build on *Attention is All You Need* [1706.03762] include:\n\n- [1810.04805] BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, which uses a Transformer architecture with bidirectional context, building directly on the Transformer's attention mechanism.  \n- [2005.14165] Language Models are Few-Shot Learners, which leverages large-scale pre-trained language models (based on Transformers) to achieve few-shot performance.  \n- [1910.10683] Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer, which uses a unified text-to-text framework based on Transformer architectures.  \n- [2106.09685] LoRA: Low-Rank Adaptation of Large Language Models, which modifies Transformer layers to enable efficient fine-tuning.  \n- [2302.13971] LLaMA: Open and Efficient Foundation Language Models, which builds large-scale foundation models using the Transformer architecture.  \n- [1908.10084] Sentence-BERT, which extends BERT (a Transformer-based model) for sentence embeddings.  \n- [2005.11401] Retrieval-Augmented Generation, which uses pre-trained language models (based on Transformers) to access knowledge.  \n- [2104.09864] RoFormer, which enhances Transformer attention with rotary position embeddings.  \n- [2004.05150] Longformer, which modifies self-attention to scale linearly with sequence length.  \n- [2307.03172] Lost in the Middle, which analyzes how language models use long contexts in Transformer-based models.  \n- [2205.14135] FlashAttention, which improves efficiency of Transformer attention operations.  \n\nAll these papers either directly or indirectly extend the Transformer architecture introduced in [1706.03762]. [2404.14219] Phi-3 also cites it, but does not explicitly build on it in the provided text."
+     }
+    },
+    {
+     "event": "citations",
+     "data": [
+      {
+       "arxiv_id": "1706.03762",
+       "title": "Attention is All you Need",
+       "year": 2017,
+       "abs_url": "https://arxiv.org/abs/1706.03762",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "1810.04805",
+       "title": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+       "year": 2019,
+       "abs_url": "https://arxiv.org/abs/1810.04805",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2005.14165",
+       "title": "Language Models are Few-Shot Learners",
+       "year": 2020,
+       "abs_url": "https://arxiv.org/abs/2005.14165",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "1910.10683",
+       "title": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+       "year": 2019,
+       "abs_url": "https://arxiv.org/abs/1910.10683",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2106.09685",
+       "title": "LoRA: Low-Rank Adaptation of Large Language Models",
+       "year": 2021,
+       "abs_url": "https://arxiv.org/abs/2106.09685",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2302.13971",
+       "title": "LLaMA: Open and Efficient Foundation Language Models",
+       "year": 2023,
+       "abs_url": "https://arxiv.org/abs/2302.13971",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "1908.10084",
+       "title": "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks",
+       "year": 2019,
+       "abs_url": "https://arxiv.org/abs/1908.10084",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2005.11401",
+       "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+       "year": 2020,
+       "abs_url": "https://arxiv.org/abs/2005.11401",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2104.09864",
+       "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+       "year": 2021,
+       "abs_url": "https://arxiv.org/abs/2104.09864",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2004.05150",
+       "title": "Longformer: The Long-Document Transformer",
+       "year": 2020,
+       "abs_url": "https://arxiv.org/abs/2004.05150",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2307.03172",
+       "title": "Lost in the Middle: How Language Models Use Long Contexts",
+       "year": 2023,
+       "abs_url": "https://arxiv.org/abs/2307.03172",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2205.14135",
+       "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+       "year": 2022,
+       "abs_url": "https://arxiv.org/abs/2205.14135",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2404.14219",
+       "title": "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2404.14219",
+       "source": "graph"
+      }
+     ]
+    },
+    {
+     "event": "subgraph",
+     "data": {
+      "nodes": [
+       {
+        "id": "paper:1706.03762",
+        "type": "Paper",
+        "label": "Attention is All you Need",
+        "arxiv_id": "1706.03762",
+        "year": 2017
+       },
+       {
+        "id": "paper:1810.04805",
+        "type": "Paper",
+        "label": "BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding",
+        "arxiv_id": "1810.04805",
+        "year": 2019
+       },
+       {
+        "id": "paper:2005.14165",
+        "type": "Paper",
+        "label": "Language Models are Few-Shot Learners",
+        "arxiv_id": "2005.14165",
+        "year": 2020
+       },
+       {
+        "id": "paper:1910.10683",
+        "type": "Paper",
+        "label": "Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer",
+        "arxiv_id": "1910.10683",
+        "year": 2019
+       },
+       {
+        "id": "paper:2106.09685",
+        "type": "Paper",
+        "label": "LoRA: Low-Rank Adaptation of Large Language Models",
+        "arxiv_id": "2106.09685",
+        "year": 2021
+       },
+       {
+        "id": "paper:2302.13971",
+        "type": "Paper",
+        "label": "LLaMA: Open and Efficient Foundation Language Models",
+        "arxiv_id": "2302.13971",
+        "year": 2023
+       },
+       {
+        "id": "paper:1908.10084",
+        "type": "Paper",
+        "label": "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks",
+        "arxiv_id": "1908.10084",
+        "year": 2019
+       },
+       {
+        "id": "paper:2005.11401",
+        "type": "Paper",
+        "label": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+        "arxiv_id": "2005.11401",
+        "year": 2020
+       },
+       {
+        "id": "paper:2104.09864",
+        "type": "Paper",
+        "label": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+        "arxiv_id": "2104.09864",
+        "year": 2021
+       },
+       {
+        "id": "paper:2004.05150",
+        "type": "Paper",
+        "label": "Longformer: The Long-Document Transformer",
+        "arxiv_id": "2004.05150",
+        "year": 2020
+       },
+       {
+        "id": "paper:2307.03172",
+        "type": "Paper",
+        "label": "Lost in the Middle: How Language Models Use Long Contexts",
+        "arxiv_id": "2307.03172",
+        "year": 2023
+       },
+       {
+        "id": "paper:2205.14135",
+        "type": "Paper",
+        "label": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
+        "arxiv_id": "2205.14135",
+        "year": 2022
+       },
+       {
+        "id": "method:RAG",
+        "type": "Method",
+        "label": "RAG"
+       },
+       {
+        "id": "dataset:MMLU",
+        "type": "Dataset",
+        "label": "MMLU"
+       },
+       {
+        "id": "dataset:Natural Questions",
+        "type": "Dataset",
+        "label": "Natural Questions"
+       },
+       {
+        "id": "dataset:Wikipedia",
+        "type": "Dataset",
+        "label": "Wikipedia"
+       },
+       {
+        "id": "method:BERT",
+        "type": "Method",
+        "label": "BERT"
+       },
+       {
+        "id": "dataset:SQuAD v2.0",
+        "type": "Dataset",
+        "label": "SQuAD v2.0"
+       },
+       {
+        "id": "dataset:MultiNLI",
+        "type": "Dataset",
+        "label": "MultiNLI"
+       },
+       {
+        "id": "dataset:SQuAD v1.1",
+        "type": "Dataset",
+        "label": "SQuAD v1.1"
+       },
+       {
+        "id": "dataset:GLUE",
+        "type": "Dataset",
+        "label": "GLUE"
+       },
+       {
+        "id": "method:Transformer",
+        "type": "Method",
+        "label": "Transformer"
+       },
+       {
+        "id": "method:Longformer",
+        "type": "Method",
+        "label": "Longformer"
+       },
+       {
+        "id": "method:LED",
+        "type": "Method",
+        "label": "LED"
+       },
+       {
+        "id": "dataset:enwik8",
+        "type": "Dataset",
+        "label": "enwik8"
+       },
+       {
+        "id": "dataset:TriviaQA",
+        "type": "Dataset",
+        "label": "TriviaQA"
+       },
+       {
+        "id": "dataset:arXiv",
+        "type": "Dataset",
+        "label": "arXiv"
+       },
+       {
+        "id": "dataset:WikiHop",
+        "type": "Dataset",
+        "label": "WikiHop"
+       },
+       {
+        "id": "dataset:text8",
+        "type": "Dataset",
+        "label": "text8"
+       },
+       {
+        "id": "method:FlashAttention",
+        "type": "Method",
+        "label": "FlashAttention"
+       },
+       {
+        "id": "method:block-sparse FlashAttention",
+        "type": "Method",
+        "label": "block-sparse FlashAttention"
+       },
+       {
+        "id": "dataset:Path-X",
+        "type": "Dataset",
+        "label": "Path-X"
+       },
+       {
+        "id": "dataset:long-range arena",
+        "type": "Dataset",
+        "label": "long-range arena"
+       },
+       {
+        "id": "dataset:Path-256",
+        "type": "Dataset",
+        "label": "Path-256"
+       },
+       {
+        "id": "method:RoFormer",
+        "type": "Method",
+        "label": "RoFormer"
+       },
+       {
+        "id": "method:RoPE",
+        "type": "Method",
+        "label": "RoPE"
+       },
+       {
+        "id": "method:text-to-text transformer",
+        "type": "Method",
+        "label": "text-to-text transformer"
+       },
+       {
+        "id": "method:unified framework",
+        "type": "Method",
+        "label": "unified framework"
+       },
+       {
+        "id": "dataset:Colossal Clean Crawled Corpus",
+        "type": "Dataset",
+        "label": "Colossal Clean Crawled Corpus"
+       },
+       {
+        "id": "dataset:STS",
+        "type": "Dataset",
+        "label": "STS"
+       },
+       {
+        "id": "method:SRoBERTa",
+        "type": "Method",
+        "label": "SRoBERTa"
+       },
+       {
+        "id": "method:Sentence-BERT",
+        "type": "Method",
+        "label": "Sentence-BERT"
+       },
+       {
+        "id": "method:GPT-3",
+        "type": "Method",
+        "label": "GPT-3"
+       },
+       {
+        "id": "dataset:translation",
+        "type": "Dataset",
+        "label": "translation"
+       },
+       {
+        "id": "dataset:unscrambling words",
+        "type": "Dataset",
+        "label": "unscrambling words"
+       },
+       {
+        "id": "dataset:question-answering",
+        "type": "Dataset",
+        "label": "question-answering"
+       },
+       {
+        "id": "dataset:using a novel word in a sentence",
+        "type": "Dataset",
+        "label": "using a novel word in a sentence"
+       },
+       {
+        "id": "dataset:cloze tasks",
+        "type": "Dataset",
+        "label": "cloze tasks"
+       },
+       {
+        "id": "method:LLaMA",
+        "type": "Method",
+        "label": "LLaMA"
+       },
+       {
+        "id": "method:LoRA",
+        "type": "Method",
+        "label": "LoRA"
+       },
+       {
+        "id": "dataset:GPT-2",
+        "type": "Dataset",
+        "label": "GPT-2"
+       },
+       {
+        "id": "dataset:DeBERTa",
+        "type": "Dataset",
+        "label": "DeBERTa"
+       },
+       {
+        "id": "dataset:RoBERTa",
+        "type": "Dataset",
+        "label": "RoBERTa"
+       },
+       {
+        "id": "dataset:GPT-3",
+        "type": "Dataset",
+        "label": "GPT-3"
+       }
+      ],
+      "links": [
+       {
+        "source": "paper:2005.11401",
+        "target": "method:RAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2005.11401",
+        "target": "dataset:MMLU",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2005.11401",
+        "target": "dataset:Natural Questions",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2005.11401",
+        "target": "dataset:Wikipedia",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:1810.04805",
+        "target": "method:BERT",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:1810.04805",
+        "target": "dataset:SQuAD v2.0",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:1810.04805",
+        "target": "dataset:MultiNLI",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:1810.04805",
+        "target": "dataset:SQuAD v1.1",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:1810.04805",
+        "target": "dataset:GLUE",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:1706.03762",
+        "target": "method:Transformer",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2004.05150",
+        "target": "method:Longformer",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2004.05150",
+        "target": "method:LED",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2004.05150",
+        "target": "dataset:enwik8",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2004.05150",
+        "target": "dataset:TriviaQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2004.05150",
+        "target": "dataset:arXiv",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2004.05150",
+        "target": "dataset:WikiHop",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2004.05150",
+        "target": "dataset:text8",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2205.14135",
+        "target": "method:FlashAttention",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2205.14135",
+        "target": "method:block-sparse FlashAttention",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2205.14135",
+        "target": "dataset:Path-X",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2205.14135",
+        "target": "dataset:long-range arena",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2205.14135",
+        "target": "dataset:Path-256",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2104.09864",
+        "target": "method:RoFormer",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2104.09864",
+        "target": "method:RoPE",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:1910.10683",
+        "target": "method:text-to-text transformer",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:1910.10683",
+        "target": "method:unified framework",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:1910.10683",
+        "target": "dataset:Colossal Clean Crawled Corpus",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:1908.10084",
+        "target": "dataset:STS",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:1908.10084",
+        "target": "method:SRoBERTa",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:1908.10084",
+        "target": "method:Sentence-BERT",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "method:GPT-3",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "dataset:translation",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "dataset:unscrambling words",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "dataset:question-answering",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "dataset:using a novel word in a sentence",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "dataset:cloze tasks",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2302.13971",
+        "target": "method:LLaMA",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2106.09685",
+        "target": "method:LoRA",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2106.09685",
+        "target": "dataset:GPT-2",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2106.09685",
+        "target": "dataset:DeBERTa",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2106.09685",
+        "target": "dataset:RoBERTa",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2106.09685",
+        "target": "dataset:GPT-3",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "paper:2005.11401",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2302.13971",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2106.09685",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2104.09864",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2205.14135",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:1910.10683",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:1908.10084",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2004.05150",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2005.11401",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2307.03172",
+        "target": "paper:1706.03762",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2005.11401",
+        "target": "paper:1706.03762",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "paper:1706.03762",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2205.14135",
+        "target": "paper:1706.03762",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2106.09685",
+        "target": "paper:1706.03762",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2004.05150",
+        "target": "paper:1706.03762",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:1908.10084",
+        "target": "paper:1706.03762",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2104.09864",
+        "target": "paper:1706.03762",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:1810.04805",
+        "target": "paper:1706.03762",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:1910.10683",
+        "target": "paper:1706.03762",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2302.13971",
+        "target": "paper:1706.03762",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2205.14135",
+        "target": "paper:2004.05150",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2307.03172",
+        "target": "paper:2004.05150",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2302.13971",
+        "target": "paper:2205.14135",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2307.03172",
+        "target": "paper:2205.14135",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2302.13971",
+        "target": "paper:2104.09864",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2307.03172",
+        "target": "paper:1910.10683",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2004.05150",
+        "target": "paper:1910.10683",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "paper:1910.10683",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2005.11401",
+        "target": "paper:1910.10683",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2104.09864",
+        "target": "paper:1910.10683",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2302.13971",
+        "target": "paper:1910.10683",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2302.13971",
+        "target": "paper:2005.14165",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2104.09864",
+        "target": "paper:2005.14165",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2106.09685",
+        "target": "paper:2005.14165",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2205.14135",
+        "target": "paper:2005.14165",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2307.03172",
+        "target": "paper:2302.13971",
+        "type": "CITES"
+       },
+       {
+        "source": "method:SRoBERTa",
+        "target": "method:BERT",
+        "type": "IMPROVES_ON"
+       },
+       {
+        "source": "method:Sentence-BERT",
+        "target": "method:BERT",
+        "type": "IMPROVES_ON"
+       },
+       {
+        "source": "method:LLaMA",
+        "target": "method:GPT-3",
+        "type": "IMPROVES_ON"
+       },
+       {
+        "source": "method:LoRA",
+        "target": "method:GPT-3",
+        "type": "IMPROVES_ON"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "question": "Compare Self-RAG and Corrective RAG",
+   "events": [
+    {
+     "event": "step",
+     "data": {
+      "node": "plan",
+      "message": "Planned: compare question; entities: Self-RAG, Corrective RAG"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "graph",
+      "message": "Knowledge graph: compared Self-RAG, Corrective RAG (2 facts)"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "search",
+      "message": "Searched 'Self-RAG vs Corrective RAG': 6 papers"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "check",
+      "message": "Evidence looks sufficient"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "answer",
+      "message": "Wrote the answer with 2 verified citations"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "subgraph",
+      "message": "Built a graph of 6 nodes and 5 links"
+     }
+    },
+    {
+     "event": "answer",
+     "data": {
+      "text": "'Corrective RAG' is not a method in the knowledge graph. The only method listed is Self-RAG, proposed in [2310.11511].\n\n| Method | Paper | Core idea | Evaluated on | Notes |\n|-------|-------|---------|------------|-------|\n| Self-RAG | [2310.11511] | Enhances LLMs by enabling self-reflection: retrieves, generates, and critiques responses to improve factual accuracy and reasoning. | Fact verification, reasoning, open-domain QA, long-form generation | Improves on ChatGPT and Llama2-chat; addresses over-retrieval and irrelevant passages |\n| Corrective RAG | [2401.15884] | Not present in the knowledge graph | N/A | The method \"Corrective RAG\" is referenced but not found in the knowledge graph; no evaluation or task details provided |\n\nNote: The knowledge graph explicitly states that \"Corrective RAG\" is not a method in the graph, and no paper with the method is listed in the provided sources. Thus, a direct comparison cannot be made. The claim that \"Corrective RAG\" exists in the graph is false. [2401.15884] describes a method named \"Corrective Retrieval Augmented Generation (CRAG)\", but it is not the same as \"Corrective RAG\" and is not evaluated in the graph. Missing: explicit evaluation of Corrective RAG or its comparison to Self-RAG."
+     }
+    },
+    {
+     "event": "citations",
+     "data": [
+      {
+       "arxiv_id": "2310.11511",
+       "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+       "year": 2023,
+       "abs_url": "https://arxiv.org/abs/2310.11511",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2401.15884",
+       "title": "Corrective Retrieval Augmented Generation",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2401.15884",
+       "source": "entity"
+      }
+     ]
+    },
+    {
+     "event": "subgraph",
+     "data": {
+      "nodes": [
+       {
+        "id": "paper:2310.11511",
+        "type": "Paper",
+        "label": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+        "arxiv_id": "2310.11511",
+        "year": 2023
+       },
+       {
+        "id": "paper:2401.15884",
+        "type": "Paper",
+        "label": "Corrective Retrieval Augmented Generation",
+        "arxiv_id": "2401.15884",
+        "year": 2024
+       },
+       {
+        "id": "method:Self-RAG",
+        "type": "Method",
+        "label": "Self-RAG"
+       },
+       {
+        "id": "method:decompose-then-recompose algorithm",
+        "type": "Method",
+        "label": "decompose-then-recompose algorithm"
+       },
+       {
+        "id": "method:lightweight retrieval evaluator",
+        "type": "Method",
+        "label": "lightweight retrieval evaluator"
+       },
+       {
+        "id": "method:CRAG",
+        "type": "Method",
+        "label": "CRAG"
+       }
+      ],
+      "links": [
+       {
+        "source": "paper:2310.11511",
+        "target": "method:Self-RAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2401.15884",
+        "target": "method:decompose-then-recompose algorithm",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2401.15884",
+        "target": "method:lightweight retrieval evaluator",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2401.15884",
+        "target": "method:CRAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2401.15884",
+        "target": "paper:2310.11511",
+        "type": "CITES"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "question": "Which papers evaluate on HotpotQA, and what do they propose?",
+   "events": [
+    {
+     "event": "step",
+     "data": {
+      "node": "plan",
+      "message": "Planned: dataset question; entities: HotpotQA"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "graph",
+      "message": "Knowledge graph: looked up papers evaluating on HotpotQA (7 facts)"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "search",
+      "message": "Searched 'HotpotQA evaluation papers': 6 papers"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "check",
+      "message": "Evidence looks sufficient"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "answer",
+      "message": "Wrote the answer with 6 verified citations"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "subgraph",
+      "message": "Built a graph of 28 nodes and 34 links"
+     }
+    },
+    {
+     "event": "answer",
+     "data": {
+      "text": "Papers that evaluate on HotpotQA:\n\n- [2009.12756] proposes multi-hop dense retrieval, achieving state-of-the-art performance on HotpotQA without needing corpus-specific annotations, with 10\u00d7 faster inference than prior methods [2009.12756].\n\n- [2210.03629] proposes ReAct, which interleaves reasoning and action generation, enabling LLMs to reason and act in tandem, with improved performance on knowledge-intensive QA tasks including HotpotQA [2210.03629].\n\n- [2212.10509] proposes IRCoT, an interleaving approach that combines retrieval and chain-of-thought reasoning for multi-step questions, addressing dependencies in knowledge retrieval for HotpotQA [2212.10509].\n\n- [2407.10805] proposes Think-on-Graph 2.0, which tightly couples document and knowledge graph retrieval to enable deep, knowledge-guided reasoning, improving performance on complex HotpotQA questions [2407.10805].\n\n- [2502.06864] proposes KG$^2$RAG, using knowledge graphs to enhance retrieval coherence and diversity, improving answer quality on HotpotQA via fact-level relationships [2502.06864].\n\n- [2405.16444] proposes CacheBlend, which optimizes RAG serving via cached knowledge fusion, but does not explicitly evaluate on HotpotQA [2405.16444].\n\nNote: CacheBlend does not evaluate on HotpotQA, despite being in the knowledge graph. [2405.16444] is excluded due to lack of HotpotQA evaluation."
+     }
+    },
+    {
+     "event": "citations",
+     "data": [
+      {
+       "arxiv_id": "2009.12756",
+       "title": "Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval",
+       "year": 2020,
+       "abs_url": "https://arxiv.org/abs/2009.12756",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2210.03629",
+       "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+       "year": 2022,
+       "abs_url": "https://arxiv.org/abs/2210.03629",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2212.10509",
+       "title": "Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions",
+       "year": 2022,
+       "abs_url": "https://arxiv.org/abs/2212.10509",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2407.10805",
+       "title": "Think-on-Graph 2.0: Deep and Faithful Large Language Model Reasoning with Knowledge-guided Retrieval Augmented Generation",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2407.10805",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2502.06864",
+       "title": "Knowledge Graph-Guided Retrieval Augmented Generation",
+       "year": 2025,
+       "abs_url": "https://arxiv.org/abs/2502.06864",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2405.16444",
+       "title": "CacheBlend: Fast Large Language Model Serving for RAG with Cached Knowledge Fusion",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2405.16444",
+       "source": "graph"
+      }
+     ]
+    },
+    {
+     "event": "subgraph",
+     "data": {
+      "nodes": [
+       {
+        "id": "paper:2009.12756",
+        "type": "Paper",
+        "label": "Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval",
+        "arxiv_id": "2009.12756",
+        "year": 2020
+       },
+       {
+        "id": "paper:2210.03629",
+        "type": "Paper",
+        "label": "ReAct: Synergizing Reasoning and Acting in Language Models",
+        "arxiv_id": "2210.03629",
+        "year": 2022
+       },
+       {
+        "id": "paper:2212.10509",
+        "type": "Paper",
+        "label": "Interleaving Retrieval with Chain-of-Thought Reasoning for Knowledge-Intensive Multi-Step Questions",
+        "arxiv_id": "2212.10509",
+        "year": 2022
+       },
+       {
+        "id": "paper:2407.10805",
+        "type": "Paper",
+        "label": "Think-on-Graph 2.0: Deep and Faithful Large Language Model Reasoning with Knowledge-guided Retrieval Augmented Generation",
+        "arxiv_id": "2407.10805",
+        "year": 2024
+       },
+       {
+        "id": "paper:2502.06864",
+        "type": "Paper",
+        "label": "Knowledge Graph-Guided Retrieval Augmented Generation",
+        "arxiv_id": "2502.06864",
+        "year": 2025
+       },
+       {
+        "id": "paper:2405.16444",
+        "type": "Paper",
+        "label": "CacheBlend: Fast Large Language Model Serving for RAG with Cached Knowledge Fusion",
+        "arxiv_id": "2405.16444",
+        "year": 2024
+       },
+       {
+        "id": "dataset:HotpotQA",
+        "type": "Dataset",
+        "label": "HotpotQA"
+       },
+       {
+        "id": "method:multi-hop dense retrieval",
+        "type": "Method",
+        "label": "multi-hop dense retrieval"
+       },
+       {
+        "id": "dataset:multi-evidence FEVER",
+        "type": "Dataset",
+        "label": "multi-evidence FEVER"
+       },
+       {
+        "id": "dataset:TruthfulQA",
+        "type": "Dataset",
+        "label": "TruthfulQA"
+       },
+       {
+        "id": "dataset:MMLU",
+        "type": "Dataset",
+        "label": "MMLU"
+       },
+       {
+        "id": "dataset:Natural Questions",
+        "type": "Dataset",
+        "label": "Natural Questions"
+       },
+       {
+        "id": "dataset:OpenBookQA",
+        "type": "Dataset",
+        "label": "OpenBookQA"
+       },
+       {
+        "id": "method:tight-coupling of context and graph retrieval",
+        "type": "Method",
+        "label": "tight-coupling of context and graph retrieval"
+       },
+       {
+        "id": "method:collaboration between contexts and knowledge graphs",
+        "type": "Method",
+        "label": "collaboration between contexts and knowledge graphs"
+       },
+       {
+        "id": "method:Think-on-Graph 2.0",
+        "type": "Method",
+        "label": "Think-on-Graph 2.0"
+       },
+       {
+        "id": "method:iterative knowledge retrieval process",
+        "type": "Method",
+        "label": "iterative knowledge retrieval process"
+       },
+       {
+        "id": "method:knowledge-guided retrieval augmented generation",
+        "type": "Method",
+        "label": "knowledge-guided retrieval augmented generation"
+       },
+       {
+        "id": "dataset:COPA",
+        "type": "Dataset",
+        "label": "COPA"
+       },
+       {
+        "id": "method:CacheBlend",
+        "type": "Method",
+        "label": "CacheBlend"
+       },
+       {
+        "id": "method:IRCoT",
+        "type": "Method",
+        "label": "IRCoT"
+       },
+       {
+        "id": "dataset:MuSiQue",
+        "type": "Dataset",
+        "label": "MuSiQue"
+       },
+       {
+        "id": "dataset:IIRC",
+        "type": "Dataset",
+        "label": "IIRC"
+       },
+       {
+        "id": "method:ReAct",
+        "type": "Method",
+        "label": "ReAct"
+       },
+       {
+        "id": "dataset:Fever",
+        "type": "Dataset",
+        "label": "Fever"
+       },
+       {
+        "id": "dataset:WebShop",
+        "type": "Dataset",
+        "label": "WebShop"
+       },
+       {
+        "id": "dataset:ALFWorld",
+        "type": "Dataset",
+        "label": "ALFWorld"
+       },
+       {
+        "id": "method:KG$^2$RAG",
+        "type": "Method",
+        "label": "KG$^2$RAG"
+       }
+      ],
+      "links": [
+       {
+        "source": "paper:2009.12756",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2009.12756",
+        "target": "method:multi-hop dense retrieval",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2009.12756",
+        "target": "dataset:multi-evidence FEVER",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "dataset:TruthfulQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "dataset:MMLU",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "dataset:Natural Questions",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "dataset:OpenBookQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "method:tight-coupling of context and graph retrieval",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "method:collaboration between contexts and knowledge graphs",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "method:Think-on-Graph 2.0",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "method:iterative knowledge retrieval process",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "method:knowledge-guided retrieval augmented generation",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2405.16444",
+        "target": "dataset:TruthfulQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2405.16444",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2405.16444",
+        "target": "dataset:COPA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2405.16444",
+        "target": "method:CacheBlend",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2405.16444",
+        "target": "dataset:Natural Questions",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2405.16444",
+        "target": "dataset:MMLU",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2212.10509",
+        "target": "method:IRCoT",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2212.10509",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2212.10509",
+        "target": "dataset:MuSiQue",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2212.10509",
+        "target": "dataset:IIRC",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2210.03629",
+        "target": "method:ReAct",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2210.03629",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2210.03629",
+        "target": "dataset:Fever",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2210.03629",
+        "target": "dataset:WebShop",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2210.03629",
+        "target": "dataset:ALFWorld",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2502.06864",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2502.06864",
+        "target": "method:KG$^2$RAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2212.10509",
+        "target": "paper:2009.12756",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "paper:2212.10509",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2502.06864",
+        "target": "paper:2210.03629",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2212.10509",
+        "target": "paper:2210.03629",
+        "type": "CITES"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "question": "What are the most cited papers on hallucination since 2023?",
+   "events": [
+    {
+     "event": "step",
+     "data": {
+      "node": "plan",
+      "message": "Planned: top_cited question"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "graph",
+      "message": "Knowledge graph: ranked papers by citations (11 facts)"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "search",
+      "message": "Searched 'hallucination AND cite COUNT>100 AND year>=2023': 6 papers"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "check",
+      "message": "Evidence looks sufficient"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "answer",
+      "message": "Wrote the answer with 4 verified citations"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "subgraph",
+      "message": "Built a graph of 10 nodes and 8 links"
+     }
+    },
+    {
+     "event": "answer",
+     "data": {
+      "text": "The most cited papers on hallucination since 2023 include:\n\n- [2401.01313] A Comprehensive Survey of Hallucination Mitigation Techniques in Large Language Models (2024): This paper provides a comprehensive overview of techniques to detect and mitigate hallucinations in LLMs, emphasizing their critical impact on real-world deployment and safety. It identifies hallucination as the primary barrier to reliable LLM use in production systems [2401.01313].\n\n- [2307.03987] A Stitch in Time Saves Nine: Detecting and Mitigating Hallucinations of LLMs by Validating Low-Confidence Generation (2023): This work proposes a method to detect and mitigate hallucinations during generation by validating low-confidence outputs using logit values, improving response reliability [2307.03987].\n\nNo other papers in the corpus explicitly focus on hallucination mitigation. While papers like [2312.10997] and [2310.11511] discuss hallucination as a challenge, they do not center on it. Thus, the most cited papers specifically addressing hallucination are [2401.01313] and [2307.03987]. The rest of the listed papers discuss related topics (e.g., reasoning, tool use, retrieval) but not hallucination directly. [2401.01313] is the only paper explicitly dedicated to hallucination mitigation. [2307.03987] is the only one with a direct method for detection and mitigation."
+     }
+    },
+    {
+     "event": "citations",
+     "data": [
+      {
+       "arxiv_id": "2401.01313",
+       "title": "A Comprehensive Survey of Hallucination Mitigation Techniques in Large Language Models",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2401.01313",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "2307.03987",
+       "title": "A Stitch in Time Saves Nine: Detecting and Mitigating Hallucinations of LLMs by Validating Low-Confidence Generation",
+       "year": 2023,
+       "abs_url": "https://arxiv.org/abs/2307.03987",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "2312.10997",
+       "title": "Retrieval-Augmented Generation for Large Language Models: A Survey",
+       "year": 2023,
+       "abs_url": "https://arxiv.org/abs/2312.10997",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2310.11511",
+       "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+       "year": 2023,
+       "abs_url": "https://arxiv.org/abs/2310.11511",
+       "source": "graph"
+      }
+     ]
+    },
+    {
+     "event": "subgraph",
+     "data": {
+      "nodes": [
+       {
+        "id": "paper:2401.01313",
+        "type": "Paper",
+        "label": "A Comprehensive Survey of Hallucination Mitigation Techniques in Large Language Models",
+        "arxiv_id": "2401.01313",
+        "year": 2024
+       },
+       {
+        "id": "paper:2307.03987",
+        "type": "Paper",
+        "label": "A Stitch in Time Saves Nine: Detecting and Mitigating Hallucinations of LLMs by Validating Low-Confidence Generation",
+        "arxiv_id": "2307.03987",
+        "year": 2023
+       },
+       {
+        "id": "paper:2312.10997",
+        "type": "Paper",
+        "label": "Retrieval-Augmented Generation for Large Language Models: A Survey",
+        "arxiv_id": "2312.10997",
+        "year": 2023
+       },
+       {
+        "id": "paper:2310.11511",
+        "type": "Paper",
+        "label": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
+        "arxiv_id": "2310.11511",
+        "year": 2023
+       },
+       {
+        "id": "method:detection technique based on logit output values",
+        "type": "Method",
+        "label": "detection technique based on logit output values"
+       },
+       {
+        "id": "dataset:false premise questions",
+        "type": "Dataset",
+        "label": "false premise questions"
+       },
+       {
+        "id": "method:mitigation technique for hallucinations",
+        "type": "Method",
+        "label": "mitigation technique for hallucinations"
+       },
+       {
+        "id": "dataset:article generation task",
+        "type": "Dataset",
+        "label": "article generation task"
+       },
+       {
+        "id": "dataset:multi-hop questions",
+        "type": "Dataset",
+        "label": "multi-hop questions"
+       },
+       {
+        "id": "method:Self-RAG",
+        "type": "Method",
+        "label": "Self-RAG"
+       }
+      ],
+      "links": [
+       {
+        "source": "paper:2307.03987",
+        "target": "method:detection technique based on logit output values",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2307.03987",
+        "target": "dataset:false premise questions",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2307.03987",
+        "target": "method:mitigation technique for hallucinations",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2307.03987",
+        "target": "dataset:article generation task",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2307.03987",
+        "target": "dataset:multi-hop questions",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2310.11511",
+        "target": "method:Self-RAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2401.01313",
+        "target": "paper:2307.03987",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2312.10997",
+        "target": "paper:2310.11511",
+        "type": "CITES"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "question": "How does HyDE improve zero-shot dense retrieval?",
+   "events": [
+    {
+     "event": "step",
+     "data": {
+      "node": "plan",
+      "message": "Planned: lookup question; entities: HyDE, zero-shot dense retrieval"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "search",
+      "message": "Searched 'HyDE zero-shot dense retrieval improvement': 6 papers"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "check",
+      "message": "Evidence looks sufficient"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "answer",
+      "message": "Wrote the answer with 1 verified citations"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "subgraph",
+      "message": "Built a graph of 2 nodes and 1 links"
+     }
+    },
+    {
+     "event": "answer",
+     "data": {
+      "text": "HyDE improves zero-shot dense retrieval by introducing a two-step process: first, it uses a language model to generate a hypothetical document (a \"fake\" document) that follows the query's instruction, capturing relevance patterns without needing labeled data. This hypothetical document is then encoded by an unsupervised contrastive encoder (e.g., Contriever), which learns to match query and document representations based on the generated document's structure and content. Although the document is hallucinated, it effectively simulates relevance, enabling zero-shot retrieval without requiring any labeled relevance data. This approach bypasses the need for relevance labels, which are typically required in supervised retrieval, thus enabling effective zero-shot dense retrieval [2212.10496].\n\nThis method leverages the instruction-following capabilities of large language models to generate plausible, contextually relevant content, which the encoder then uses to learn semantic similarity. While the generated documents may contain hallucinations, the overall retrieval performance is improved because the model learns to associate queries with content that reflects plausible relevance patterns. This makes HyDE a practical solution for zero-shot dense retrieval in real-world, label-scarce settings."
+     }
+    },
+    {
+     "event": "citations",
+     "data": [
+      {
+       "arxiv_id": "2212.10496",
+       "title": "Precise Zero-Shot Dense Retrieval without Relevance Labels",
+       "year": 2022,
+       "abs_url": "https://arxiv.org/abs/2212.10496",
+       "source": "entity"
+      }
+     ]
+    },
+    {
+     "event": "subgraph",
+     "data": {
+      "nodes": [
+       {
+        "id": "paper:2212.10496",
+        "type": "Paper",
+        "label": "Precise Zero-Shot Dense Retrieval without Relevance Labels",
+        "arxiv_id": "2212.10496",
+        "year": 2022
+       },
+       {
+        "id": "method:HyDE",
+        "type": "Method",
+        "label": "HyDE"
+       }
+      ],
+      "links": [
+       {
+        "source": "paper:2212.10496",
+        "target": "method:HyDE",
+        "type": "PROPOSES"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "question": "What are the latest papers on agent memory?",
+   "events": [
+    {
+     "event": "step",
+     "data": {
+      "node": "plan",
+      "message": "Planned: recent question"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "search",
+      "message": "Searched 'agent memory recent papers': 6 papers"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "live",
+      "message": "Live arXiv search: 5 recent papers"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "check",
+      "message": "Evidence looks sufficient"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "answer",
+      "message": "Wrote the answer with 9 verified citations"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "subgraph",
+      "message": "Built a graph of 20 nodes and 17 links"
+     }
+    },
+    {
+     "event": "answer",
+     "data": {
+      "text": "The latest papers on agent memory (2024\u20132026) highlight evolving systems and evaluations beyond simple retrieval. Key works include:\n\n- [2610.07309] introduces a retrieval-admissibility verification framework to ensure memory content is policy-compliant and contextually appropriate, addressing risks of inadmissible data in long-term memory [2610.07309].  \n- [2607.13157] proposes Oracle Agent Memory as a database-native substrate for long-horizon agents, emphasizing lifecycle management, state scoping, and retrieval under latency [2607.13157].  \n- [2606.24775] critiques current evaluations of agent memory, arguing that end-to-end metrics obscure critical system-level concerns like cost and robustness under dynamic updates [2606.24775].  \n- [2605.27825] presents MRMMIA, a membership inference attack targeting chat agent memory, revealing privacy risks in stored user interactions [2605.27825].  \n- [2603.04428] enables persistent KV cache storage on edge devices, reducing redundant prefill via disk-based cache restoration [2603.04428].  \n- [2507.05257] identifies four core memory competencies\u2014accurate retrieval, test-time learning, long-range understanding, and selective forgetting\u2014lacking in current benchmarks [2507.05257].  \n- [2502.12110] proposes A-MEM, a dynamically organized memory system inspired by Zettelkasten, enabling adaptive knowledge structuring [2502.12110].  \n- [2512.13564] critiques fragmentation in agent memory research and calls for clearer taxonomies beyond long/short-term memory [2512.13564].  \n- [2408.03615] introduces a hybrid multimodal memory module for world knowledge and experience representation [2408.03615].  \n\nThese works collectively advance agent memory from retrieval mechanisms to structured, secure, and adaptive systems."
+     }
+    },
+    {
+     "event": "citations",
+     "data": [
+      {
+       "arxiv_id": "2610.07309",
+       "title": "The Right Memory in the Wrong Context: Verifying Retrieval Admissibility in Long-Term Agent Memory",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2610.07309",
+       "source": "live"
+      },
+      {
+       "arxiv_id": "2607.13157",
+       "title": "Oracle Agent Memory as an Enterprise Memory Substrate for Long-Horizon AI Agents",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2607.13157",
+       "source": "live"
+      },
+      {
+       "arxiv_id": "2606.24775",
+       "title": "Are We Ready For An Agent-Native Memory System?",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2606.24775",
+       "source": "live"
+      },
+      {
+       "arxiv_id": "2605.27825",
+       "title": "MRMMIA: Membership Inference Attacks on Memory in Chat Agents",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2605.27825",
+       "source": "live"
+      },
+      {
+       "arxiv_id": "2603.04428",
+       "title": "Agent Memory Below the Prompt: Persistent Q4 KV Cache for Multi-Agent LLM Inference on Edge Devices",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2603.04428",
+       "source": "live"
+      },
+      {
+       "arxiv_id": "2507.05257",
+       "title": "Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions",
+       "year": 2025,
+       "abs_url": "https://arxiv.org/abs/2507.05257",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "2502.12110",
+       "title": "A-MEM: Agentic Memory for LLM Agents",
+       "year": 2025,
+       "abs_url": "https://arxiv.org/abs/2502.12110",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "2512.13564",
+       "title": "Memory in the Age of AI Agents",
+       "year": 2025,
+       "abs_url": "https://arxiv.org/abs/2512.13564",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "2408.03615",
+       "title": "Optimus-1: Hybrid Multimodal Memory Empowered Agents Excel in Long-Horizon Tasks",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2408.03615",
+       "source": "search"
+      }
+     ]
+    },
+    {
+     "event": "subgraph",
+     "data": {
+      "nodes": [
+       {
+        "id": "paper:2507.05257",
+        "type": "Paper",
+        "label": "Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions",
+        "arxiv_id": "2507.05257",
+        "year": 2025
+       },
+       {
+        "id": "paper:2502.12110",
+        "type": "Paper",
+        "label": "A-MEM: Agentic Memory for LLM Agents",
+        "arxiv_id": "2502.12110",
+        "year": 2025
+       },
+       {
+        "id": "paper:2512.13564",
+        "type": "Paper",
+        "label": "Memory in the Age of AI Agents",
+        "arxiv_id": "2512.13564",
+        "year": 2025
+       },
+       {
+        "id": "paper:2408.03615",
+        "type": "Paper",
+        "label": "Optimus-1: Hybrid Multimodal Memory Empowered Agents Excel in Long-Horizon Tasks",
+        "arxiv_id": "2408.03615",
+        "year": 2024
+       },
+       {
+        "id": "method:MemoryAgentBench",
+        "type": "Method",
+        "label": "MemoryAgentBench"
+       },
+       {
+        "id": "dataset:MemoryAgentBench",
+        "type": "Dataset",
+        "label": "MemoryAgentBench"
+       },
+       {
+        "id": "method:memory evolution",
+        "type": "Method",
+        "label": "memory evolution"
+       },
+       {
+        "id": "method:Zettelkasten-inspired memory organization",
+        "type": "Method",
+        "label": "Zettelkasten-inspired memory organization"
+       },
+       {
+        "id": "method:dynamic indexing and linking",
+        "type": "Method",
+        "label": "dynamic indexing and linking"
+       },
+       {
+        "id": "method:agentic memory system",
+        "type": "Method",
+        "label": "agentic memory system"
+       },
+       {
+        "id": "method:memory automation",
+        "type": "Method",
+        "label": "memory automation"
+       },
+       {
+        "id": "method:multi-agent memory",
+        "type": "Method",
+        "label": "multi-agent memory"
+       },
+       {
+        "id": "method:reinforcement learning integration",
+        "type": "Method",
+        "label": "reinforcement learning integration"
+       },
+       {
+        "id": "method:multimodal memory",
+        "type": "Method",
+        "label": "multimodal memory"
+       },
+       {
+        "id": "method:Hierarchical Directed Knowledge Graph",
+        "type": "Method",
+        "label": "Hierarchical Directed Knowledge Graph"
+       },
+       {
+        "id": "method:Knowledge-guided Planner",
+        "type": "Method",
+        "label": "Knowledge-guided Planner"
+       },
+       {
+        "id": "method:Abstracted Multimodal Experience Pool",
+        "type": "Method",
+        "label": "Abstracted Multimodal Experience Pool"
+       },
+       {
+        "id": "method:Hybrid Multimodal Memory module",
+        "type": "Method",
+        "label": "Hybrid Multimodal Memory module"
+       },
+       {
+        "id": "method:Experience-Driven Reflector",
+        "type": "Method",
+        "label": "Experience-Driven Reflector"
+       },
+       {
+        "id": "dataset:Minecraft",
+        "type": "Dataset",
+        "label": "Minecraft"
+       }
+      ],
+      "links": [
+       {
+        "source": "paper:2507.05257",
+        "target": "method:MemoryAgentBench",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2507.05257",
+        "target": "dataset:MemoryAgentBench",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2502.12110",
+        "target": "method:memory evolution",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2502.12110",
+        "target": "method:Zettelkasten-inspired memory organization",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2502.12110",
+        "target": "method:dynamic indexing and linking",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2502.12110",
+        "target": "method:agentic memory system",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2512.13564",
+        "target": "method:memory automation",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2512.13564",
+        "target": "method:multi-agent memory",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2512.13564",
+        "target": "method:reinforcement learning integration",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2512.13564",
+        "target": "method:multimodal memory",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2408.03615",
+        "target": "method:Hierarchical Directed Knowledge Graph",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2408.03615",
+        "target": "method:Knowledge-guided Planner",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2408.03615",
+        "target": "method:Abstracted Multimodal Experience Pool",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2408.03615",
+        "target": "method:Hybrid Multimodal Memory module",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2408.03615",
+        "target": "method:Experience-Driven Reflector",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2408.03615",
+        "target": "dataset:Minecraft",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2507.05257",
+        "target": "paper:2502.12110",
+        "type": "CITES"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "question": "Compare ReAct and Reflexion",
+   "events": [
+    {
+     "event": "step",
+     "data": {
+      "node": "plan",
+      "message": "Planned: compare question; entities: ReAct, Reflexion"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "graph",
+      "message": "Knowledge graph: compared ReAct, Reflexion (2 facts)"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "search",
+      "message": "Searched 'ReAct Reflexion comparison': 6 papers"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "check",
+      "message": "Evidence looks sufficient"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "answer",
+      "message": "Wrote the answer with 2 verified citations"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "subgraph",
+      "message": "Built a graph of 9 nodes and 8 links"
+     }
+    },
+    {
+     "event": "answer",
+     "data": {
+      "text": "- **ReAct** (2022) [2210.03629] synergizes reasoning and acting by interleaving chain-of-thought reasoning with action generation, enabling models to query external sources or environments. It is evaluated on tasks like question answering, fact verification, and interactive decision making (HotpotQA, Fever, WebShop, ALFWorld).  \n- **Reflexion** (2023) [2303.11366] improves upon GPT-4 by using verbal reinforcement learning\u2014agents reflect on feedback and store it in episodic memory to improve future decisions. It focuses on coding and sequential reasoning, evaluated on HumanEval.\n\n| Method | Paper | Core idea | Evaluated on | Notes |\n|--------|-------|----------|-------------|-------|\n| ReAct | [2210.03629] | Interleaves reasoning and acting; uses reasoning traces to update action plans and interact with environments | HotpotQA, Fever, WebShop, ALFWorld | Tasks: QA, fact verification, interactive decision making |\n| Reflexion | [2303.11366] | Uses verbal reflection and episodic memory to learn from feedback without model fine-tuning | HumanEval | Tasks: coding, sequential decision-making, language reasoning |\n\n*Note: Both methods focus on agent-like behavior but differ in learning mechanism (ReAct: reasoning-acting loop; Reflexion: verbal reinforcement via reflection).*"
+     }
+    },
+    {
+     "event": "citations",
+     "data": [
+      {
+       "arxiv_id": "2210.03629",
+       "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
+       "year": 2022,
+       "abs_url": "https://arxiv.org/abs/2210.03629",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2303.11366",
+       "title": "Reflexion: language agents with verbal reinforcement learning",
+       "year": 2023,
+       "abs_url": "https://arxiv.org/abs/2303.11366",
+       "source": "graph"
+      }
+     ]
+    },
+    {
+     "event": "subgraph",
+     "data": {
+      "nodes": [
+       {
+        "id": "paper:2210.03629",
+        "type": "Paper",
+        "label": "ReAct: Synergizing Reasoning and Acting in Language Models",
+        "arxiv_id": "2210.03629",
+        "year": 2022
+       },
+       {
+        "id": "paper:2303.11366",
+        "type": "Paper",
+        "label": "Reflexion: language agents with verbal reinforcement learning",
+        "arxiv_id": "2303.11366",
+        "year": 2023
+       },
+       {
+        "id": "method:ReAct",
+        "type": "Method",
+        "label": "ReAct"
+       },
+       {
+        "id": "dataset:HotpotQA",
+        "type": "Dataset",
+        "label": "HotpotQA"
+       },
+       {
+        "id": "dataset:Fever",
+        "type": "Dataset",
+        "label": "Fever"
+       },
+       {
+        "id": "dataset:WebShop",
+        "type": "Dataset",
+        "label": "WebShop"
+       },
+       {
+        "id": "dataset:ALFWorld",
+        "type": "Dataset",
+        "label": "ALFWorld"
+       },
+       {
+        "id": "method:Reflexion",
+        "type": "Method",
+        "label": "Reflexion"
+       },
+       {
+        "id": "dataset:HumanEval",
+        "type": "Dataset",
+        "label": "HumanEval"
+       }
+      ],
+      "links": [
+       {
+        "source": "paper:2210.03629",
+        "target": "method:ReAct",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2210.03629",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2210.03629",
+        "target": "dataset:Fever",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2210.03629",
+        "target": "dataset:WebShop",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2210.03629",
+        "target": "dataset:ALFWorld",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2303.11366",
+        "target": "method:Reflexion",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2303.11366",
+        "target": "dataset:HumanEval",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2303.11366",
+        "target": "paper:2210.03629",
+        "type": "CITES"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "question": "Which authors wrote the most papers in the corpus?",
+   "events": [
+    {
+     "event": "step",
+     "data": {
+      "node": "plan",
+      "message": "Planned: graph question"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "graph",
+      "message": "Knowledge graph: ran a generated read-only Cypher query (26 facts)"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "check",
+      "message": "Evidence looks sufficient"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "answer",
+      "message": "Wrote the answer with 0 verified citations"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "subgraph",
+      "message": "Built a graph of 0 nodes and 0 links"
+     }
+    },
+    {
+     "event": "answer",
+     "data": {
+      "text": "The authors who wrote the most papers in the corpus are Zhi-Yuan Liu, Ji-Rong Wen, and Jimmy Lin, each with 10 papers.  \n\nNo other author has a paper count exceeding 9.  \n\nThe remaining authors have fewer papers, with the next highest counts being 9 (W. Zhao) and 8 (Yang Liu).  \n\nThus, Zhi-Yuan Liu, Ji-Rong Wen, and Jimmy Lin are tied for the highest paper count."
+     }
+    },
+    {
+     "event": "citations",
+     "data": []
+    },
+    {
+     "event": "subgraph",
+     "data": {
+      "nodes": [],
+      "links": []
+     }
+    }
+   ]
+  }
+ ]
+}

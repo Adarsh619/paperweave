@@ -4,20 +4,26 @@ Templates are trusted code, so they skip the text-to-Cypher guard, but they stil
 run through stores.read() (READ transaction + timeout) like everything else.
 """
 
-# Exact name or alias match, case-insensitive; most-mentioned first.
+# Exact name or alias match, case-insensitive. Aliases also match without their
+# "(ABBR)" part, so "Dense Passage Retrieval" finds DPR via "Dense Passage Retrieval (DPR)".
+# Order: the kind the caller wants ($prefer, e.g. Method for lineage), then exact name over
+# alias, then methods > datasets > tasks, then the most mentioned.
 RESOLVE_ENTITY = """
 MATCH (n) WHERE (n:Method OR n:Dataset OR n:Task)
   AND (toLower(n.name) = toLower($name)
-       OR any(a IN coalesce(n.aliases, []) WHERE toLower(a) = toLower($name)))
-RETURN labels(n)[0] AS label, n.name AS name, coalesce(n.paper_mentions, 0) AS mentions
-ORDER BY mentions DESC LIMIT 3
+       OR any(a IN coalesce(n.aliases, []) WHERE toLower(a) = toLower($name)
+              OR toLower(trim(split(a, '(')[0])) = toLower($name)))
+RETURN labels(n)[0] AS label, n.name AS name, coalesce(n.aliases, []) AS aliases, coalesce(n.paper_mentions, 0) AS mentions
+ORDER BY CASE WHEN labels(n)[0] = $prefer THEN 0 ELSE 1 END,
+         CASE WHEN toLower(n.name) = toLower($name) THEN 0 ELSE 1 END,
+         CASE labels(n)[0] WHEN 'Method' THEN 0 WHEN 'Dataset' THEN 1 ELSE 2 END, mentions DESC LIMIT 3
 """
 
 # Fallback when nothing matches exactly: "graph rag" -> "GraphRAG-style ...".
 RESOLVE_ENTITY_FUZZY = """
 MATCH (n) WHERE (n:Method OR n:Dataset OR n:Task) AND toLower(n.name) CONTAINS toLower($name)
-RETURN labels(n)[0] AS label, n.name AS name, coalesce(n.paper_mentions, 0) AS mentions
-ORDER BY mentions DESC, size(n.name) LIMIT 3
+RETURN labels(n)[0] AS label, n.name AS name, coalesce(n.aliases, []) AS aliases, coalesce(n.paper_mentions, 0) AS mentions
+ORDER BY CASE WHEN labels(n)[0] = $prefer THEN 0 ELSE 1 END, mentions DESC, size(n.name) LIMIT 3
 """
 
 # A paper named in the question ("Attention Is All You Need"), via the fulltext index.
@@ -27,6 +33,13 @@ RETURN node.arxiv_id AS arxiv_id, node.title AS title, node.year AS year, score
 ORDER BY score DESC LIMIT 1
 """
 
+# Papers whose title contains a phrase (Lucene syntax, e.g. title:"Dense Passage Retrieval").
+TITLE_MATCH = """
+CALL db.index.fulltext.queryNodes('paper_text', $query) YIELD node, score
+RETURN node.arxiv_id AS arxiv_id, node.title AS title, node.year AS year, score
+ORDER BY score DESC LIMIT 3
+"""
+
 # Methods that improve on $name, who proposed them and where they were evaluated.
 IMPROVED_BY = """
 MATCH (new:Method)-[:IMPROVES_ON]->(:Method {name: $name})
@@ -34,7 +47,14 @@ MATCH (p:Paper)-[:PROPOSES]->(new)
 OPTIONAL MATCH (p)-[:EVALUATES_ON]->(d:Dataset)
 WITH new, p, collect(DISTINCT d.name) AS datasets
 RETURN new.name AS method, p.arxiv_id AS arxiv_id, p.title AS title, p.year AS year, datasets
-ORDER BY p.year DESC, p.citation_count DESC LIMIT 20
+ORDER BY p.year DESC, p.citation_count DESC LIMIT 10
+"""
+
+# Influential papers that use $name as a building block (e.g. RAG and FiD use DPR).
+USED_BY = """
+MATCH (p:Paper)-[:USES]->(:Method {name: $name})
+RETURN p.arxiv_id AS arxiv_id, p.title AS title, p.year AS year
+ORDER BY p.citation_count DESC LIMIT 8
 """
 
 # What $name itself improves on, and which paper introduced it.
