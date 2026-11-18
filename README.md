@@ -167,7 +167,34 @@ npm run dev                       # http://localhost:3000
 - **Vector-only RAG:** the question goes straight into the same hybrid (MiniLM + BM25) search.
 - **PaperWeave agent:** planning, graph tools, per-entity search, then the evidence check and retries.
 
-EVAL_RESULTS_PLACEHOLDER
+**Results** (30 questions, local `qwen3:4b-instruct` via Ollama for planning and answers):
+
+| Questions | n | Context recall: vector-only → agent | Hit rate: vector-only → agent | Citation recall: vector-only → agent |
+|---|---|---|---|---|
+| All | 30 | 71% → **79%** | 83% → **90%** | 70% → **76%** |
+| Lookup | 10 | 100% → **100%** | 100% → **100%** | 100% → **100%** |
+| Multi-hop | 10 | 30% → **43%** | 60% → **70%** | 27% → **34%** |
+| Comparison | 10 | 82% → **95%** | 90% → **100%** | 82% → **95%** |
+
+- **Context recall:** the share of gold papers in the answer LLM's context.
+- **Hit rate:** the share of questions with at least one gold paper in context.
+- **Citation recall:** the share of gold papers the final answer cites.
+
+What the numbers show:
+- **The graph helps most where vector search can't follow links.**
+  - "Which papers build on *Attention Is All You Need*?" went from 0% to 100%, via citation edges.
+  - "Which methods improved on standard RAG?" went from 0% to 60%, via `IMPROVES_ON` edges.
+  - Comparisons went from 82% to 95%: the agent finds each method's defining paper even when the name never appears in its abstract, as with DPR.
+- **Lookups are already easy.** Both systems find the one relevant paper every time.
+- **Multi-hop is the weak spot, mostly because of the small planner.**
+  - The 4B model classified 5 of the 10 multi-hop questions as plain lookups, so they never reached the graph tools.
+  - It marked one as "recent", which brought in live arXiv results instead.
+  - One question ("Which methods decide when to retrieve?") dropped from 33% to 0%.
+  - Two lineage questions have links the extracted graph doesn't contain.
+  - The planner should improve with Groq's Llama 3.3 70B. Re-run with `GROQ_API_KEY` set to measure it.
+- **Latency:** on a laptop GPU, the agent takes about 55 s per question and vector-only RAG about 45 s, almost all of it local LLM time. Groq should bring both down to a few seconds.
+
+Per-question results are in [`backend/evals/results.json`](backend/evals/results.json).
 
 ```bash
 cd backend
