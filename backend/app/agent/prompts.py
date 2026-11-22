@@ -50,7 +50,8 @@ Answer the question using ONLY the sources below. Rules:
 - Cite every claim with the paper's arXiv ID in square brackets right after it, e.g. [2005.11401].
   Copy IDs exactly from the sources. Never invent papers or IDs.
 - If the sources don't fully answer the question, say what is missing.
-- Be concise: at most about 250 words. Use short paragraphs or bullets. No tables."""
+- Be concise: at most about 250 words. Use short paragraphs or bullets. No tables.
+- No LaTeX: the page shows it as raw text. Write math in plain Unicode, e.g. ΛCDM, z ≲ 0.1, w = −1."""
 
 # Appended for compare questions only; small models add tables everywhere if always offered.
 ANSWER_TABLE = """
