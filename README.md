@@ -163,7 +163,7 @@ cd backend
 ../.venv/Scripts/python -m uvicorn app.main:app --reload --port 8010              # API + docs at /docs
 ```
 
-LLMs are tried in order: Groq, then Gemini, then local Ollama. Put `GROQ_API_KEY` and/or `GOOGLE_API_KEY` in `.env`; with neither, everything runs on Ollama. That works, but takes 1–2 minutes per answer on a laptop GPU, compared with a few seconds on Groq. The production image (`backend/Dockerfile`) uses about 150 MB of RAM, within Render's 512 MB free tier.
+LLMs are tried in order: Groq's answer model, then Groq's router model (each has its own free daily token quota), then Gemini, then local Ollama. Put `GROQ_API_KEY` and/or `GOOGLE_API_KEY` in `.env`; with neither, everything runs on Ollama. That works, but takes 1–2 minutes per answer on a laptop GPU, compared with a few seconds on Groq. The production image (`backend/Dockerfile`) uses about 150 MB of RAM, within Render's 512 MB free tier.
 
 ## Frontend
 

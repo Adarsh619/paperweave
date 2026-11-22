@@ -1,4 +1,4 @@
-"""Chat models with automatic fallback: Groq -> Gemini -> local Ollama.
+"""Chat models with automatic fallback: Groq (answer model, then router model) -> Gemini -> local Ollama.
 
 "router" is the fast model for planning; "answer" is the strong model for writing.
 Providers without an API key are skipped, so local development runs on Ollama alone.
@@ -20,8 +20,10 @@ def _models(role: Role) -> list[BaseChatModel]:
     if config.GROQ_API_KEY:
         from langchain_groq import ChatGroq
 
-        name = config.GROQ_ROUTER_MODEL if role == "router" else config.GROQ_ANSWER_MODEL
-        models.append(ChatGroq(model=name, api_key=config.GROQ_API_KEY, temperature=0, max_retries=1, timeout=30))
+        names = [config.GROQ_ROUTER_MODEL] if role == "router" else [config.GROQ_ANSWER_MODEL, config.GROQ_ROUTER_MODEL]
+        # Each Groq model has its own free daily token quota, so the router model backs up the answer model.
+        for name in dict.fromkeys(names):
+            models.append(ChatGroq(model=name, api_key=config.GROQ_API_KEY, temperature=0, max_retries=1, timeout=30))
     if config.GOOGLE_API_KEY:
         from langchain_google_genai import ChatGoogleGenerativeAI
 
@@ -55,4 +57,4 @@ def structured(role: Role, schema: type) -> Runnable:
 
 
 def provider_names() -> list[str]:
-    return [type(m).__name__ for m in _models("answer")]
+    return [f"{type(m).__name__}({getattr(m, 'model_name', None) or getattr(m, 'model', '')})" for m in _models("answer")]
