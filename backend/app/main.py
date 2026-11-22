@@ -15,6 +15,7 @@ from app.agent import llm
 from app.api import chat, papers
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(name)s: %(message)s")
+log = logging.getLogger("paperweave")
 
 
 @asynccontextmanager
@@ -43,11 +44,13 @@ def check_databases() -> dict:
         status["papers"] = stores.read("MATCH (p:Paper) RETURN count(p) AS n")[0]["n"]
     except Exception as exc:  # noqa: BLE001
         status["neo4j_error"] = type(exc).__name__
+        log.warning("health: Neo4j check failed: %r", exc)  # the reason shows in Render's logs
     try:
         points, _ = stores.qdrant().scroll(config.QDRANT_COLLECTION, limit=1, with_payload=False)
         status["vectors_ok"] = bool(points)
     except Exception as exc:  # noqa: BLE001
         status["qdrant_error"] = type(exc).__name__
+        log.warning("health: Qdrant check failed: %r", exc)
     return status
 
 
