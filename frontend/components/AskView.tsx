@@ -13,6 +13,7 @@ import PaperPanel from "@/components/PaperPanel";
 import WakingBanner from "@/components/WakingBanner";
 import { streamChat } from "@/lib/api";
 import { findExample } from "@/lib/examples";
+import { useSmoothText } from "@/lib/useSmoothText";
 import type { ChatEvent, Citation, Step, Subgraph, Turn } from "@/lib/types";
 
 type Status = "loading" | "streaming" | "done" | "error";
@@ -202,6 +203,7 @@ function QuestionRun({
   const openId = (id: string) =>
     setOpen(citations.find((c) => c.arxiv_id === id) ?? { arxiv_id: id, title: id, year: null, abs_url: null, source: "graph" });
 
+  const shown = useSmoothText(text);
   const running = status === "loading" || status === "streaming";
 
   const Heading = index === 0 ? "h1" : "h2";
@@ -226,8 +228,8 @@ function QuestionRun({
 
           {text && (
             <article className="rounded-lg border border-border bg-surface p-5">
-              <Answer text={text} onCite={openId} />
-              {status === "done" && (
+              <Answer text={shown} onCite={openId} />
+              {status === "done" && shown === text && (
                 <p className="mt-4 text-xs text-muted">
                   {source === "example"
                     ? "Saved example answer."

@@ -14,7 +14,10 @@ export default function AskBox({ initial = "", autoFocus = false }: { initial?: 
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        if (valid) router.push(askHref(question));
+        if (!valid) return;
+        router.push(askHref(question));
+        // Next keeps visited pages alive, so without this the home box still shows the old question.
+        if (!initial) setQuestion("");
       }}
       className="flex w-full gap-2"
     >

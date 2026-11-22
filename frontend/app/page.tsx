@@ -195,7 +195,7 @@ export default function Home() {
             <p className="mt-4 text-sm text-muted">
               Plain vector search finds papers that match your words. It can&apos;t follow &ldquo;method A improves on
               method B, which was evaluated on dataset C&rdquo;. The graph can.{" "}
-              <Link href="/about" className="text-accent underline">
+              <Link href="/how-it-works" className="text-accent underline">
                 Read how it works →
               </Link>
             </p>

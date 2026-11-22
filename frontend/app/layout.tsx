@@ -43,16 +43,19 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                 </svg>
                 PaperWeave
               </Link>
-              <nav className="flex items-center gap-5 text-sm text-muted">
+              <nav className="flex items-center gap-3 whitespace-nowrap text-[13px] text-muted sm:gap-5 sm:text-sm">
                 <Link href="/trends" className="hover:text-foreground">
                   Trends
                 </Link>
-                <Link href="/about" className="hover:text-foreground">
+                <Link href="/how-it-works" className="hover:text-foreground">
                   How it works
+                </Link>
+                <Link href="/about" className="hover:text-foreground">
+                  About
                 </Link>
                 <a
                   href="https://github.com/Adarsh619/paperweave"
-                  className="hover:text-foreground"
+                  className="hidden hover:text-foreground sm:inline"
                   target="_blank"
                   rel="noreferrer"
                 >

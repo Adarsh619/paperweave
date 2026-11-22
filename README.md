@@ -51,7 +51,7 @@ Not yet deployed.
 | Backend | FastAPI, LangGraph, Docker (Render) |
 | Graph DB | Neo4j AuraDB |
 | Vector DB | Qdrant Cloud (hybrid dense + BM25) |
-| LLM | Groq (Llama 3.3 70B), Gemini Flash fallback; Ollama for the offline graph build |
+| LLM | Groq (`openai/gpt-oss-120b` answers, `qwen/qwen3.8-27b` plans), Gemini Flash fallback; Ollama for the offline graph build |
 | Data | arXiv API, Semantic Scholar API |
 | Evals | Golden-question recall and citation recall vs vector-only RAG (`backend/evals`) |
 
@@ -170,7 +170,8 @@ LLMs are tried in order: Groq, then Gemini, then local Ollama. Put `GROQ_API_KEY
 A Next.js app with five pages:
 - **Home:** what it is and who it's for, a real saved answer shown inline, example questions, and coverage per field and topic (from `public/stats.json`).
 - **`/trends`:** topic growth, rising methods and breakout papers, filterable by field.
-- **`/about`:** how the pipeline and agent work, the evaluation, and the stack.
+- **`/how-it-works`:** how the pipeline and agent work, the evaluation, and the stack.
+- **`/about`:** why PaperWeave exists, who built it, its limits and data credits.
 - **`/ask?q=...`:** the agent's steps stream in as a timeline, then a markdown answer with clickable citations, a sources list and the interactive graph behind the answer. Clicking a paper opens its card. A follow-up box continues the conversation.
 - **`/paper/[id]`:** the paper's abstract, entities and citation neighborhood.
 
@@ -232,8 +233,8 @@ What the numbers show:
   - It classifies some multi-hop questions as plain lookups, so they never reach the graph tools.
   - The first v2 run showed it also calls specialist physics questions "off-topic". The agent now overrules that when the library has a closely matching paper (cosine ≥ 0.5). Real off-topic questions score at most 0.46.
   - It also searches the question as asked, not only its own keywords, which lost two physics papers.
-  - Re-run with `GROQ_API_KEY` set to measure the planner with Groq's Llama 3.3 70B.
-- **Latency:** on a laptop GPU, the agent takes about 60 s per question and vector-only RAG about 45 s, almost all of it local LLM time. Groq should bring both down to a few seconds.
+- **On Groq (production), retrieval scores the same.** A retrieval-only re-run with Groq's `qwen/qwen3.8-27b` as the planner (2026-11-23) matched every row above, with multi-hop context recall slightly higher (44% vs 42%) and 3/3 off-topic questions declined. Citation recall wasn't re-measured on Groq: answers for all 43 questions need more than the free tier's 200K tokens a day.
+- **Latency:** on a laptop GPU, the agent takes about 60 s per question and vector-only RAG about 45 s, almost all of it local LLM time. On Groq, the live agent answers in about 10–25 s.
 
 Per-question results are in [`backend/evals/results.json`](backend/evals/results.json).
 

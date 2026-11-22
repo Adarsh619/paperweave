@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round">
+  <!-- The header's woven-strands mark. Favicons can't read CSS tokens, so the accent hexes are repeated here. -->
+  <style>
+    path { stroke: #b4432c; }
+    @media (prefers-color-scheme: dark) { path { stroke: #f0876a; } }
+  </style>
+  <path d="M3 7c4 0 5 10 9 10s5-10 9-10" />
+  <path d="M3 17c4 0 5-10 9-10s5 10 9 10" opacity="0.55" />
+  <path d="M3 12h18" opacity="0.3" />
+</svg>
