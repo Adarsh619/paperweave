@@ -58,7 +58,9 @@ def check_databases() -> dict:
 def health():
     status = check_databases()
     ok = "papers" in status and status.get("vectors_ok") is True
-    return JSONResponse({"status": "ok" if ok else "degraded", **status}, status_code=200 if ok else 503)
+    # The models in use change on their own when providers retire one, so show them here.
+    return JSONResponse({"status": "ok" if ok else "degraded", **status, "models": llm.provider_names()},
+                        status_code=200 if ok else 503)
 
 
 @app.get("/")

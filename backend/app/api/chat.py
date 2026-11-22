@@ -45,9 +45,14 @@ class ChatRequest(BaseModel):
 
 
 def client_ip(request: Request) -> str:
-    # Render and Vercel put the real client first in X-Forwarded-For.
-    forwarded = request.headers.get("x-forwarded-for")
-    return forwarded.split(",")[0].strip() if forwarded else (request.client.host if request.client else "unknown")
+    """The visitor's real address, for the rate limit. Never trust what the client can write:
+    Cloudflare (in front of Render) overwrites CF-Connecting-IP with the real address, and in
+    X-Forwarded-For only the last entry is added by a proxy; the first can be anything a script sends."""
+    if cf := request.headers.get("cf-connecting-ip"):
+        return cf.strip()
+    if forwarded := request.headers.get("x-forwarded-for"):
+        return forwarded.split(",")[-1].strip()
+    return request.client.host if request.client else "unknown"
 
 
 def sse(event: str, data) -> str:

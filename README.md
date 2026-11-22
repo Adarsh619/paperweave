@@ -165,6 +165,8 @@ cd backend
 
 LLMs are tried in order: Groq's answer model, then Groq's router model (each has its own free daily token quota), then Gemini, then local Ollama. Put `GROQ_API_KEY` and/or `GOOGLE_API_KEY` in `.env`; with neither, everything runs on Ollama. That works, but takes 1–2 minutes per answer on a laptop GPU, compared with a few seconds on Groq. The production image (`backend/Dockerfile`) uses about 150 MB of RAM, within Render's 512 MB free tier.
 
+Free-tier providers retire models every few weeks, so the backend doesn't depend on the exact names in `app/config.py`. At startup, and again every 6 hours, it reads each provider's live model list. A configured model that is no longer offered is replaced by the largest chat model Groq still offers, or by Gemini's Flash-Lite family (Google's `-latest` aliases never retire), with a warning in the logs. `/health` lists the models in use. If a list can't be read, the configured names are used.
+
 ## Frontend
 
 A Next.js app with five pages:

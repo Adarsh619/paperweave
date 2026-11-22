@@ -132,3 +132,25 @@ def test_trends_are_computed_once_per_field(client, monkeypatch):
     finally:
         papers._trends.cache_clear()
     assert calls == ["Physics", None]
+
+
+def test_spoofed_forwarded_for_cannot_dodge_the_rate_limit(client, monkeypatch):
+    """A script that writes a new X-Forwarded-For each time is still one visitor to Cloudflare."""
+    monkeypatch.setattr(chat, "agent_events", fake_agent([]))
+    for i, q in enumerate(("question one", "question two", "question three")):
+        headers = {"CF-Connecting-IP": "203.0.113.7", "X-Forwarded-For": f"10.0.0.{i}"}
+        status = client.post("/api/chat", json={"question": q}, headers=headers).status_code
+        assert status == (429 if i == 2 else 200)
+
+
+@pytest.mark.parametrize("headers,ip", [
+    ({"CF-Connecting-IP": "203.0.113.7", "X-Forwarded-For": "1.2.3.4"}, "203.0.113.7"),
+    ({"X-Forwarded-For": "6.6.6.6, 198.51.100.2"}, "198.51.100.2"),  # first entry is client-written
+    ({}, "testclient"),
+])
+def test_client_ip_uses_only_proxy_written_addresses(headers, ip):
+    from starlette.requests import Request
+
+    scope = {"type": "http", "headers": [(k.lower().encode(), v.encode()) for k, v in headers.items()],
+             "client": ("testclient", 50000)}
+    assert chat.client_ip(Request(scope)) == ip
