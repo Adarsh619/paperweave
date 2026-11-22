@@ -42,7 +42,7 @@ bash pipeline/build_all.sh   # fetch -> citations -> extract -> normalize -> reb
 Backend (run from `backend/`):
 
 ```bash
-../.venv/Scripts/python -m pytest -q                                  # 56 tests, no DB/LLM needed
+../.venv/Scripts/python -m pytest -q                                  # 58 tests, no DB/LLM needed
 ../.venv/Scripts/python -m uvicorn app.main:app --reload --port 8010
 ../.venv/Scripts/python -m app.agent.graph "Compare GraphRAG and RAPTOR"   # CLI run of the agent
 ../.venv/Scripts/python -m evals.run_eval [--answers] [--only C01,M02]

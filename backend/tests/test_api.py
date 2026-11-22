@@ -105,3 +105,30 @@ def test_follow_ups_pass_history_and_skip_the_cache(client, monkeypatch):
         assert events[-1] == ("done", {"cached": False})
     assert seen == [[turn], [turn]]  # ran twice: follow-ups are never served from cache
     assert chat.cache.get("Which is newer?") is None
+
+
+def test_llm_rate_limits_get_a_busy_message_not_a_generic_error(client, monkeypatch):
+    class RateLimitError(Exception):
+        pass
+
+    async def agent_events(question, history):
+        raise RateLimitError("Error code: 429 - tokens per day")
+        yield  # pragma: no cover - makes this an async generator
+
+    monkeypatch.setattr(chat, "agent_events", agent_events)
+    events = parse_sse(client.post("/api/chat", json={"question": "What is RAG?"}).text)
+    assert events == [("error", {"message": chat.BUSY})]
+
+
+def test_trends_are_computed_once_per_field(client, monkeypatch):
+    from app.api import papers
+
+    calls = []
+    monkeypatch.setattr(papers.graph_query, "trends", lambda f, t, y: calls.append(f) or {"field": f})
+    papers._trends.cache_clear()
+    try:
+        for field in ["Physics", "Physics", None]:
+            assert client.get("/api/trends", params={"field": field} if field else {}).json() == {"field": field}
+    finally:
+        papers._trends.cache_clear()
+    assert calls == ["Physics", None]

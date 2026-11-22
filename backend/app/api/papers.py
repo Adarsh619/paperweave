@@ -1,5 +1,8 @@
 """Paper cards and per-paper graphs for the UI."""
 
+from datetime import date
+from functools import lru_cache
+
 from fastapi import APIRouter, HTTPException, Path, Query
 
 from app import stores
@@ -36,10 +39,17 @@ RETURN p {.arxiv_id, .title, .year} AS paper, entities, cites,
 """
 
 
+@lru_cache(maxsize=64)
+def _trends(field: str | None, topic: str | None, year: int) -> dict:
+    # The graph only changes when the snapshot is reloaded (which redeploys), and each call
+    # costs ~4 s of AuraDB queries, so keep results for the life of the process.
+    return graph_query.trends(field, topic, year)
+
+
 @router.get("/api/trends")
 def trends(field: str | None = Query(None, max_length=60), topic: str | None = Query(None, max_length=60)):
     """Data-driven trends for the whole library, one field, or one topic. No forecasts."""
-    return graph_query.trends(field, topic)
+    return _trends(field, topic, date.today().year)
 
 
 @router.get("/api/papers/{arxiv_id}")

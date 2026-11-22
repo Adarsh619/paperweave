@@ -49,7 +49,7 @@ function TrendsData({ field }: { field: string | null }) {
   }, [field]);
 
   if (error) return <p className="mt-8 text-sm text-muted">{error}</p>;
-  if (!data) return <p className="mt-8 text-sm text-muted">Loading… (the free server may take up to a minute to wake up)</p>;
+  if (!data) return <p className="mt-8 text-sm text-muted">Loading trends…</p>;
 
   const growing = data.topics.filter((t) => t.growth !== null);
   const [r0, r1] = data.recent_years;
@@ -57,7 +57,7 @@ function TrendsData({ field }: { field: string | null }) {
 
   return (
     <div className="mt-8 grid gap-10 lg:grid-cols-2">
-      <section className="lg:col-span-2">
+      <section id="growing" className="scroll-mt-20 lg:col-span-2">
         <h2 className="font-serif text-2xl font-semibold">Which topics are growing</h2>
         <p className="mt-1 text-sm text-muted">
           Papers published per year across all of Semantic Scholar: the last 2 complete years vs the 2 before.
@@ -65,7 +65,7 @@ function TrendsData({ field }: { field: string | null }) {
         {growing.length ? <GrowthBars topics={growing} /> : <Empty />}
       </section>
 
-      <section>
+      <section id="methods" className="scroll-mt-20">
         <h2 className="font-serif text-2xl font-semibold">Methods on the rise</h2>
         <p className="mt-1 text-sm text-muted">
           Share of papers in the library that propose or use each method: {r0}–{r1} vs {e0}–{e1}.
@@ -73,7 +73,7 @@ function TrendsData({ field }: { field: string | null }) {
         {data.rising_methods.length ? <MethodShares methods={data.rising_methods} /> : <Empty />}
       </section>
 
-      <section>
+      <section id="breakout" className="scroll-mt-20">
         <h2 className="font-serif text-2xl font-semibold">Breakout papers</h2>
         <p className="mt-1 text-sm text-muted">Papers from {r0}–{r1} gaining citations fastest (citations per year).</p>
         {data.breakout_papers.length ? (

@@ -28,5 +28,6 @@ def validate(text: str, known_ids: set[str]) -> tuple[str, list[str]]:
                 cited.append(i)
         return f" [{', '.join(ids)}]" if ids else ""
 
-    text = CITATION.sub(fix, text)
+    # gpt-oss sometimes cites with CJK lenticular brackets: 【2212.10496】
+    text = CITATION.sub(fix, text.replace("【", "[").replace("】", "]"))
     return PLACEHOLDER.sub("", text).strip(), cited

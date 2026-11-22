@@ -10,9 +10,11 @@ import AskBox from "@/components/AskBox";
 import Citations from "@/components/Citations";
 import GraphView from "@/components/GraphView";
 import PaperPanel from "@/components/PaperPanel";
+import { QuestionRail, WithSidebars } from "@/components/Sidebars";
 import WakingBanner from "@/components/WakingBanner";
 import { streamChat } from "@/lib/api";
 import { findExample } from "@/lib/examples";
+import { addRecent } from "@/lib/recent";
 import { useSmoothText } from "@/lib/useSmoothText";
 import type { ChatEvent, Citation, Step, Subgraph, Turn } from "@/lib/types";
 
@@ -26,15 +28,18 @@ const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 export default function AskView() {
   const question = useSearchParams().get("q")?.trim() ?? "";
-  if (question.length < 3) {
-    return (
-      <div className="mx-auto max-w-3xl px-4 py-12">
-        <AskBox autoFocus />
-      </div>
-    );
-  }
-  // Keyed by question: asking something new remounts with a fresh conversation.
-  return <Conversation key={question} first={question} />;
+  return (
+    <WithSidebars left={<QuestionRail current={question} />}>
+      {question.length < 3 ? (
+        <div className="mx-auto max-w-3xl px-4 py-12">
+          <AskBox autoFocus />
+        </div>
+      ) : (
+        // Keyed by question: asking something new remounts with a fresh conversation.
+        <Conversation key={question} first={question} />
+      )}
+    </WithSidebars>
+  );
 }
 
 /** The first question plus any follow-ups, each answered with the earlier turns as context. */
@@ -45,6 +50,7 @@ function Conversation({ first }: { first: string }) {
   const onDone = useCallback((index: number, answer: string) => {
     setAnswers((a) => Object.assign([...a], { [index]: answer }));
   }, []);
+  useEffect(() => addRecent(first), [first]);
   const last = questions.length - 1;
   const canFollowUp = answers[last] !== undefined && draft.trim().length >= 3;
 

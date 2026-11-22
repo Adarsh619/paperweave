@@ -26,6 +26,8 @@ from app.ratelimit import RateLimiter
 router = APIRouter()
 log = logging.getLogger(__name__)
 cache = AnswerCache(config.CACHE_PATH, config.CACHE_TTL_S)
+BUSY = ("PaperWeave is at its free-tier AI limit right now. Please try again in a minute, "
+        "or pick an example question; those are always available.")
 limiter = RateLimiter(config.RATE_LIMIT_PER_HOUR)
 
 
@@ -100,9 +102,10 @@ async def chat(body: ChatRequest, request: Request):
                 yield sse(event, data)
                 if event != "token":  # tokens are replaced by the final answer event
                     events.append({"event": event, "data": data})
-        except Exception:
+        except Exception as exc:
             log.exception("agent failed for question %r", question)
-            yield sse("error", {"message": "Something went wrong while answering. Please try again."})
+            busy = "RateLimit" in type(exc).__name__ or "429" in str(exc)  # free-tier LLM limits, not a bug
+            yield sse("error", {"message": BUSY if busy else "Something went wrong while answering. Please try again."})
             return
         if not history:
             cache.put(question, events)

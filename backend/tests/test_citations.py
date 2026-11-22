@@ -37,3 +37,9 @@ def test_table_cells_keep_citations():
     text, cited = validate("| GraphRAG | [2404.16130] | graphs |", KNOWN)
     assert "[2404.16130]" in text
     assert cited == ["2404.16130"]
+
+
+def test_lenticular_bracket_citations_are_recognised():
+    """gpt-oss sometimes writes 【id】 instead of [id]."""
+    text, cited = validate("HyDE writes a fake document【2005.11401】.", KNOWN)
+    assert cited == ["2005.11401"] and "[2005.11401]" in text and "【" not in text
