@@ -43,7 +43,7 @@ The whole stack runs on free tiers. Each step needs an account you create yourse
 
    ```bash
    NEO4J_URI=neo4j+s://xxxx.databases.neo4j.io
-   NEO4J_USER=neo4j
+   NEO4J_USER=<username shown with the password: the instance ID on new instances, "neo4j" on older ones>
    NEO4J_PASSWORD=...
    QDRANT_URL=https://xxxx.cloud.qdrant.io
    QDRANT_API_KEY=...

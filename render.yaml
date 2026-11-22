@@ -14,7 +14,7 @@ services:
       - key: NEO4J_URI
         sync: false # neo4j+s://xxxx.databases.neo4j.io
       - key: NEO4J_USER
-        value: neo4j
+        sync: false # newer AuraDB instances use the instance ID, older ones "neo4j"
       - key: NEO4J_PASSWORD
         sync: false
       - key: QDRANT_URL

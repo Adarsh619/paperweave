@@ -24,8 +24,8 @@ SPARSE_MODEL = os.getenv("QDRANT_SPARSE_MODEL", "Qdrant/bm25")
 # LLM providers are tried in this order: Groq, Gemini, then local Ollama.
 # Ollama is used only when no cloud key is set, or when LLM_LOCAL_FALLBACK=true.
 GROQ_API_KEY = os.getenv("GROQ_API_KEY") or None
-GROQ_ANSWER_MODEL = os.getenv("GROQ_ANSWER_MODEL", "llama-3.3-70b-versatile")
-GROQ_ROUTER_MODEL = os.getenv("GROQ_ROUTER_MODEL", "llama-3.1-8b-instant")
+GROQ_ANSWER_MODEL = os.getenv("GROQ_ANSWER_MODEL", "openai/gpt-oss-120b")
+GROQ_ROUTER_MODEL = os.getenv("GROQ_ROUTER_MODEL", "qwen/qwen3.8-27b")
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY") or None
 GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
