@@ -27,7 +27,7 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY") or None
 GROQ_ANSWER_MODEL = os.getenv("GROQ_ANSWER_MODEL", "openai/gpt-oss-120b")
 GROQ_ROUTER_MODEL = os.getenv("GROQ_ROUTER_MODEL", "qwen/qwen3.8-27b")
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY") or None
-GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+GEMINI_MODEL = os.getenv("GEMINI_MODEL", "gemini-3.5-flash-lite")
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://localhost:11434")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "qwen3:4b-instruct")
 LLM_LOCAL_FALLBACK = os.getenv("LLM_LOCAL_FALLBACK", "false").lower() == "true"

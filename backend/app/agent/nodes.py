@@ -83,7 +83,7 @@ def standalone_question(question: str, history: list[dict]) -> str:
             SystemMessage(prompts.CONTEXTUALIZE),
             HumanMessage(f"Conversation so far:\n{transcript}\n\nLatest message: {question}"),
         ])
-        return reply.content.strip().strip('"') or question
+        return reply.text.strip().strip('"') or question
     except Exception:  # noqa: BLE001 - fall back to the message as typed
         return question
 
@@ -292,7 +292,7 @@ def answer(state: AgentState) -> dict:
         SystemMessage(system),
         HumanMessage(prompts.ANSWER_USER.format(question=state["question"], facts=facts, papers=papers)),
     ])
-    text, cited = citations.validate(response.content, set(state["papers"]))
+    text, cited = citations.validate(response.text, set(state["papers"]))
     refs = [
         {k: state["papers"][i].get(k) for k in ("arxiv_id", "title", "year", "abs_url", "source")}
         for i in cited

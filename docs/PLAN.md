@@ -74,7 +74,7 @@ It then checks whether the evidence is enough, rewriting the query and retrying 
 | Agent | **LangGraph** + LangChain integrations (Neo4j, Qdrant, Groq) | |
 | Graph DB | **Neo4j AuraDB Free** | About 200K nodes / 400K rels / 1 GB. **Pauses after 3 days idle** |
 | Vector DB | **Qdrant Cloud Free** (1 GB) + **free Cloud Inference** (MiniLM dense + BM25) | Qdrant embeds the text, so no model runs in 512 MB. **Suspended after 1 week idle, deleted after 4 weeks** |
-| Live LLM | **Groq**: `openai/gpt-oss-120b` for answers, `qwen/qwen3.8-27b` for routing. **Gemini Flash** free as fallback | About 30 RPM, 6–12K TPM |
+| Live LLM | **Groq**: `openai/gpt-oss-120b` for answers, `qwen/qwen3.8-27b` for routing. **Gemini Flash-Lite** (`gemini-3.5-flash-lite`) free as fallback | About 30 RPM, 6–12K TPM |
 | Offline graph build | **Ollama** on your PC (Qwen 7B/8B class) | One-time job, no cost |
 | Data sources | **arXiv API**, **Semantic Scholar API** (citations; about 100 req/5 min without a key) | |
 | Cache / rate limit | SQLite in the container (rebuilt on deploy) for v1 | No extra service that could pause |

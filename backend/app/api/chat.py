@@ -62,8 +62,8 @@ async def agent_events(question: str, history: list[dict]) -> AsyncIterator[tupl
     ):
         if mode == "messages":
             message, meta = chunk
-            if meta.get("langgraph_node") == "answer" and message.content:
-                yield "token", {"text": message.content}
+            if meta.get("langgraph_node") == "answer" and message.text:
+                yield "token", {"text": message.text}
             continue
         for update in chunk.values():
             for step in (update or {}).get("steps", []):

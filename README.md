@@ -51,7 +51,7 @@ Not yet deployed.
 | Backend | FastAPI, LangGraph, Docker (Render) |
 | Graph DB | Neo4j AuraDB |
 | Vector DB | Qdrant Cloud (hybrid dense + BM25) |
-| LLM | Groq (`openai/gpt-oss-120b` answers, `qwen/qwen3.8-27b` plans), Gemini Flash fallback; Ollama for the offline graph build |
+| LLM | Groq (`openai/gpt-oss-120b` answers, `qwen/qwen3.8-27b` plans), Gemini Flash-Lite fallback; Ollama for the offline graph build |
 | Data | arXiv API, Semantic Scholar API |
 | Evals | Golden-question recall and citation recall vs vector-only RAG (`backend/evals`) |
 
