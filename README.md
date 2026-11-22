@@ -235,6 +235,7 @@ What the numbers show:
   - It also searches the question as asked, not only its own keywords, which lost two physics papers.
 - **On Groq (production), retrieval scores the same.** A retrieval-only re-run with Groq's `qwen/qwen3.8-27b` as the planner (2026-11-23) matched every row above, with multi-hop context recall slightly higher (44% vs 42%) and 3/3 off-topic questions declined. Citation recall wasn't re-measured on Groq: answers for all 43 questions need more than the free tier's 200K tokens a day.
 - **Latency:** on a laptop GPU, the agent takes about 60 s per question and vector-only RAG about 45 s, almost all of it local LLM time. On Groq, the live agent answers in about 10–25 s.
+- **Token budget:** the live answer LLM sees the first 450 characters of each of the 12 abstracts (700 in the runs above; `CONTEXT_ABSTRACT_CHARS`). That cut answer input by about 25% (roughly 2.4K → 1.75K tokens) with the same key citations in a 3-question A/B check. Showing fewer papers instead would cost recall: 10 papers drops agent context recall from 82% to 77%.
 
 Per-question results are in [`backend/evals/results.json`](backend/evals/results.json).
 

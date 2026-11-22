@@ -42,3 +42,6 @@ CORS_ORIGINS = [o.strip() for o in os.getenv("CORS_ORIGINS", "http://localhost:3
 
 MAX_REWRITES = 2  # evidence-check retries before answering with what we have
 MAX_CONTEXT_PAPERS = 12  # keeps the answer prompt within Groq's free-tier tokens/minute
+# Abstract characters per paper in the answer prompt. Abstracts are most of the prompt; shortening them
+# saves tokens without changing which papers the answer sees (fewer papers would cost recall).
+CONTEXT_ABSTRACT_CHARS = int(os.getenv("CONTEXT_ABSTRACT_CHARS", "450"))

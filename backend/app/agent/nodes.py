@@ -277,7 +277,7 @@ def _context(state: AgentState) -> tuple[str, str]:
     papers = context_papers(state)
     paper_text = "\n\n".join(
         f"[{x['arxiv_id']}] {x['title']} ({x.get('year')}){' (live arXiv result)' if x.get('source') == 'live' else ''}\n"
-        f"{(x.get('abstract') or '')[:700]}"
+        f"{(x.get('abstract') or '')[:config.CONTEXT_ABSTRACT_CHARS]}"
         for x in papers
     )
     return "\n".join(state.get("facts") or []) or "(none)", paper_text
