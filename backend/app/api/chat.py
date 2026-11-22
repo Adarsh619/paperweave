@@ -19,6 +19,7 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from pydantic import BaseModel, Field
 
 from app import config
+from app.agent import llm
 from app.agent.graph import build
 from app.cache import AnswerCache
 from app.ratelimit import RateLimiter
@@ -104,7 +105,7 @@ async def chat(body: ChatRequest, request: Request):
                     events.append({"event": event, "data": data})
         except Exception as exc:
             log.exception("agent failed for question %r", question)
-            busy = "RateLimit" in type(exc).__name__ or "429" in str(exc)  # free-tier LLM limits, not a bug
+            busy = llm.is_busy(exc)  # free-tier LLM limits, not a bug
             yield sse("error", {"message": BUSY if busy else "Something went wrong while answering. Please try again."})
             return
         if not history:

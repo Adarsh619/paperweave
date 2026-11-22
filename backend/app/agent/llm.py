@@ -4,15 +4,18 @@
 Providers without an API key are skipped, so local development runs on Ollama alone.
 """
 
+import logging
+import time
 from functools import lru_cache
 from typing import Literal
 
 from langchain_core.language_models import BaseChatModel
-from langchain_core.runnables import Runnable
+from langchain_core.runnables import Runnable, RunnableConfig, RunnableLambda
 
 from app import config
 
 Role = Literal["router", "answer"]
+log = logging.getLogger(__name__)
 
 
 def _models(role: Role) -> list[BaseChatModel]:
@@ -44,10 +47,38 @@ def _structured(model: BaseChatModel, schema: type) -> Runnable:
     return model.with_structured_output(schema)
 
 
+def is_busy(exc: BaseException) -> bool:
+    """Free-tier rate limits or an overloaded model: worth waiting for, not a bug."""
+    text = f"{type(exc).__name__} {exc}"
+    return any(s in text for s in ("RateLimit", "429", "503", "RESOURCE_EXHAUSTED", "UNAVAILABLE", "high demand"))
+
+
+# Groq's per-minute token budget refills continuously: one answer's worth (~2.5K of 8K/min) frees up in ~20 s.
+BUSY_WAITS = (8, 15)
+
+
+def _patient(runnable: Runnable) -> Runnable:
+    """When every model is busy, wait and try the whole chain again instead of failing the question."""
+
+    def run(messages, config: RunnableConfig | None = None):
+        for wait in (*BUSY_WAITS, None):
+            try:
+                return runnable.invoke(messages, config)
+            except Exception as exc:
+                if wait is None or not is_busy(exc):
+                    raise
+                log.warning("all models busy (%s); retrying in %ss", type(exc).__name__, wait)
+                time.sleep(wait)
+
+    return RunnableLambda(run)
+
+
 @lru_cache
 def chat(role: Role) -> Runnable:
     primary, *backups = _models(role)
-    return primary.with_fallbacks(backups) if backups else primary
+    chain = primary.with_fallbacks(backups) if backups else primary
+    # The planner has an instant keyword fallback, so only the answer is worth waiting for.
+    return _patient(chain) if role == "answer" else chain
 
 
 @lru_cache
