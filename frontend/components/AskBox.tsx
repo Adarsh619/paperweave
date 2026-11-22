@@ -30,7 +30,7 @@ export default function AskBox({ initial = "", autoFocus = false }: { initial?: 
       <button
         type="submit"
         disabled={!valid}
-        className="rounded-lg bg-accent px-5 py-3 font-medium text-white disabled:opacity-40"
+        className="rounded-lg bg-accent px-5 py-3 font-medium text-on-accent transition-opacity hover:opacity-90 disabled:opacity-40"
       >
         Ask
       </button>

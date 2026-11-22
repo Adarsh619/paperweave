@@ -62,21 +62,25 @@ METHOD_ORIGIN = """
 MATCH (m:Method {name: $name})
 OPTIONAL MATCH (p:Paper)-[:PROPOSES]->(m)
 OPTIONAL MATCH (m)-[:IMPROVES_ON]->(base:Method)
-RETURN collect(DISTINCT {arxiv_id: p.arxiv_id, title: p.title, year: p.year}) AS proposed_in,
+RETURN collect(DISTINCT {arxiv_id: p.arxiv_id, title: p.title, year: p.year, citations: p.citation_count}) AS proposed_in,
        collect(DISTINCT base.name) AS improves_on
 """
 
-# Everything needed for one row of a comparison table.
+# Everything needed for one row of a comparison table. Datasets and tasks come from the most
+# cited proposing paper only: other papers reusing the name (e.g. a second "GraphRAG") add noise.
 METHOD_PROFILE = """
 MATCH (m:Method {name: $name})
-OPTIONAL MATCH (p:Paper)-[:PROPOSES]->(m)
+OPTIONAL MATCH (p0:Paper)-[:PROPOSES]->(m)
+WITH m, p0 ORDER BY p0.citation_count DESC
+WITH m, collect(p0) AS proposers
+WITH m, proposers, proposers[0] AS p
 OPTIONAL MATCH (p)-[:EVALUATES_ON]->(d:Dataset)
 OPTIONAL MATCH (p)-[:ADDRESSES]->(t:Task)
 OPTIONAL MATCH (m)-[:IMPROVES_ON]->(base:Method)
 OPTIONAL MATCH (succ:Method)-[:IMPROVES_ON]->(m)
 OPTIONAL MATCH (u:Paper)-[:USES]->(m)
 RETURN m.name AS method,
-       collect(DISTINCT {arxiv_id: p.arxiv_id, title: p.title, year: p.year}) AS proposed_in,
+       [x IN proposers | {arxiv_id: x.arxiv_id, title: x.title, year: x.year, citations: x.citation_count}] AS proposed_in,
        collect(DISTINCT d.name) AS datasets, collect(DISTINCT t.name) AS tasks,
        collect(DISTINCT base.name) AS improves_on, collect(DISTINCT succ.name) AS improved_by,
        count(DISTINCT u) AS used_by_papers
@@ -109,6 +113,42 @@ MATCH (:Paper {arxiv_id: $arxiv_id})<-[:CITES]-(p:Paper)
 RETURN p.arxiv_id AS arxiv_id, p.title AS title, p.year AS year, p.citation_count AS total_citations
 ORDER BY total_citations DESC LIMIT 15
 """
+
+# --- Trends. $field / $topic are optional filters (null = everything). ---
+
+# Field-wide publication volume per topic (from Semantic Scholar), plus our corpus size.
+TOPIC_VOLUME = """
+MATCH (t:Topic)-[:PART_OF]->(f:Field)
+WHERE ($field IS NULL OR f.name = $field) AND ($topic IS NULL OR t.name = $topic)
+RETURN t.name AS topic, f.name AS field, t.years AS years, t.counts AS counts,
+       COUNT { (t)<-[:IN_TOPIC]-(:Paper) } AS papers
+"""
+
+_IN_SCOPE = """
+MATCH (p:Paper) WHERE p.year >= $from_year AND EXISTS {
+  MATCH (p)-[:IN_TOPIC]->(t:Topic)-[:PART_OF]->(f:Field)
+  WHERE ($field IS NULL OR f.name = $field) AND ($topic IS NULL OR t.name = $topic) }
+WITH p, CASE WHEN p.year >= $recent_from THEN 'recent' ELSE 'earlier' END AS period
+"""
+
+# Corpus papers per period: the denominators for method shares.
+PERIOD_PAPERS = _IN_SCOPE + "RETURN period, count(p) AS papers"
+
+# How many papers in each period propose or use each method.
+PERIOD_METHODS = _IN_SCOPE + """
+MATCH (p)-[:PROPOSES|USES]->(m:Method)
+RETURN period, m.name AS method, count(DISTINCT p) AS papers
+"""
+
+# Recent papers gaining citations fastest.
+BREAKOUT_PAPERS = _IN_SCOPE + """
+WITH p WHERE period = 'recent'
+RETURN p.arxiv_id AS arxiv_id, p.title AS title, p.year AS year, p.citation_count AS citations,
+       toFloat(p.citation_count) / ($this_year - p.year + 1) AS per_year
+ORDER BY per_year DESC LIMIT 8
+"""
+
+TOPIC_NAMES = "MATCH (t:Topic)-[:PART_OF]->(f:Field) RETURN t.name AS topic, f.name AS field"
 
 PAPER_DETAILS = """
 MATCH (p:Paper) WHERE p.arxiv_id IN $ids

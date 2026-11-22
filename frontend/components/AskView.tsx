@@ -13,7 +13,7 @@ import PaperPanel from "@/components/PaperPanel";
 import WakingBanner from "@/components/WakingBanner";
 import { streamChat } from "@/lib/api";
 import { findExample } from "@/lib/examples";
-import type { ChatEvent, Citation, Step, Subgraph } from "@/lib/types";
+import type { ChatEvent, Citation, Step, Subgraph, Turn } from "@/lib/types";
 
 type Status = "loading" | "streaming" | "done" | "error";
 type Source = "example" | "cached" | "live";
@@ -32,11 +32,79 @@ export default function AskView() {
       </div>
     );
   }
-  // Keyed by question: asking something new remounts with fresh state.
-  return <QuestionRun key={question} question={question} />;
+  // Keyed by question: asking something new remounts with a fresh conversation.
+  return <Conversation key={question} first={question} />;
 }
 
-function QuestionRun({ question }: { question: string }) {
+/** The first question plus any follow-ups, each answered with the earlier turns as context. */
+function Conversation({ first }: { first: string }) {
+  const [questions, setQuestions] = useState([first]);
+  const [answers, setAnswers] = useState<string[]>([]);
+  const [draft, setDraft] = useState("");
+  const onDone = useCallback((index: number, answer: string) => {
+    setAnswers((a) => Object.assign([...a], { [index]: answer }));
+  }, []);
+  const last = questions.length - 1;
+  const canFollowUp = answers[last] !== undefined && draft.trim().length >= 3;
+
+  return (
+    <div className="mx-auto max-w-6xl px-4 py-8">
+      <div className="max-w-3xl">
+        <AskBox initial={first} />
+      </div>
+      {questions.map((q, i) => (
+        <QuestionRun
+          key={i}
+          index={i}
+          question={q}
+          history={questions.slice(0, i).map((question, j) => ({ question, answer: answers[j] ?? "" }))}
+          onDone={onDone}
+        />
+      ))}
+      {answers[last] !== undefined && (
+        <form
+          className="mt-10 flex max-w-3xl gap-2 border-t border-border pt-6"
+          onSubmit={(e) => {
+            e.preventDefault();
+            if (!canFollowUp) return;
+            setQuestions((qs) => [...qs, draft.trim()]);
+            setDraft("");
+          }}
+        >
+          <input
+            value={draft}
+            onChange={(e) => setDraft(e.target.value)}
+            maxLength={500}
+            placeholder="Ask a follow-up, e.g. “Which of these is the newest?”"
+            aria-label="Follow-up question"
+            className="min-w-0 flex-1 rounded-lg border border-border bg-surface px-4 py-3 outline-none focus:border-accent"
+          />
+          <button
+            type="submit"
+            disabled={!canFollowUp}
+            className="rounded-lg bg-accent px-5 py-3 font-medium text-on-accent transition-opacity hover:opacity-90 disabled:opacity-40"
+          >
+            Follow up
+          </button>
+        </form>
+      )}
+    </div>
+  );
+}
+
+function QuestionRun({
+  index,
+  question,
+  history,
+  onDone,
+}: {
+  index: number;
+  question: string;
+  history: Turn[];
+  onDone: (index: number, answer: string) => void;
+}) {
+  // The conversation so far, frozen when this turn starts (later turns don't change it).
+  const [context] = useState(history);
   const [status, setStatus] = useState<Status>("loading");
   const [source, setSource] = useState<Source>("live");
   const [steps, setSteps] = useState<Step[]>([]);
@@ -77,8 +145,14 @@ function QuestionRun({ question }: { question: string }) {
 
   useEffect(() => {
     const controller = new AbortController();
+    let finalAnswer: string | null = null;
+    const onEvent = (e: ChatEvent) => {
+      if (e.event === "answer") finalAnswer = e.data.text;
+      handle(e);
+    };
     (async () => {
-      const example = await findExample(question);
+      // Saved examples only make sense without earlier turns.
+      const example = context.length ? null : await findExample(question);
       if (controller.signal.aborted) return;
       if (example) {
         // Saved answer: replay the steps with a short delay so the timeline still reads naturally.
@@ -87,18 +161,26 @@ function QuestionRun({ question }: { question: string }) {
         for (const e of example.events) {
           if (controller.signal.aborted) return;
           if (e.event === "step") await sleep(250);
-          handle(e);
+          onEvent(e);
         }
         setStatus("done");
+        if (finalAnswer !== null) onDone(index, finalAnswer);
         return;
       }
       setStatus("streaming");
       const timer = setTimeout(() => setWaking(true), WAKING_AFTER_MS);
       try {
-        await streamChat(question, handle, controller.signal, () => {
-          clearTimeout(timer);
-          setWaking(false);
-        });
+        await streamChat(
+          question,
+          onEvent,
+          controller.signal,
+          () => {
+            clearTimeout(timer);
+            setWaking(false);
+          },
+          context,
+        );
+        if (finalAnswer !== null) onDone(index, finalAnswer);
       } catch (err) {
         if (controller.signal.aborted) return;
         const message = err instanceof Error ? err.message : String(err);
@@ -115,22 +197,21 @@ function QuestionRun({ question }: { question: string }) {
     })();
 
     return () => controller.abort();
-  }, [question, handle]);
+  }, [question, handle, context, index, onDone]);
 
   const openId = (id: string) =>
     setOpen(citations.find((c) => c.arxiv_id === id) ?? { arxiv_id: id, title: id, year: null, abs_url: null, source: "graph" });
 
   const running = status === "loading" || status === "streaming";
 
-  return (
-    <div className="mx-auto max-w-6xl px-4 py-8">
-      <div className="max-w-3xl">
-        <AskBox key={question} initial={question} />
-      </div>
+  const Heading = index === 0 ? "h1" : "h2";
 
+  return (
+    <section className={index === 0 ? "" : "mt-12 border-t border-border pt-8"}>
       <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,26rem)]">
         <div className="min-w-0 space-y-6">
-          <h1 className="text-2xl font-semibold leading-snug">{question}</h1>
+          {index > 0 && <div className="text-xs font-medium uppercase tracking-wide text-accent">Follow-up</div>}
+          <Heading className="font-serif text-2xl font-semibold leading-snug">{question}</Heading>
           {waking && <WakingBanner />}
           <AgentSteps steps={steps} running={running} />
 
@@ -175,6 +256,6 @@ function QuestionRun({ question }: { question: string }) {
       </div>
 
       <PaperPanel citation={open} onClose={() => setOpen(null)} />
-    </div>
+    </section>
   );
 }

@@ -39,7 +39,7 @@ def test_health_degraded_when_a_database_fails(client, monkeypatch):
 
 
 def fake_agent(calls):
-    async def agent_events(question):
+    async def agent_events(question, history):
         calls.append(question)
         yield "step", {"node": "plan", "message": "Planned"}
         yield "token", {"text": "Hel"}
@@ -77,7 +77,7 @@ def test_chat_validates_input(client):
 
 
 def test_agent_failure_becomes_error_event_and_is_not_cached(client, monkeypatch):
-    async def broken(question):
+    async def broken(question, history):
         yield "step", {"node": "plan", "message": "Planned"}
         raise RuntimeError("LLM down")
 
@@ -89,3 +89,19 @@ def test_agent_failure_becomes_error_event_and_is_not_cached(client, monkeypatch
 
 def test_paper_id_is_validated(client):
     assert client.get("/api/papers/not-an-id").status_code == 422
+
+
+def test_follow_ups_pass_history_and_skip_the_cache(client, monkeypatch):
+    seen = []
+
+    async def agent_events(question, history):
+        seen.append(history)
+        yield "answer", {"text": "ok"}
+
+    monkeypatch.setattr(chat, "agent_events", agent_events)
+    turn = {"question": "Compare GraphRAG and RAPTOR", "answer": "GraphRAG ... RAPTOR ..."}
+    for _ in range(2):
+        events = parse_sse(client.post("/api/chat", json={"question": "Which is newer?", "history": [turn]}).text)
+        assert events[-1] == ("done", {"cached": False})
+    assert seen == [[turn], [turn]]  # ran twice: follow-ups are never served from cache
+    assert chat.cache.get("Which is newer?") is None

@@ -17,7 +17,13 @@ QUERIES = [
     ("retrieval model decides when to retrieve and critiques its own output", "2310.11511"),  # Self-RAG
     ("low-rank adapters for cheap fine-tuning", "2106.09685"),  # LoRA
     ("why models ignore information in the middle of long inputs", "2307.03172"),  # Lost in the Middle
+    ("logical error rate falls as surface code distance grows on superconducting qubits", "2408.13687"),
+    ("first direct detection of gravitational waves from merging black holes", "1602.03837"),  # GW150914
+    ("distribution-free uncertainty quantification with conformal prediction", "2107.07511"),
 ]
+
+# Top 5, not 3: with ~9K papers, several close neighbours can outrank the landmark paper.
+TOP_K = 5
 
 
 def main() -> None:
@@ -31,17 +37,17 @@ def main() -> None:
     for query, expected in queries:
         print(f"\nQ: {query}")
         for mode in ("dense", "bm25", "hybrid"):
-            points = search(qdrant, query, mode=mode, limit=3)
+            points = search(qdrant, query, mode=mode, limit=TOP_K)
             ids = [p.payload["arxiv_id"] for p in points]
-            print(f"  {mode:6} " + " | ".join(f"{p.payload['title'][:45]} ({p.payload['arxiv_id']})" for p in points))
+            print(f"  {mode:6} " + " | ".join(f"{p.payload['title'][:45]} ({p.payload['arxiv_id']})" for p in points[:3]))
             if mode == "hybrid" and expected:
                 found = expected in ids
                 hits += found
-                print(f"  expected {expected} in hybrid top 3: {'yes' if found else 'NO'}")
+                print(f"  expected {expected} in hybrid top {TOP_K}: {'yes' if found else 'NO'}")
 
     expected_total = sum(1 for _, e in queries if e)
     if expected_total:
-        print(f"\nHybrid top-3 hits: {hits}/{expected_total}")
+        print(f"\nHybrid top-{TOP_K} hits: {hits}/{expected_total}")
 
     print("\nFiltered (year >= 2024): " + ", ".join(
         f"{p.payload['title'][:40]} ({p.payload['year']})"

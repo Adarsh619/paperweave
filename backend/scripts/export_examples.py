@@ -32,6 +32,8 @@ QUESTIONS = [
     "What are the latest papers on agent memory?",
     "Compare ReAct and Reflexion",
     "Which authors wrote the most papers in the corpus?",
+    "How do physics-informed neural networks work?",
+    "What is trending in quantum computing?",
 ]
 
 

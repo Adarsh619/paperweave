@@ -1,21 +1,36 @@
 """Build the paper corpus into data/papers.jsonl using Semantic Scholar.
 
-Seed papers are always included; topic searches (sorted by citation count) fill
-the rest up to --max-papers. Only papers with an arXiv ID and an abstract are
-kept, so every node links to arXiv and has text to embed.
+Seed papers are always included. Each topic in config.TOPICS then adds its most cited
+arXiv papers *per year* (MIN_YEAR..this year), with the same quota for every
+(topic, year), so recent work isn't crowded out by older classics and per-year shares
+are comparable for trends. Only papers with an arXiv ID and an abstract are kept.
 
-    python pipeline/fetch_papers.py --max-papers 50
+Every paper records the topics that found it. The same searches also give each topic's
+field-wide paper count per year (all of Semantic Scholar, not just our corpus), saved to
+data/topic_stats.jsonl for the trends page.
+
+Search results are cached in data/.s2_cache/, so an interrupted run resumes cheaply.
+Papers from an earlier corpus that the new searches didn't return are kept (their
+extractions are reused) and tagged by matching topic phrases.
+
+    python pipeline/fetch_papers.py --max-papers 10000
 """
 
 import argparse
+import json
+import re
+from datetime import date
 
 import s2
-from config import PAPERS_FILE, SEED_ARXIV_IDS, TOPIC_QUERIES
-from jsonl import write_jsonl
+from config import DATA_DIR, PAPERS_FILE, SEED_ARXIV_IDS, TOPIC_STATS_FILE, TOPICS
+from jsonl import read_jsonl, write_jsonl
 
 FIELDS = "title,abstract,authors,year,publicationDate,venue,externalIds,citationCount,influentialCitationCount"
 BATCH_SIZE = 100
 MIN_YEAR = 2017
+CACHE_DIR = DATA_DIR / ".s2_cache"
+# Bare words in topic queries too generic to tag a paper on their own.
+GENERIC_WORDS = {"learning", "manipulation", "navigation", "physics", "pretraining", "llm"}
 
 
 def _to_record(paper: dict, source: str) -> dict | None:
@@ -37,6 +52,7 @@ def _to_record(paper: dict, source: str) -> dict | None:
         "abs_url": f"https://arxiv.org/abs/{arxiv_id}",
         "pdf_url": f"https://arxiv.org/pdf/{arxiv_id}",
         "source": source,
+        "topics": [],
     }
 
 
@@ -51,59 +67,107 @@ def fetch_seeds(http) -> list[dict]:
     return records
 
 
-def search_topic(http, query: str, limit: int) -> list[dict]:
-    """Most-cited arXiv papers matching the query, up to `limit` usable records."""
-    records: list[dict] = []
+def search_topic(http, name: str, year: int, limit: int) -> tuple[list[dict], int]:
+    """Most-cited arXiv papers for one topic and year, and the field-wide match count."""
+    cache = CACHE_DIR / f"{re.sub(r'[^a-z0-9]+', '-', name.lower())}-{year}-{limit}.json"
+    if cache.exists():
+        cached = json.loads(cache.read_text(encoding="utf-8"))
+        return cached["records"], cached["total"]
+
+    topic = TOPICS[name]
     params = {
-        "query": query,
+        "query": topic["query"],
         "fields": FIELDS,
-        "fieldsOfStudy": "Computer Science",
-        "year": f"{MIN_YEAR}-",
+        "fieldsOfStudy": topic["fos"],
+        "year": str(year),
         "sort": "citationCount:desc",
     }
+    records: list[dict] = []
+    total = None
     while len(records) < limit:
         page = s2.request(http, "GET", "/paper/search/bulk", params=params)
+        total = page.get("total", 0) if total is None else total
         records.extend(r for r in (_to_record(p, "topic") for p in page.get("data") or []) if r)
         if not page.get("token"):
             break
         params["token"] = page["token"]
-    return records[:limit]
+    records = records[:limit]
+    CACHE_DIR.mkdir(parents=True, exist_ok=True)
+    cache.write_text(json.dumps({"records": records, "total": total or 0}), encoding="utf-8")
+    return records, total or 0
+
+
+def topic_phrases(query: str) -> list[str]:
+    """Quoted phrases and distinctive bare words of a bulk-search query, lowercased."""
+    quoted = re.findall(r'"([^"]+)"', query)
+    bare = re.findall(r"[A-Za-z][A-Za-z-]{3,}", re.sub(r'"[^"]*"', " ", query))
+    return [p.lower() for p in quoted + [w for w in bare if w.lower() not in GENERIC_WORDS]]
+
+
+def match_topics(paper: dict) -> list[str]:
+    """Topics whose query the paper satisfies: every '+'-joined part (AND) must have a phrase
+    in the title or abstract. Parts with only generic words count as satisfied."""
+    text = f"{paper['title']} {paper['abstract']}".lower()
+
+    def matches(query: str) -> bool:
+        parts = [topic_phrases(part) for part in query.split("+")]
+        return all(not phrases or any(p in text for p in phrases) for phrases in parts) and any(parts)
+
+    return [name for name, t in TOPICS.items() if matches(t["query"])]
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--max-papers", type=int, default=500)
+    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--max-papers", type=int, default=10000)
     args = parser.parse_args()
 
+    previous = {p["arxiv_id"]: p for p in read_jsonl(PAPERS_FILE)}
+    seed_topics = {s: name for name, t in TOPICS.items() for s in t["seeds"]}
+    years = range(MIN_YEAR, date.today().year + 1)
     corpus: dict[str, dict] = {}
+    stats = []
+
     with s2.client() as http:
         print(f"Fetching {len(SEED_ARXIV_IDS)} seed papers...")
         for rec in fetch_seeds(http):
+            rec["topics"] = [seed_topics[rec["arxiv_id"]]]
             corpus[rec["arxiv_id"]] = rec
         missing = sorted(set(SEED_ARXIV_IDS) - corpus.keys())
         if missing:
             print(f"  warning: seeds missing or without abstract: {missing}")
 
-        # Each topic gets an equal share of the remaining slots, so early topics
-        # can't crowd out later ones. Over-fetch 2x: results overlap with seeds
-        # and with each other; a topic that falls short leaves slots for the next.
-        for i, query in enumerate(TOPIC_QUERIES):
-            remaining = args.max_papers - len(corpus)
-            if remaining <= 0:
-                break
-            quota = -(-remaining // (len(TOPIC_QUERIES) - i))
-            print(f"Searching (up to {quota}): {query}")
+        quota = max(1, -(-(args.max_papers - len(corpus)) // (len(TOPICS) * len(years))))
+        print(f"{len(TOPICS)} topics x {len(years)} years, up to {quota} papers each")
+        for name in TOPICS:
             added = 0
-            for rec in search_topic(http, query, max(10, quota * 2)):
-                if added >= quota:
-                    break
-                if rec["arxiv_id"] not in corpus:
-                    corpus[rec["arxiv_id"]] = rec
-                    added += 1
-            print(f"  +{added} papers (corpus: {len(corpus)})")
+            for year in years:
+                # Over-fetch: results overlap with seeds and other topics.
+                records, total = search_topic(http, name, year, quota * 2)
+                stats.append({"topic": name, "field": TOPICS[name]["field"], "year": year, "total": total})
+                year_added = 0
+                for rec in records:
+                    if rec["arxiv_id"] in corpus:
+                        topics = corpus[rec["arxiv_id"]]["topics"]
+                        if name not in topics:
+                            topics.append(name)
+                    elif year_added < quota:
+                        rec["topics"] = [name]
+                        corpus[rec["arxiv_id"]] = rec
+                        year_added += 1
+                added += year_added
+            print(f"  {name}: +{added} papers (corpus: {len(corpus)})")
+
+    carried = [p for i, p in previous.items() if i not in corpus]
+    for p in carried:
+        p["topics"] = match_topics(p)
+        corpus[p["arxiv_id"]] = p
+    if carried:
+        untagged = sum(1 for p in carried if not p["topics"])
+        print(f"Kept {len(carried)} papers from the previous corpus ({untagged} without a topic match)")
 
     count = write_jsonl(PAPERS_FILE, sorted(corpus.values(), key=lambda p: p["arxiv_id"]))
-    print(f"Wrote {count} papers to {PAPERS_FILE}")
+    write_jsonl(TOPIC_STATS_FILE, stats)
+    print(f"Wrote {count} papers to {PAPERS_FILE} and {len(stats)} topic-year counts to {TOPIC_STATS_FILE.name}")
 
 
 if __name__ == "__main__":

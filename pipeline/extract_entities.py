@@ -17,7 +17,7 @@ import time
 
 import httpx
 
-from config import ENTITIES_RAW_FILE, OLLAMA_MODEL, OLLAMA_URL, PAPERS_FILE
+from config import ENTITIES_RAW_FILE, OLLAMA_MODEL, OLLAMA_URL, PAPERS_FILE, TOPICS
 from jsonl import read_jsonl
 
 MAX_ITEMS = 6
@@ -35,12 +35,16 @@ SCHEMA = {
     "required": ["methods_proposed", "methods_used", "datasets", "tasks", "improves_on"],
 }
 
-SYSTEM_PROMPT = """You extract structured facts from AI research paper abstracts for a knowledge graph.
+SYSTEM_PROMPT = """You extract structured facts from research paper abstracts (AI, computer science, physics,
+mathematics) for a knowledge graph. The user message names the paper's field.
 Return JSON with these lists (use [] when the abstract does not say):
-- methods_proposed: names of new models, methods, frameworks or techniques THIS paper introduces.
-- methods_used: existing named methods or models this paper builds on or applies (not ones it proposes).
-- datasets: named datasets or benchmarks the paper evaluates on (e.g. "Natural Questions", "MMLU").
-- tasks: research tasks addressed, as short noun phrases (e.g. "open-domain question answering").
+- methods_proposed: names of new models, methods, algorithms, frameworks or techniques THIS paper introduces.
+- methods_used: existing named methods, models, algorithms or experimental techniques this paper builds on
+  or applies, not ones it proposes (e.g. "BERT", "density functional theory", "Monte Carlo sampling").
+- datasets: named datasets, benchmarks, surveys, experiments or observational data the paper evaluates on
+  (e.g. "MMLU", "ImageNet", "Planck 2018", "LIGO O3").
+- tasks: research problems addressed, as short noun phrases (e.g. "open-domain question answering",
+  "dark matter detection", "quantum error correction").
 - improves_on: named existing methods or models the paper says it outperforms, extends or improves.
 Rules:
 - Only include names explicitly stated in the abstract. Never guess.
@@ -53,7 +57,9 @@ Rules:
 
 
 def extract(http: httpx.Client, paper: dict) -> dict:
-    user = f"Title: {paper['title']}\n\nAbstract: {paper['abstract']}"
+    fields = sorted({TOPICS[t]["field"] for t in paper.get("topics", []) if t in TOPICS}) or ["AI"]
+    # 4,500 chars keeps instructions + abstract + answer inside num_ctx (only ~15 of 9K abstracts are longer).
+    user = f"Field: {', '.join(fields)}\nTitle: {paper['title']}\n\nAbstract: {paper['abstract'][:4500]}"
     resp = http.post(
         f"{OLLAMA_URL}/api/chat",
         json={
@@ -61,7 +67,9 @@ def extract(http: httpx.Client, paper: dict) -> dict:
             "messages": [{"role": "system", "content": SYSTEM_PROMPT}, {"role": "user", "content": user}],
             "format": SCHEMA,
             "stream": False,
-            "options": {"temperature": 0, "num_ctx": 4096},
+            # Prompt + one abstract is well under 2K tokens; a smaller context keeps the
+            # whole 4B model on a 4 GB laptop GPU (4096 spilled to the CPU at half speed).
+            "options": {"temperature": 0, "num_ctx": 2048},
         },
     )
     resp.raise_for_status()

@@ -20,6 +20,8 @@ from config import (
     NEO4J_URI,
     NEO4J_USER,
     PAPERS_FILE,
+    TOPIC_STATS_FILE,
+    TOPICS,
 )
 from jsonl import read_jsonl
 
@@ -52,6 +54,23 @@ UNWIND $rows AS row
 MATCH (src:Paper {arxiv_id: row.source})
 MATCH (dst:Paper {arxiv_id: row.target})
 MERGE (src)-[:CITES]->(dst)
+"""
+
+# Topic volume per year (all of Semantic Scholar) lives on the Topic as two parallel arrays.
+UPSERT_TOPICS = """
+UNWIND $rows AS row
+MERGE (f:Field {name: row.field})
+MERGE (t:Topic {name: row.name})
+SET t.years = row.years, t.counts = row.counts
+MERGE (t)-[:PART_OF]->(f)
+"""
+
+UPSERT_PAPER_TOPICS = """
+UNWIND $rows AS row
+MATCH (p:Paper {arxiv_id: row.arxiv_id})
+UNWIND row.topics AS name
+MATCH (t:Topic {name: name})
+MERGE (p)-[:IN_TOPIC]->(t)
 """
 
 # Entities are rebuilt from data/entities.jsonl each run, so edits to that file
@@ -117,6 +136,18 @@ def load(fresh: bool = False) -> None:
             print(f"Upserted {len(papers)} papers with authors")
             _write_batches(session, UPSERT_CITATIONS, citations)
             print(f"Upserted {len(citations)} citation edges")
+
+            volume: dict[str, dict[int, int]] = {}
+            for s in read_jsonl(TOPIC_STATS_FILE):
+                volume.setdefault(s["topic"], {})[s["year"]] = s["total"]
+            topics = [
+                {"name": name, "field": t["field"], "years": sorted(volume.get(name, {})),
+                 "counts": [volume[name][y] for y in sorted(volume.get(name, {}))]}
+                for name, t in TOPICS.items()
+            ]
+            _write_batches(session, UPSERT_TOPICS, topics)
+            _write_batches(session, UPSERT_PAPER_TOPICS, [p for p in papers if p.get("topics")])
+            print(f"Upserted {len(topics)} topics; {sum(1 for p in papers if p.get('topics'))} papers tagged")
 
             if entities:
                 session.run(CLEAR_ENTITIES).consume()

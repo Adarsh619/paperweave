@@ -5,6 +5,12 @@ import nextTs from "eslint-config-next/typescript";
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
+  // Vendored React Bits components (reactbits.dev), kept as published so they can be updated.
+  // They use the "latest ref" pattern, which these React Compiler rules flag.
+  {
+    files: ["components/reactbits/**"],
+    rules: { "react-hooks/refs": "off", "react-hooks/set-state-in-effect": "off" },
+  },
   // Override default ignores of eslint-config-next.
   globalIgnores([
     // Default ignores of eslint-config-next:

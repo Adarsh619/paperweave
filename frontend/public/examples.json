@@ -1,5 +1,5 @@
 {
- "generated": "2026-10-30T06:04:57+00:00",
+ "generated": "2026-11-22T11:51:06+00:00",
  "model": "ChatOllama",
  "examples": [
   {
@@ -9,21 +9,21 @@
      "event": "step",
      "data": {
       "node": "plan",
-      "message": "Planned: lineage question; entities: RAG"
+      "message": "Planned: lineage question; entities: GraphRAG, RAPTOR, DPR, Convolutional RAG, Vision-RL RAG, Retrieval-Augmented Generation"
      }
     },
     {
      "event": "step",
      "data": {
       "node": "graph",
-      "message": "Knowledge graph: traced lineage of RAG (14 facts)"
+      "message": "Knowledge graph: traced lineage of GraphRAG, RAPTOR (21 facts)"
      }
     },
     {
      "event": "step",
      "data": {
       "node": "search",
-      "message": "Searched 'improved on RAG dataset': 6 papers"
+      "message": "Searched 'RAG improvement datasets': 12 papers"
      }
     },
     {
@@ -44,13 +44,13 @@
      "event": "step",
      "data": {
       "node": "subgraph",
-      "message": "Built a graph of 21 nodes and 18 links"
+      "message": "Built a graph of 32 nodes and 39 links"
      }
     },
     {
      "event": "answer",
      "data": {
-      "text": "Papers that improve on RAG include:\n\n- **GraphRAG** [2404.16130] and **GRAG** [2405.16506], which enhance RAG by handling networked documents and graph-structured knowledge, respectively. GraphRAG is designed for query-focused summarization over large corpora, while GRAG enables retrieval of textual subgraphs and integration of topological information.\n\n- **HippoRAG** [2405.14831], which introduces neurobiologically inspired long-term memory for efficient knowledge integration and avoiding catastrophic forgetting.\n\n- **CoA** [2406.02818], a chain-of-agents framework that enables multi-agent collaboration for long-context tasks, improving upon RAG\u2019s handling of long inputs.\n\n- **Self-Route** [2407.16833], which evaluates RAG and long-context LLMs on datasets including **Natural Questions** and **MMLU**.\n\n- **RAG-end2end** [2210.02627], which improves domain adaptation and is evaluated on **COVID-19**, **News**, and **Conversations** datasets.\n\nThese papers use diverse datasets to evaluate their approaches, with specific datasets listed above. Note: Self-RAG [2310.11511] and RAGAs [2309.15217] use RAG as a building block but do not improve on RAG itself."
+      "text": "Papers that improve on RAG include:\n\n- **GraphRAG** [2404.16130], which improves on RAG by structuring knowledge as relational graphs for better reasoning.\n- **MAS** [2601.03023], which improves on GraphRAG and is evaluated on **MedDialogRubrics**, a benchmark of 5,200 synthetic patient cases and over 60,000 evaluation rubrics.\n- **GNNs** [2609.30417] and [2603.02630], which improve on GraphRAG and are evaluated on real-world geospatial data from **Bryan-College Station, Texas, US**.\n- **LegalGraphRAG** [2605.28120], which improves on GraphRAG with hierarchical legal graphs and is evaluated on legal domain data.\n- **BM25 Wins at Scale** [2607.26497], which improves on GraphRAG via a controlled scaling study across 28 nested tiers of corpus size, evaluating on corpus tokens spanning 450-fold growth with relevant and adversarial documents.\n- **ToT** and **PGR** [2605.14177], which improve on GraphRAG and are evaluated on **MemoryQuest**.\n- **GFM-RAG** [2502.01113], which improves on GraphRAG by addressing noise and incompleteness in graph structures.\n\nNo paper improves on RAPTOR, which only improves on traditional RAG. All listed improvements on RAG are evaluated on specific datasets as described."
      }
     },
     {
@@ -64,52 +64,52 @@
        "source": "graph"
       },
       {
-       "arxiv_id": "2405.16506",
-       "title": "GRAG: Graph Retrieval-Augmented Generation",
-       "year": 2024,
-       "abs_url": "https://arxiv.org/abs/2405.16506",
+       "arxiv_id": "2601.03023",
+       "title": "MedDialogRubrics: A Comprehensive Benchmark and Evaluation Framework for Multi-turn Medical Consultations in Large Language Models",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2601.03023",
        "source": "graph"
       },
       {
-       "arxiv_id": "2405.14831",
-       "title": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
-       "year": 2024,
-       "abs_url": "https://arxiv.org/abs/2405.14831",
+       "arxiv_id": "2609.30417",
+       "title": "Electric Vehicle Charging Station Location Selection using Geospatial Artificial Intelligence (GeoAI)",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2609.30417",
        "source": "graph"
       },
       {
-       "arxiv_id": "2406.02818",
-       "title": "Chain of Agents: Large Language Models Collaborating on Long-Context Tasks",
-       "year": 2024,
-       "abs_url": "https://arxiv.org/abs/2406.02818",
+       "arxiv_id": "2603.02630",
+       "title": "MASPOB: Bandit-Based Prompt Optimization for Multi-Agent Systems with Graph Neural Networks",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2603.02630",
        "source": "graph"
       },
       {
-       "arxiv_id": "2407.16833",
-       "title": "Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach",
-       "year": 2024,
-       "abs_url": "https://arxiv.org/abs/2407.16833",
+       "arxiv_id": "2605.28120",
+       "title": "LegalGraphRAG: Multi-Agent Graph Retrieval-Augmented Generation for Reliable Legal Reasoning",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2605.28120",
        "source": "graph"
       },
       {
-       "arxiv_id": "2210.02627",
-       "title": "Improving the Domain Adaptation of Retrieval Augmented Generation (RAG) Models for Open Domain Question Answering",
-       "year": 2022,
-       "abs_url": "https://arxiv.org/abs/2210.02627",
+       "arxiv_id": "2607.26497",
+       "title": "BM25 Wins at Scale: A Scaling Study of Retrieval-Augmented Generation Paradigms",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2607.26497",
        "source": "graph"
       },
       {
-       "arxiv_id": "2310.11511",
-       "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
-       "year": 2023,
-       "abs_url": "https://arxiv.org/abs/2310.11511",
+       "arxiv_id": "2605.14177",
+       "title": "Thinking Ahead: Prospection-Guided Retrieval of Memory with Language Models",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2605.14177",
        "source": "graph"
       },
       {
-       "arxiv_id": "2309.15217",
-       "title": "RAGAs: Automated Evaluation of Retrieval Augmented Generation",
-       "year": 2023,
-       "abs_url": "https://arxiv.org/abs/2309.15217",
+       "arxiv_id": "2502.01113",
+       "title": "GFM-RAG: Graph Foundation Model for Retrieval Augmented Generation",
+       "year": 2025,
+       "abs_url": "https://arxiv.org/abs/2502.01113",
        "source": "graph"
       }
      ]
@@ -126,58 +126,53 @@
         "year": 2024
        },
        {
-        "id": "paper:2405.16506",
+        "id": "paper:2601.03023",
         "type": "Paper",
-        "label": "GRAG: Graph Retrieval-Augmented Generation",
-        "arxiv_id": "2405.16506",
-        "year": 2024
+        "label": "MedDialogRubrics: A Comprehensive Benchmark and Evaluation Framework for Multi-turn Medical Consultations in Large Language Models",
+        "arxiv_id": "2601.03023",
+        "year": 2026
        },
        {
-        "id": "paper:2405.14831",
+        "id": "paper:2609.30417",
         "type": "Paper",
-        "label": "HippoRAG: Neurobiologically Inspired Long-Term Memory for Large Language Models",
-        "arxiv_id": "2405.14831",
-        "year": 2024
+        "label": "Electric Vehicle Charging Station Location Selection using Geospatial Artificial Intelligence (GeoAI)",
+        "arxiv_id": "2609.30417",
+        "year": 2026
        },
        {
-        "id": "paper:2406.02818",
+        "id": "paper:2603.02630",
         "type": "Paper",
-        "label": "Chain of Agents: Large Language Models Collaborating on Long-Context Tasks",
-        "arxiv_id": "2406.02818",
-        "year": 2024
+        "label": "MASPOB: Bandit-Based Prompt Optimization for Multi-Agent Systems with Graph Neural Networks",
+        "arxiv_id": "2603.02630",
+        "year": 2026
        },
        {
-        "id": "paper:2407.16833",
+        "id": "paper:2605.28120",
         "type": "Paper",
-        "label": "Retrieval Augmented Generation or Long-Context LLMs? A Comprehensive Study and Hybrid Approach",
-        "arxiv_id": "2407.16833",
-        "year": 2024
+        "label": "LegalGraphRAG: Multi-Agent Graph Retrieval-Augmented Generation for Reliable Legal Reasoning",
+        "arxiv_id": "2605.28120",
+        "year": 2026
        },
        {
-        "id": "paper:2210.02627",
+        "id": "paper:2607.26497",
         "type": "Paper",
-        "label": "Improving the Domain Adaptation of Retrieval Augmented Generation (RAG) Models for Open Domain Question Answering",
-        "arxiv_id": "2210.02627",
-        "year": 2022
+        "label": "BM25 Wins at Scale: A Scaling Study of Retrieval-Augmented Generation Paradigms",
+        "arxiv_id": "2607.26497",
+        "year": 2026
        },
        {
-        "id": "paper:2310.11511",
+        "id": "paper:2605.14177",
         "type": "Paper",
-        "label": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
-        "arxiv_id": "2310.11511",
-        "year": 2023
+        "label": "Thinking Ahead: Prospection-Guided Retrieval of Memory with Language Models",
+        "arxiv_id": "2605.14177",
+        "year": 2026
        },
        {
-        "id": "paper:2309.15217",
+        "id": "paper:2502.01113",
         "type": "Paper",
-        "label": "RAGAs: Automated Evaluation of Retrieval Augmented Generation",
-        "arxiv_id": "2309.15217",
-        "year": 2023
-       },
-       {
-        "id": "method:CoA",
-        "type": "Method",
-        "label": "CoA"
+        "label": "GFM-RAG: Graph Foundation Model for Retrieval Augmented Generation",
+        "arxiv_id": "2502.01113",
+        "year": 2025
        },
        {
         "id": "method:GraphRAG",
@@ -185,151 +180,316 @@
         "label": "GraphRAG"
        },
        {
-        "id": "method:divide-and-conquer strategy for textual subgraph retrieval",
-        "type": "Method",
-        "label": "divide-and-conquer strategy for textual subgraph retrieval"
-       },
-       {
-        "id": "method:RAGAs",
-        "type": "Method",
-        "label": "RAGAs"
-       },
-       {
-        "id": "method:Self-RAG",
-        "type": "Method",
-        "label": "Self-RAG"
-       },
-       {
-        "id": "dataset:COVID-19",
+        "id": "dataset:corpus tokens spanning 450-fold growth",
         "type": "Dataset",
-        "label": "COVID-19"
+        "label": "corpus tokens spanning 450-fold growth"
        },
        {
-        "id": "method:RAG-end2end",
+        "id": "method:controlled scaling study of RAG paradigms",
         "type": "Method",
-        "label": "RAG-end2end"
+        "label": "controlled scaling study of RAG paradigms"
        },
        {
-        "id": "dataset:News",
+        "id": "dataset:relevant and adversarial documents",
         "type": "Dataset",
-        "label": "News"
+        "label": "relevant and adversarial documents"
        },
        {
-        "id": "dataset:Conversations",
-        "type": "Dataset",
-        "label": "Conversations"
-       },
-       {
-        "id": "method:HippoRAG",
+        "id": "method:corpus size variation across 28 nested tiers",
         "type": "Method",
-        "label": "HippoRAG"
+        "label": "corpus size variation across 28 nested tiers"
        },
        {
-        "id": "method:Self-Route",
+        "id": "dataset:shared tiers of corpus size",
+        "type": "Dataset",
+        "label": "shared tiers of corpus size"
+       },
+       {
+        "id": "method:coordinate ascent",
         "type": "Method",
-        "label": "Self-Route"
+        "label": "coordinate ascent"
        },
        {
-        "id": "dataset:Natural Questions",
-        "type": "Dataset",
-        "label": "Natural Questions"
+        "id": "method:GNNs",
+        "type": "Method",
+        "label": "GNNs"
        },
        {
-        "id": "dataset:MMLU",
+        "id": "method:MASPOB",
+        "type": "Method",
+        "label": "MASPOB"
+       },
+       {
+        "id": "method:UCB",
+        "type": "Method",
+        "label": "UCB"
+       },
+       {
+        "id": "method:MAS",
+        "type": "Method",
+        "label": "MAS"
+       },
+       {
+        "id": "method:hierarchical legal graph",
+        "type": "Method",
+        "label": "hierarchical legal graph"
+       },
+       {
+        "id": "method:Patient Agent with dynamic guidance mechanism",
+        "type": "Method",
+        "label": "Patient Agent with dynamic guidance mechanism"
+       },
+       {
+        "id": "method:reject sampling for rubric item prioritization",
+        "type": "Method",
+        "label": "reject sampling for rubric item prioritization"
+       },
+       {
+        "id": "method:structured LLM-based and expert-annotated rubric-generation pipeline",
+        "type": "Method",
+        "label": "structured LLM-based and expert-annotated rubric-generation pipeline"
+       },
+       {
+        "id": "dataset:MedDialogRubrics",
         "type": "Dataset",
-        "label": "MMLU"
+        "label": "MedDialogRubrics"
+       },
+       {
+        "id": "method:ToT",
+        "type": "Method",
+        "label": "ToT"
+       },
+       {
+        "id": "dataset:MemoryQuest",
+        "type": "Dataset",
+        "label": "MemoryQuest"
+       },
+       {
+        "id": "method:PGR",
+        "type": "Method",
+        "label": "PGR"
+       },
+       {
+        "id": "method:GFM-RAG",
+        "type": "Method",
+        "label": "GFM-RAG"
+       },
+       {
+        "id": "method:GFM (Graph Foundation Model)",
+        "type": "Method",
+        "label": "GFM (Graph Foundation Model)"
+       },
+       {
+        "id": "method:geospatial artificial intelligence (GeoAI)-based framework",
+        "type": "Method",
+        "label": "geospatial artificial intelligence (GeoAI)-based framework"
+       },
+       {
+        "id": "dataset:Bryan-College Station, Texas, US",
+        "type": "Dataset",
+        "label": "Bryan-College Station, Texas, US"
+       },
+       {
+        "id": "method:VAE",
+        "type": "Method",
+        "label": "VAE"
        }
       ],
       "links": [
        {
-        "source": "paper:2406.02818",
-        "target": "method:CoA",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2405.16506",
-        "target": "method:GraphRAG",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2405.16506",
-        "target": "method:divide-and-conquer strategy for textual subgraph retrieval",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2309.15217",
-        "target": "method:RAGAs",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2310.11511",
-        "target": "method:Self-RAG",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2210.02627",
-        "target": "dataset:COVID-19",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2210.02627",
-        "target": "method:RAG-end2end",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2210.02627",
-        "target": "dataset:News",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2210.02627",
-        "target": "dataset:Conversations",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2405.14831",
-        "target": "method:HippoRAG",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2407.16833",
-        "target": "method:Self-Route",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2407.16833",
-        "target": "dataset:Natural Questions",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2407.16833",
-        "target": "dataset:MMLU",
-        "type": "EVALUATES_ON"
-       },
-       {
         "source": "paper:2404.16130",
         "target": "method:GraphRAG",
         "type": "PROPOSES"
        },
        {
-        "source": "paper:2404.16130",
-        "target": "paper:2309.15217",
-        "type": "CITES"
+        "source": "paper:2607.26497",
+        "target": "dataset:corpus tokens spanning 450-fold growth",
+        "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:2407.16833",
-        "target": "paper:2310.11511",
-        "type": "CITES"
+        "source": "paper:2607.26497",
+        "target": "method:controlled scaling study of RAG paradigms",
+        "type": "PROPOSES"
        },
        {
-        "source": "paper:2405.14831",
+        "source": "paper:2607.26497",
+        "target": "dataset:relevant and adversarial documents",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2607.26497",
+        "target": "method:corpus size variation across 28 nested tiers",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2607.26497",
+        "target": "dataset:shared tiers of corpus size",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2603.02630",
+        "target": "method:coordinate ascent",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2603.02630",
+        "target": "method:GNNs",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2603.02630",
+        "target": "method:MASPOB",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2603.02630",
+        "target": "method:UCB",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2605.28120",
+        "target": "method:MAS",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2605.28120",
+        "target": "method:hierarchical legal graph",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2601.03023",
+        "target": "method:Patient Agent with dynamic guidance mechanism",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2601.03023",
+        "target": "method:reject sampling for rubric item prioritization",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2601.03023",
+        "target": "method:structured LLM-based and expert-annotated rubric-generation pipeline",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2601.03023",
+        "target": "method:MAS",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2601.03023",
+        "target": "dataset:MedDialogRubrics",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2605.14177",
+        "target": "method:ToT",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2605.14177",
+        "target": "dataset:MemoryQuest",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2605.14177",
+        "target": "method:PGR",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2502.01113",
+        "target": "method:GFM-RAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2502.01113",
+        "target": "method:GFM (Graph Foundation Model)",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2502.01113",
+        "target": "method:GNNs",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2609.30417",
+        "target": "method:GNNs",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2609.30417",
+        "target": "method:geospatial artificial intelligence (GeoAI)-based framework",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2609.30417",
+        "target": "dataset:Bryan-College Station, Texas, US",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2609.30417",
+        "target": "method:VAE",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2605.28120",
         "target": "paper:2404.16130",
         "type": "CITES"
        },
        {
-        "source": "paper:2405.16506",
+        "source": "paper:2605.14177",
         "target": "paper:2404.16130",
         "type": "CITES"
+       },
+       {
+        "source": "paper:2502.01113",
+        "target": "paper:2404.16130",
+        "type": "CITES"
+       },
+       {
+        "source": "method:MAS",
+        "target": "method:GraphRAG",
+        "type": "IMPROVES_ON"
+       },
+       {
+        "source": "method:controlled scaling study of RAG paradigms",
+        "target": "method:GraphRAG",
+        "type": "IMPROVES_ON"
+       },
+       {
+        "source": "method:GFM-RAG",
+        "target": "method:GraphRAG",
+        "type": "IMPROVES_ON"
+       },
+       {
+        "source": "method:corpus size variation across 28 nested tiers",
+        "target": "method:GraphRAG",
+        "type": "IMPROVES_ON"
+       },
+       {
+        "source": "method:GFM (Graph Foundation Model)",
+        "target": "method:GraphRAG",
+        "type": "IMPROVES_ON"
+       },
+       {
+        "source": "method:PGR",
+        "target": "method:GraphRAG",
+        "type": "IMPROVES_ON"
+       },
+       {
+        "source": "method:hierarchical legal graph",
+        "target": "method:GraphRAG",
+        "type": "IMPROVES_ON"
+       },
+       {
+        "source": "method:ToT",
+        "target": "method:GraphRAG",
+        "type": "IMPROVES_ON"
+       },
+       {
+        "source": "method:GNNs",
+        "target": "method:GraphRAG",
+        "type": "IMPROVES_ON"
        }
       ]
      }
@@ -357,7 +517,7 @@
      "event": "step",
      "data": {
       "node": "search",
-      "message": "Searched 'GraphRAG RAPTOR HippoRAG comparison': 6 papers"
+      "message": "Searched 'GraphRAG RAPTOR HippoRAG comparison': 12 papers"
      }
     },
     {
@@ -384,7 +544,7 @@
     {
      "event": "answer",
      "data": {
-      "text": "- **GraphRAG** focuses on query-focused summarization and multi-hop reasoning using textual graphs, leveraging graph structures to capture relational knowledge. It improves upon traditional RAG and is used in multiple corpus papers, emphasizing scalability and context-aware retrieval [2404.16130].  \n- **RAPTOR** introduces recursive summarization via a tree-structured retrieval system, enhancing multi-step reasoning and question answering by building hierarchical abstractions from text chunks. Evaluated on QuALITY, it improves holistic document understanding [2401.18059].  \n- **HippoRAG** is neurobiologically inspired, aiming to enable efficient long-term memory integration in LLMs, improving knowledge retention and updating without catastrophic forgetting. It enhances multi-hop question answering over RAG and IRCoT [2405.14831].\n\n| Method | Paper | Core idea | Evaluated on | Notes |\n|--------|-------|----------|-------------|-------|\n| GraphRAG | [2404.16130] | Graph-based retrieval for query-focused summarization and multi-hop reasoning | Query-focused summarization, textual graphs | Improves RAG; used in multiple corpus papers |\n| RAPTOR | [2401.18059] | Recursive abstractive processing via tree-structured summaries | QuALITY | Enhances multi-step reasoning and document context |\n| HippoRAG | [2405.14831] | Neurobiologically inspired long-term memory for knowledge integration | Multi-hop question answering | Improves on RAG and IRCoT; focuses on memory efficiency |"
+      "text": "- **GraphRAG** [2404.16130] improves on traditional RAG by using graph structures to capture relational knowledge, enabling precise retrieval for query-focused summarization. It scales across 28 nested tiers and is used in 6 other corpus papers. Evaluated on summarization tasks with structured knowledge graphs.  \n- **RAPTOR** [2401.18059] enhances retrieval-augmented LMs via recursive summarization and tree-structured abstraction, improving multi-step reasoning and QA on QuALITY. Focuses on holistic document understanding through hierarchical chunking.  \n- **HippoRAG** [2405.14831] is inspired by human hippocampal memory, enabling efficient long-term knowledge integration and avoiding catastrophic forgetting. Designed for multi-hop QA, emphasizing memory retention over retrieval.  \n\n| Method | Paper | Core idea | Evaluated on | Notes |\n|--------|-------|----------|-------------|-------|\n| GraphRAG | [2404.16130] | Graph-based retrieval for query-focused summarization using relational knowledge | Query-focused summarization | Scales across 28 tiers; used in 6 papers |\n| RAPTOR | [2401.18059] | Recursive abstractive processing via tree-structured summaries | QA, multi-step reasoning | Evaluated on QuALITY |\n| HippoRAG | [2405.14831] | Neurobiologically inspired long-term memory for knowledge integration | Multi-hop question answering | Focuses on memory retention and integration |"
      }
     },
     {
@@ -521,7 +681,7 @@
      "event": "step",
      "data": {
       "node": "search",
-      "message": "Searched 'Attention Is All You Need lineage': 6 papers"
+      "message": "Searched 'build on Attention Is All You Need': 12 papers"
      }
     },
     {
@@ -542,13 +702,13 @@
      "event": "step",
      "data": {
       "node": "subgraph",
-      "message": "Built a graph of 54 nodes and 83 links"
+      "message": "Built a graph of 59 nodes and 83 links"
      }
     },
     {
      "event": "answer",
      "data": {
-      "text": "Papers in the corpus that build on *Attention is All You Need* [1706.03762] include:\n\n- [1810.04805] BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, which uses a Transformer architecture with bidirectional context, building directly on the Transformer's attention mechanism.  \n- [2005.14165] Language Models are Few-Shot Learners, which leverages large-scale pre-trained language models (based on Transformers) to achieve few-shot performance.  \n- [1910.10683] Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer, which uses a unified text-to-text framework based on Transformer architectures.  \n- [2106.09685] LoRA: Low-Rank Adaptation of Large Language Models, which modifies Transformer layers to enable efficient fine-tuning.  \n- [2302.13971] LLaMA: Open and Efficient Foundation Language Models, which builds large-scale foundation models using the Transformer architecture.  \n- [1908.10084] Sentence-BERT, which extends BERT (a Transformer-based model) for sentence embeddings.  \n- [2005.11401] Retrieval-Augmented Generation, which uses pre-trained language models (based on Transformers) to access knowledge.  \n- [2104.09864] RoFormer, which enhances Transformer attention with rotary position embeddings.  \n- [2004.05150] Longformer, which modifies self-attention to scale linearly with sequence length.  \n- [2307.03172] Lost in the Middle, which analyzes how language models use long contexts in Transformer-based models.  \n- [2205.14135] FlashAttention, which improves efficiency of Transformer attention operations.  \n\nAll these papers either directly or indirectly extend the Transformer architecture introduced in [1706.03762]. [2404.14219] Phi-3 also cites it, but does not explicitly build on it in the provided text."
+      "text": "Papers in the corpus that build on *Attention is All You Need* [1706.03762] include:\n\n- [1810.04805] BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding, which uses the Transformer architecture for bidirectional language representation [1810.04805].  \n- [2010.11929] An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale, which applies a pure Transformer to image patches, bypassing convolutional networks [2010.11929].  \n- [2103.00020] Learning Transferable Visual Models From Natural Language Supervision, which uses natural language to supervise image representation learning via a Transformer [2103.00020].  \n- [2103.14030] Swin Transformer: Hierarchical Vision Transformer using Shifted Windows, which adapts the Transformer to vision with hierarchical, shifted windows [2103.14030].  \n- [1907.11692] RoBERTa: A Robustly Optimized BERT Pretraining Approach, which builds on BERT\u2019s Transformer foundation with improved training strategies [1907.11692].  \n- [1910.10683] Exploring the Limits of Transfer Learning with a Unified Text-to-Text Transformer, which uses a unified text-to-text framework based on Transformers [1910.10683].  \n- [2106.09685] LoRA: Low-Rank Adaptation of Large Language Models, which modifies Transformer layers for efficient fine-tuning [2106.09685].  \n- [2302.13971] LLaMA: Open and Efficient Foundation Language Models, which uses a large-scale Transformer-based architecture [2302.13971].  \n\nThese papers extend or adapt the Transformer architecture introduced in [1706.03762] to language modeling, vision, and efficient adaptation.  \n\nNote: [2005.14165], [2006.11239], [1710.10903], [2112.10752] do not directly build on the Transformer architecture in the same way. [2005.14165] discusses few-shot learning, [2006.11239] uses diffusion models, [1710.10903] applies attention to graphs, and [2112.10752] uses diffusion in latent space\u2014none of which are direct extensions of the Transformer from [1706.03762]."
      }
     },
     {
@@ -569,10 +729,31 @@
        "source": "graph"
       },
       {
-       "arxiv_id": "2005.14165",
-       "title": "Language Models are Few-Shot Learners",
+       "arxiv_id": "2010.11929",
+       "title": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
        "year": 2020,
-       "abs_url": "https://arxiv.org/abs/2005.14165",
+       "abs_url": "https://arxiv.org/abs/2010.11929",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2103.00020",
+       "title": "Learning Transferable Visual Models From Natural Language Supervision",
+       "year": 2021,
+       "abs_url": "https://arxiv.org/abs/2103.00020",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2103.14030",
+       "title": "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows",
+       "year": 2021,
+       "abs_url": "https://arxiv.org/abs/2103.14030",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "1907.11692",
+       "title": "RoBERTa: A Robustly Optimized BERT Pretraining Approach",
+       "year": 2019,
+       "abs_url": "https://arxiv.org/abs/1907.11692",
        "source": "graph"
       },
       {
@@ -597,52 +778,31 @@
        "source": "graph"
       },
       {
-       "arxiv_id": "1908.10084",
-       "title": "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks",
-       "year": 2019,
-       "abs_url": "https://arxiv.org/abs/1908.10084",
-       "source": "graph"
-      },
-      {
-       "arxiv_id": "2005.11401",
-       "title": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
+       "arxiv_id": "2005.14165",
+       "title": "Language Models are Few-Shot Learners",
        "year": 2020,
-       "abs_url": "https://arxiv.org/abs/2005.11401",
+       "abs_url": "https://arxiv.org/abs/2005.14165",
        "source": "graph"
       },
       {
-       "arxiv_id": "2104.09864",
-       "title": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
+       "arxiv_id": "2006.11239",
+       "title": "Denoising Diffusion Probabilistic Models",
+       "year": 2020,
+       "abs_url": "https://arxiv.org/abs/2006.11239",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "1710.10903",
+       "title": "Graph Attention Networks",
+       "year": 2017,
+       "abs_url": "https://arxiv.org/abs/1710.10903",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2112.10752",
+       "title": "High-Resolution Image Synthesis with Latent Diffusion Models",
        "year": 2021,
-       "abs_url": "https://arxiv.org/abs/2104.09864",
-       "source": "graph"
-      },
-      {
-       "arxiv_id": "2004.05150",
-       "title": "Longformer: The Long-Document Transformer",
-       "year": 2020,
-       "abs_url": "https://arxiv.org/abs/2004.05150",
-       "source": "graph"
-      },
-      {
-       "arxiv_id": "2307.03172",
-       "title": "Lost in the Middle: How Language Models Use Long Contexts",
-       "year": 2023,
-       "abs_url": "https://arxiv.org/abs/2307.03172",
-       "source": "graph"
-      },
-      {
-       "arxiv_id": "2205.14135",
-       "title": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
-       "year": 2022,
-       "abs_url": "https://arxiv.org/abs/2205.14135",
-       "source": "graph"
-      },
-      {
-       "arxiv_id": "2404.14219",
-       "title": "Phi-3 Technical Report: A Highly Capable Language Model Locally on Your Phone",
-       "year": 2024,
-       "abs_url": "https://arxiv.org/abs/2404.14219",
+       "abs_url": "https://arxiv.org/abs/2112.10752",
        "source": "graph"
       }
      ]
@@ -666,11 +826,32 @@
         "year": 2019
        },
        {
-        "id": "paper:2005.14165",
+        "id": "paper:2010.11929",
         "type": "Paper",
-        "label": "Language Models are Few-Shot Learners",
-        "arxiv_id": "2005.14165",
+        "label": "An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale",
+        "arxiv_id": "2010.11929",
         "year": 2020
+       },
+       {
+        "id": "paper:2103.00020",
+        "type": "Paper",
+        "label": "Learning Transferable Visual Models From Natural Language Supervision",
+        "arxiv_id": "2103.00020",
+        "year": 2021
+       },
+       {
+        "id": "paper:2103.14030",
+        "type": "Paper",
+        "label": "Swin Transformer: Hierarchical Vision Transformer using Shifted Windows",
+        "arxiv_id": "2103.14030",
+        "year": 2021
+       },
+       {
+        "id": "paper:1907.11692",
+        "type": "Paper",
+        "label": "RoBERTa: A Robustly Optimized BERT Pretraining Approach",
+        "arxiv_id": "1907.11692",
+        "year": 2019
        },
        {
         "id": "paper:1910.10683",
@@ -694,66 +875,195 @@
         "year": 2023
        },
        {
-        "id": "paper:1908.10084",
+        "id": "paper:2005.14165",
         "type": "Paper",
-        "label": "Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks",
-        "arxiv_id": "1908.10084",
-        "year": 2019
-       },
-       {
-        "id": "paper:2005.11401",
-        "type": "Paper",
-        "label": "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks",
-        "arxiv_id": "2005.11401",
+        "label": "Language Models are Few-Shot Learners",
+        "arxiv_id": "2005.14165",
         "year": 2020
        },
        {
-        "id": "paper:2104.09864",
+        "id": "paper:2006.11239",
         "type": "Paper",
-        "label": "RoFormer: Enhanced Transformer with Rotary Position Embedding",
-        "arxiv_id": "2104.09864",
-        "year": 2021
-       },
-       {
-        "id": "paper:2004.05150",
-        "type": "Paper",
-        "label": "Longformer: The Long-Document Transformer",
-        "arxiv_id": "2004.05150",
+        "label": "Denoising Diffusion Probabilistic Models",
+        "arxiv_id": "2006.11239",
         "year": 2020
        },
        {
-        "id": "paper:2307.03172",
+        "id": "paper:1710.10903",
         "type": "Paper",
-        "label": "Lost in the Middle: How Language Models Use Long Contexts",
-        "arxiv_id": "2307.03172",
-        "year": 2023
+        "label": "Graph Attention Networks",
+        "arxiv_id": "1710.10903",
+        "year": 2017
        },
        {
-        "id": "paper:2205.14135",
-        "type": "Paper",
-        "label": "FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness",
-        "arxiv_id": "2205.14135",
-        "year": 2022
-       },
-       {
-        "id": "method:RAG",
+        "id": "method:LoRA",
         "type": "Method",
-        "label": "RAG"
+        "label": "LoRA"
        },
        {
-        "id": "dataset:MMLU",
+        "id": "dataset:RoBERTa",
         "type": "Dataset",
-        "label": "MMLU"
+        "label": "RoBERTa"
        },
        {
-        "id": "dataset:Natural Questions",
+        "id": "dataset:GPT-3",
         "type": "Dataset",
-        "label": "Natural Questions"
+        "label": "GPT-3"
        },
        {
-        "id": "dataset:Wikipedia",
+        "id": "dataset:GPT-2",
         "type": "Dataset",
-        "label": "Wikipedia"
+        "label": "GPT-2"
+       },
+       {
+        "id": "dataset:DeBERTa",
+        "type": "Dataset",
+        "label": "DeBERTa"
+       },
+       {
+        "id": "method:predicting which caption goes with which image",
+        "type": "Method",
+        "label": "predicting which caption goes with which image"
+       },
+       {
+        "id": "dataset:geo-localization",
+        "type": "Dataset",
+        "label": "geo-localization"
+       },
+       {
+        "id": "dataset:action recognition in videos",
+        "type": "Dataset",
+        "label": "action recognition in videos"
+       },
+       {
+        "id": "dataset:fine-grained object classification",
+        "type": "Dataset",
+        "label": "fine-grained object classification"
+       },
+       {
+        "id": "dataset:ImageNet",
+        "type": "Dataset",
+        "label": "ImageNet"
+       },
+       {
+        "id": "dataset:OCR",
+        "type": "Dataset",
+        "label": "OCR"
+       },
+       {
+        "id": "method:GATs",
+        "type": "Method",
+        "label": "GATs"
+       },
+       {
+        "id": "dataset:Citeseer",
+        "type": "Dataset",
+        "label": "Citeseer"
+       },
+       {
+        "id": "dataset:protein-protein interaction dataset",
+        "type": "Dataset",
+        "label": "protein-protein interaction dataset"
+       },
+       {
+        "id": "dataset:Cora",
+        "type": "Dataset",
+        "label": "Cora"
+       },
+       {
+        "id": "dataset:PubMed",
+        "type": "Dataset",
+        "label": "PubMed"
+       },
+       {
+        "id": "method:weighted variational bound",
+        "type": "Method",
+        "label": "weighted variational bound"
+       },
+       {
+        "id": "method:progressive lossy decompression scheme",
+        "type": "Method",
+        "label": "progressive lossy decompression scheme"
+       },
+       {
+        "id": "dataset:LSUN",
+        "type": "Dataset",
+        "label": "LSUN"
+       },
+       {
+        "id": "dataset:CIFAR-10",
+        "type": "Dataset",
+        "label": "CIFAR-10"
+       },
+       {
+        "id": "method:HiT-SR",
+        "type": "Method",
+        "label": "HiT-SR"
+       },
+       {
+        "id": "method:Swin Transformer",
+        "type": "Method",
+        "label": "Swin Transformer"
+       },
+       {
+        "id": "method:shifted windows",
+        "type": "Method",
+        "label": "shifted windows"
+       },
+       {
+        "id": "dataset:ImageNet-1K",
+        "type": "Dataset",
+        "label": "ImageNet-1K"
+       },
+       {
+        "id": "dataset:ADE20K val",
+        "type": "Dataset",
+        "label": "ADE20K val"
+       },
+       {
+        "id": "dataset:COCO test-dev",
+        "type": "Dataset",
+        "label": "COCO test-dev"
+       },
+       {
+        "id": "method:Transformer",
+        "type": "Method",
+        "label": "Transformer"
+       },
+       {
+        "id": "method:LLaMA",
+        "type": "Method",
+        "label": "LLaMA"
+       },
+       {
+        "id": "method:GPT-3",
+        "type": "Method",
+        "label": "GPT-3"
+       },
+       {
+        "id": "dataset:translation",
+        "type": "Dataset",
+        "label": "translation"
+       },
+       {
+        "id": "dataset:using a novel word in a sentence",
+        "type": "Dataset",
+        "label": "using a novel word in a sentence"
+       },
+       {
+        "id": "dataset:unscrambling words",
+        "type": "Dataset",
+        "label": "unscrambling words"
+       },
+       {
+        "id": "dataset:cloze tasks",
+        "type": "Dataset",
+        "label": "cloze tasks"
+       },
+       {
+        "id": "dataset:question answering",
+        "type": "Dataset",
+        "label": "question answering"
        },
        {
         "id": "method:BERT",
@@ -761,9 +1071,9 @@
         "label": "BERT"
        },
        {
-        "id": "dataset:SQuAD v2.0",
+        "id": "dataset:GLUE",
         "type": "Dataset",
-        "label": "SQuAD v2.0"
+        "label": "GLUE"
        },
        {
         "id": "dataset:MultiNLI",
@@ -776,84 +1086,9 @@
         "label": "SQuAD v1.1"
        },
        {
-        "id": "dataset:GLUE",
+        "id": "dataset:SQuAD v2.0",
         "type": "Dataset",
-        "label": "GLUE"
-       },
-       {
-        "id": "method:Transformer",
-        "type": "Method",
-        "label": "Transformer"
-       },
-       {
-        "id": "method:Longformer",
-        "type": "Method",
-        "label": "Longformer"
-       },
-       {
-        "id": "method:LED",
-        "type": "Method",
-        "label": "LED"
-       },
-       {
-        "id": "dataset:enwik8",
-        "type": "Dataset",
-        "label": "enwik8"
-       },
-       {
-        "id": "dataset:TriviaQA",
-        "type": "Dataset",
-        "label": "TriviaQA"
-       },
-       {
-        "id": "dataset:arXiv",
-        "type": "Dataset",
-        "label": "arXiv"
-       },
-       {
-        "id": "dataset:WikiHop",
-        "type": "Dataset",
-        "label": "WikiHop"
-       },
-       {
-        "id": "dataset:text8",
-        "type": "Dataset",
-        "label": "text8"
-       },
-       {
-        "id": "method:FlashAttention",
-        "type": "Method",
-        "label": "FlashAttention"
-       },
-       {
-        "id": "method:block-sparse FlashAttention",
-        "type": "Method",
-        "label": "block-sparse FlashAttention"
-       },
-       {
-        "id": "dataset:Path-X",
-        "type": "Dataset",
-        "label": "Path-X"
-       },
-       {
-        "id": "dataset:long-range arena",
-        "type": "Dataset",
-        "label": "long-range arena"
-       },
-       {
-        "id": "dataset:Path-256",
-        "type": "Dataset",
-        "label": "Path-256"
-       },
-       {
-        "id": "method:RoFormer",
-        "type": "Method",
-        "label": "RoFormer"
-       },
-       {
-        "id": "method:RoPE",
-        "type": "Method",
-        "label": "RoPE"
+        "label": "SQuAD v2.0"
        },
        {
         "id": "method:text-to-text transformer",
@@ -871,100 +1106,200 @@
         "label": "Colossal Clean Crawled Corpus"
        },
        {
-        "id": "dataset:STS",
+        "id": "dataset:SQuAD",
         "type": "Dataset",
-        "label": "STS"
+        "label": "SQuAD"
        },
        {
-        "id": "method:SRoBERTa",
+        "id": "dataset:RACE",
+        "type": "Dataset",
+        "label": "RACE"
+       },
+       {
+        "id": "method:ViTs",
         "type": "Method",
-        "label": "SRoBERTa"
+        "label": "ViTs"
        },
        {
-        "id": "method:Sentence-BERT",
-        "type": "Method",
-        "label": "Sentence-BERT"
-       },
-       {
-        "id": "method:GPT-3",
-        "type": "Method",
-        "label": "GPT-3"
-       },
-       {
-        "id": "dataset:translation",
+        "id": "dataset:CIFAR-100",
         "type": "Dataset",
-        "label": "translation"
+        "label": "CIFAR-100"
        },
        {
-        "id": "dataset:unscrambling words",
+        "id": "dataset:VTAB",
         "type": "Dataset",
-        "label": "unscrambling words"
-       },
-       {
-        "id": "dataset:question-answering",
-        "type": "Dataset",
-        "label": "question-answering"
-       },
-       {
-        "id": "dataset:using a novel word in a sentence",
-        "type": "Dataset",
-        "label": "using a novel word in a sentence"
-       },
-       {
-        "id": "dataset:cloze tasks",
-        "type": "Dataset",
-        "label": "cloze tasks"
-       },
-       {
-        "id": "method:LLaMA",
-        "type": "Method",
-        "label": "LLaMA"
-       },
-       {
-        "id": "method:LoRA",
-        "type": "Method",
-        "label": "LoRA"
-       },
-       {
-        "id": "dataset:GPT-2",
-        "type": "Dataset",
-        "label": "GPT-2"
-       },
-       {
-        "id": "dataset:DeBERTa",
-        "type": "Dataset",
-        "label": "DeBERTa"
-       },
-       {
-        "id": "dataset:RoBERTa",
-        "type": "Dataset",
-        "label": "RoBERTa"
-       },
-       {
-        "id": "dataset:GPT-3",
-        "type": "Dataset",
-        "label": "GPT-3"
+        "label": "VTAB"
        }
       ],
       "links": [
        {
-        "source": "paper:2005.11401",
-        "target": "method:RAG",
+        "source": "paper:2106.09685",
+        "target": "method:LoRA",
         "type": "PROPOSES"
        },
        {
-        "source": "paper:2005.11401",
-        "target": "dataset:MMLU",
+        "source": "paper:2106.09685",
+        "target": "dataset:RoBERTa",
         "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:2005.11401",
-        "target": "dataset:Natural Questions",
+        "source": "paper:2106.09685",
+        "target": "dataset:GPT-3",
         "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:2005.11401",
-        "target": "dataset:Wikipedia",
+        "source": "paper:2106.09685",
+        "target": "dataset:GPT-2",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2106.09685",
+        "target": "dataset:DeBERTa",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2103.00020",
+        "target": "method:predicting which caption goes with which image",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2103.00020",
+        "target": "dataset:geo-localization",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2103.00020",
+        "target": "dataset:action recognition in videos",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2103.00020",
+        "target": "dataset:fine-grained object classification",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2103.00020",
+        "target": "dataset:ImageNet",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2103.00020",
+        "target": "dataset:OCR",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:1710.10903",
+        "target": "method:GATs",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:1710.10903",
+        "target": "dataset:Citeseer",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:1710.10903",
+        "target": "dataset:protein-protein interaction dataset",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:1710.10903",
+        "target": "dataset:Cora",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:1710.10903",
+        "target": "dataset:PubMed",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2006.11239",
+        "target": "method:weighted variational bound",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2006.11239",
+        "target": "method:progressive lossy decompression scheme",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2006.11239",
+        "target": "dataset:LSUN",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2006.11239",
+        "target": "dataset:CIFAR-10",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2103.14030",
+        "target": "method:HiT-SR",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2103.14030",
+        "target": "method:Swin Transformer",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2103.14030",
+        "target": "method:shifted windows",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2103.14030",
+        "target": "dataset:ImageNet-1K",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2103.14030",
+        "target": "dataset:ADE20K val",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2103.14030",
+        "target": "dataset:COCO test-dev",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:1706.03762",
+        "target": "method:Transformer",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2302.13971",
+        "target": "method:LLaMA",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "method:GPT-3",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "dataset:translation",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "dataset:using a novel word in a sentence",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "dataset:unscrambling words",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "dataset:cloze tasks",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "dataset:question answering",
         "type": "EVALUATES_ON"
        },
        {
@@ -974,7 +1309,7 @@
        },
        {
         "source": "paper:1810.04805",
-        "target": "dataset:SQuAD v2.0",
+        "target": "dataset:GLUE",
         "type": "EVALUATES_ON"
        },
        {
@@ -989,83 +1324,8 @@
        },
        {
         "source": "paper:1810.04805",
-        "target": "dataset:GLUE",
+        "target": "dataset:SQuAD v2.0",
         "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:1706.03762",
-        "target": "method:Transformer",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2004.05150",
-        "target": "method:Longformer",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2004.05150",
-        "target": "method:LED",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2004.05150",
-        "target": "dataset:enwik8",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2004.05150",
-        "target": "dataset:TriviaQA",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2004.05150",
-        "target": "dataset:arXiv",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2004.05150",
-        "target": "dataset:WikiHop",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2004.05150",
-        "target": "dataset:text8",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2205.14135",
-        "target": "method:FlashAttention",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2205.14135",
-        "target": "method:block-sparse FlashAttention",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2205.14135",
-        "target": "dataset:Path-X",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2205.14135",
-        "target": "dataset:long-range arena",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2205.14135",
-        "target": "dataset:Path-256",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2104.09864",
-        "target": "method:RoFormer",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2104.09864",
-        "target": "method:RoPE",
-        "type": "PROPOSES"
        },
        {
         "source": "paper:1910.10683",
@@ -1083,167 +1343,87 @@
         "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:1908.10084",
-        "target": "dataset:STS",
+        "source": "paper:1907.11692",
+        "target": "dataset:SQuAD",
         "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:1908.10084",
-        "target": "method:SRoBERTa",
+        "source": "paper:1907.11692",
+        "target": "dataset:RACE",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:1907.11692",
+        "target": "dataset:GLUE",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2010.11929",
+        "target": "method:ViTs",
         "type": "PROPOSES"
        },
        {
-        "source": "paper:1908.10084",
-        "target": "method:Sentence-BERT",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2005.14165",
-        "target": "method:GPT-3",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2005.14165",
-        "target": "dataset:translation",
+        "source": "paper:2010.11929",
+        "target": "dataset:CIFAR-100",
         "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:2005.14165",
-        "target": "dataset:unscrambling words",
+        "source": "paper:2010.11929",
+        "target": "dataset:VTAB",
         "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:2005.14165",
-        "target": "dataset:question-answering",
+        "source": "paper:2010.11929",
+        "target": "dataset:ImageNet",
         "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:2005.14165",
-        "target": "dataset:using a novel word in a sentence",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2005.14165",
-        "target": "dataset:cloze tasks",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2302.13971",
-        "target": "method:LLaMA",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2106.09685",
-        "target": "method:LoRA",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2106.09685",
-        "target": "dataset:GPT-2",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2106.09685",
-        "target": "dataset:DeBERTa",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2106.09685",
-        "target": "dataset:RoBERTa",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2106.09685",
-        "target": "dataset:GPT-3",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2005.14165",
-        "target": "paper:2005.11401",
+        "source": "paper:2103.14030",
+        "target": "paper:2103.00020",
         "type": "CITES"
        },
        {
         "source": "paper:2302.13971",
-        "target": "paper:1810.04805",
+        "target": "paper:1706.03762",
         "type": "CITES"
        },
        {
         "source": "paper:2106.09685",
-        "target": "paper:1810.04805",
+        "target": "paper:1706.03762",
         "type": "CITES"
        },
        {
-        "source": "paper:2104.09864",
-        "target": "paper:1810.04805",
+        "source": "paper:2103.14030",
+        "target": "paper:1706.03762",
         "type": "CITES"
        },
        {
-        "source": "paper:2205.14135",
-        "target": "paper:1810.04805",
+        "source": "paper:2103.00020",
+        "target": "paper:1706.03762",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2010.11929",
+        "target": "paper:1706.03762",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2006.11239",
+        "target": "paper:1706.03762",
         "type": "CITES"
        },
        {
         "source": "paper:2005.14165",
-        "target": "paper:1810.04805",
+        "target": "paper:1706.03762",
         "type": "CITES"
        },
        {
         "source": "paper:1910.10683",
-        "target": "paper:1810.04805",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:1908.10084",
-        "target": "paper:1810.04805",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2004.05150",
-        "target": "paper:1810.04805",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2005.11401",
-        "target": "paper:1810.04805",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2307.03172",
         "target": "paper:1706.03762",
         "type": "CITES"
        },
        {
-        "source": "paper:2005.11401",
-        "target": "paper:1706.03762",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2005.14165",
-        "target": "paper:1706.03762",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2205.14135",
-        "target": "paper:1706.03762",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2106.09685",
-        "target": "paper:1706.03762",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2004.05150",
-        "target": "paper:1706.03762",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:1908.10084",
-        "target": "paper:1706.03762",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2104.09864",
+        "source": "paper:1907.11692",
         "target": "paper:1706.03762",
         "type": "CITES"
        },
@@ -1253,77 +1433,12 @@
         "type": "CITES"
        },
        {
-        "source": "paper:1910.10683",
+        "source": "paper:1710.10903",
         "target": "paper:1706.03762",
         "type": "CITES"
        },
        {
         "source": "paper:2302.13971",
-        "target": "paper:1706.03762",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2205.14135",
-        "target": "paper:2004.05150",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2307.03172",
-        "target": "paper:2004.05150",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2302.13971",
-        "target": "paper:2205.14135",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2307.03172",
-        "target": "paper:2205.14135",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2302.13971",
-        "target": "paper:2104.09864",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2307.03172",
-        "target": "paper:1910.10683",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2004.05150",
-        "target": "paper:1910.10683",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2005.14165",
-        "target": "paper:1910.10683",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2005.11401",
-        "target": "paper:1910.10683",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2104.09864",
-        "target": "paper:1910.10683",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2302.13971",
-        "target": "paper:1910.10683",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2302.13971",
-        "target": "paper:2005.14165",
-        "type": "CITES"
-       },
-       {
-        "source": "paper:2104.09864",
         "target": "paper:2005.14165",
         "type": "CITES"
        },
@@ -1333,32 +1448,102 @@
         "type": "CITES"
        },
        {
-        "source": "paper:2205.14135",
+        "source": "paper:2103.00020",
         "target": "paper:2005.14165",
         "type": "CITES"
        },
        {
-        "source": "paper:2307.03172",
-        "target": "paper:2302.13971",
+        "source": "paper:2010.11929",
+        "target": "paper:2005.14165",
         "type": "CITES"
        },
        {
-        "source": "method:SRoBERTa",
-        "target": "method:BERT",
-        "type": "IMPROVES_ON"
+        "source": "paper:2302.13971",
+        "target": "paper:1810.04805",
+        "type": "CITES"
        },
        {
-        "source": "method:Sentence-BERT",
-        "target": "method:BERT",
-        "type": "IMPROVES_ON"
+        "source": "paper:2106.09685",
+        "target": "paper:1810.04805",
+        "type": "CITES"
        },
        {
-        "source": "method:LLaMA",
+        "source": "paper:2103.00020",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2010.11929",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:1910.10683",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:1907.11692",
+        "target": "paper:1810.04805",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "paper:1910.10683",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2302.13971",
+        "target": "paper:1910.10683",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2103.14030",
+        "target": "paper:1910.10683",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2103.00020",
+        "target": "paper:1910.10683",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2106.09685",
+        "target": "paper:1907.11692",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2005.14165",
+        "target": "paper:1907.11692",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:1910.10683",
+        "target": "paper:1907.11692",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2103.00020",
+        "target": "paper:2010.11929",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2103.14030",
+        "target": "paper:2010.11929",
+        "type": "CITES"
+       },
+       {
+        "source": "method:LoRA",
         "target": "method:GPT-3",
         "type": "IMPROVES_ON"
        },
        {
-        "source": "method:LoRA",
+        "source": "method:LLaMA",
         "target": "method:GPT-3",
         "type": "IMPROVES_ON"
        }
@@ -1388,7 +1573,7 @@
      "event": "step",
      "data": {
       "node": "search",
-      "message": "Searched 'Self-RAG vs Corrective RAG': 6 papers"
+      "message": "Searched 'Self-RAG Corrective RAG comparison': 14 papers"
      }
     },
     {
@@ -1415,7 +1600,7 @@
     {
      "event": "answer",
      "data": {
-      "text": "'Corrective RAG' is not a method in the knowledge graph. The only method listed is Self-RAG, proposed in [2310.11511].\n\n| Method | Paper | Core idea | Evaluated on | Notes |\n|-------|-------|---------|------------|-------|\n| Self-RAG | [2310.11511] | Enhances LLMs by enabling self-reflection: retrieves, generates, and critiques responses to improve factual accuracy and reasoning. | Fact verification, reasoning, open-domain QA, long-form generation | Improves on ChatGPT and Llama2-chat; addresses over-retrieval and irrelevant passages |\n| Corrective RAG | [2401.15884] | Not present in the knowledge graph | N/A | The method \"Corrective RAG\" is referenced but not found in the knowledge graph; no evaluation or task details provided |\n\nNote: The knowledge graph explicitly states that \"Corrective RAG\" is not a method in the graph, and no paper with the method is listed in the provided sources. Thus, a direct comparison cannot be made. The claim that \"Corrective RAG\" exists in the graph is false. [2401.15884] describes a method named \"Corrective Retrieval Augmented Generation (CRAG)\", but it is not the same as \"Corrective RAG\" and is not evaluated in the graph. Missing: explicit evaluation of Corrective RAG or its comparison to Self-RAG."
+      "text": "- **Self-RAG** [2310.11511] introduces self-reflection to improve retrieval, generation, and critique in LLMs. It enhances reasoning, long-form generation, open-domain QA, and fact verification by enabling the model to evaluate and revise its own outputs. It improves upon standard RAG by introducing self-critique and adaptive retrieval, though it is not evaluated on hallucination mitigation specifically.\n\n- **CRAG** [2401.15884] focuses on robustness by introducing a lightweight evaluator to assess retrieved document quality and assign confidence scores. It uses this confidence to guide generation, reducing hallucinations when retrieval fails. It emphasizes error correction and is evaluated on both short- and long-form generation tasks.\n\n| Method | Paper | Core idea | Evaluated on | Notes |\n|--------|-------|----------|-------------|-------|\n| Self-RAG | [2310.11511] | Self-reflection to critique and refine retrieval, generation, and responses | Reasoning, long-form generation, open-domain QA, fact verification | Improves on standard RAG; focuses on internal critique and quality control |\n| Corrective RAG | [2401.15884] | Lightweight evaluator assigns confidence to retrieved content; corrects generation if retrieval is low-quality | Long-form and short-form generation | Prioritizes robustness against retrieval failure and hallucinations |"
      }
     },
     {
@@ -1433,7 +1618,7 @@
        "title": "Corrective Retrieval Augmented Generation",
        "year": 2024,
        "abs_url": "https://arxiv.org/abs/2401.15884",
-       "source": "entity"
+       "source": "graph"
       }
      ]
     },
@@ -1461,14 +1646,14 @@
         "label": "Self-RAG"
        },
        {
-        "id": "method:decompose-then-recompose algorithm",
-        "type": "Method",
-        "label": "decompose-then-recompose algorithm"
-       },
-       {
         "id": "method:lightweight retrieval evaluator",
         "type": "Method",
         "label": "lightweight retrieval evaluator"
+       },
+       {
+        "id": "method:decompose-then-recompose algorithm",
+        "type": "Method",
+        "label": "decompose-then-recompose algorithm"
        },
        {
         "id": "method:CRAG",
@@ -1484,12 +1669,12 @@
        },
        {
         "source": "paper:2401.15884",
-        "target": "method:decompose-then-recompose algorithm",
+        "target": "method:lightweight retrieval evaluator",
         "type": "PROPOSES"
        },
        {
         "source": "paper:2401.15884",
-        "target": "method:lightweight retrieval evaluator",
+        "target": "method:decompose-then-recompose algorithm",
         "type": "PROPOSES"
        },
        {
@@ -1514,21 +1699,21 @@
      "event": "step",
      "data": {
       "node": "plan",
-      "message": "Planned: dataset question; entities: HotpotQA"
+      "message": "Planned: dataset question; entities: HotpotQA, RAG, GraphRAG, BERT, T5, BERT-Base, BERT-Base-uncased, BERT-Base-uncased-128"
      }
     },
     {
      "event": "step",
      "data": {
       "node": "graph",
-      "message": "Knowledge graph: looked up papers evaluating on HotpotQA (7 facts)"
+      "message": "Knowledge graph: looked up papers evaluating on HotpotQA (15 facts)"
      }
     },
     {
      "event": "step",
      "data": {
       "node": "search",
-      "message": "Searched 'HotpotQA evaluation papers': 6 papers"
+      "message": "Searched 'HotpotQA evaluation': 12 papers"
      }
     },
     {
@@ -1542,32 +1727,25 @@
      "event": "step",
      "data": {
       "node": "answer",
-      "message": "Wrote the answer with 6 verified citations"
+      "message": "Wrote the answer with 12 verified citations"
      }
     },
     {
      "event": "step",
      "data": {
       "node": "subgraph",
-      "message": "Built a graph of 28 nodes and 34 links"
+      "message": "Built a graph of 58 nodes and 73 links"
      }
     },
     {
      "event": "answer",
      "data": {
-      "text": "Papers that evaluate on HotpotQA:\n\n- [2009.12756] proposes multi-hop dense retrieval, achieving state-of-the-art performance on HotpotQA without needing corpus-specific annotations, with 10\u00d7 faster inference than prior methods [2009.12756].\n\n- [2210.03629] proposes ReAct, which interleaves reasoning and action generation, enabling LLMs to reason and act in tandem, with improved performance on knowledge-intensive QA tasks including HotpotQA [2210.03629].\n\n- [2212.10509] proposes IRCoT, an interleaving approach that combines retrieval and chain-of-thought reasoning for multi-step questions, addressing dependencies in knowledge retrieval for HotpotQA [2212.10509].\n\n- [2407.10805] proposes Think-on-Graph 2.0, which tightly couples document and knowledge graph retrieval to enable deep, knowledge-guided reasoning, improving performance on complex HotpotQA questions [2407.10805].\n\n- [2502.06864] proposes KG$^2$RAG, using knowledge graphs to enhance retrieval coherence and diversity, improving answer quality on HotpotQA via fact-level relationships [2502.06864].\n\n- [2405.16444] proposes CacheBlend, which optimizes RAG serving via cached knowledge fusion, but does not explicitly evaluate on HotpotQA [2405.16444].\n\nNote: CacheBlend does not evaluate on HotpotQA, despite being in the knowledge graph. [2405.16444] is excluded due to lack of HotpotQA evaluation."
+      "text": "The following papers evaluate on HotpotQA and propose the following methods:\n\n- [2210.03629] ReAct: proposes ReAct, an interleaved reasoning-and-acting framework where reasoning traces guide action plans and actions retrieve external knowledge.  \n- [2212.10509] IRCoT: proposes IRCoT, interleaving retrieval with chain-of-thought reasoning for multi-step QA, where retrieval depends on prior reasoning steps.  \n- [2203.15827] LinkBERT: proposes LinkBERT, pretraining with document links to capture inter-document knowledge relations.  \n- [2403.10131] RAFT: proposes RAFT, a domain-specific RAG training method that adapts LLMs via retrieval-augmented fine-tuning.  \n- [2405.16444] CacheBlend: proposes CacheBlend, a fast RAG serving method that efficiently fuses precomputed KV caches across text chunks.  \n- [2009.12756] Multi-hop dense retrieval: proposes a multi-hop dense retrieval method achieving state-of-the-art accuracy on HotpotQA with 10\u00d7 faster inference.  \n- [2305.18323] ReWOO: proposes ReWOO, decoupling reasoning from observations to reduce redundant prompts and improve efficiency.  \n- [2502.06864] KG$^2$RAG: proposes KG$^2$RAG, using knowledge graphs to guide retrieval and improve coherence of retrieved chunks.  \n- [2602.02474] MemSkill: proposes MemSkill, a learnable, evolvable memory system for agent memory management.  \n- [2407.10805] Think-on-Graph 2.0: proposes ToG-2, a tight-coupling RAG framework with iterative knowledge graph-guided retrieval.  \n- [2504.18070] PropRAG: proposes PropRAG, using context-rich propositions and beam search over proposition paths to preserve context.  \n- [2604.23783] S2G-RAG: proposes S2G-RAG, an iterative RAG framework with gap judging to ensure sufficient evidence and avoid redundancy.  \n\nAll these papers evaluate on HotpotQA, with diverse proposals ranging from retrieval strategies to memory and reasoning architectures. [2009.12756] [2210.03629] [2212.10509] [2203.15827] [2403.10131] [2405.16444] [2305.18323] [2502.06864] [2602.02474] [2407.10805] [2504.18070] [2604.23783]"
      }
     },
     {
      "event": "citations",
      "data": [
-      {
-       "arxiv_id": "2009.12756",
-       "title": "Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval",
-       "year": 2020,
-       "abs_url": "https://arxiv.org/abs/2009.12756",
-       "source": "graph"
-      },
       {
        "arxiv_id": "2210.03629",
        "title": "ReAct: Synergizing Reasoning and Acting in Language Models",
@@ -1583,10 +1761,38 @@
        "source": "graph"
       },
       {
-       "arxiv_id": "2407.10805",
-       "title": "Think-on-Graph 2.0: Deep and Faithful Large Language Model Reasoning with Knowledge-guided Retrieval Augmented Generation",
+       "arxiv_id": "2203.15827",
+       "title": "LinkBERT: Pretraining Language Models with Document Links",
+       "year": 2022,
+       "abs_url": "https://arxiv.org/abs/2203.15827",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2403.10131",
+       "title": "RAFT: Adapting Language Model to Domain Specific RAG",
        "year": 2024,
-       "abs_url": "https://arxiv.org/abs/2407.10805",
+       "abs_url": "https://arxiv.org/abs/2403.10131",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2405.16444",
+       "title": "CacheBlend: Fast Large Language Model Serving for RAG with Cached Knowledge Fusion",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2405.16444",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2009.12756",
+       "title": "Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval",
+       "year": 2020,
+       "abs_url": "https://arxiv.org/abs/2009.12756",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2305.18323",
+       "title": "ReWOO: Decoupling Reasoning from Observations for Efficient Augmented Language Models",
+       "year": 2023,
+       "abs_url": "https://arxiv.org/abs/2305.18323",
        "source": "graph"
       },
       {
@@ -1597,10 +1803,31 @@
        "source": "graph"
       },
       {
-       "arxiv_id": "2405.16444",
-       "title": "CacheBlend: Fast Large Language Model Serving for RAG with Cached Knowledge Fusion",
+       "arxiv_id": "2602.02474",
+       "title": "MemSkill: Learning and Evolving Memory Skills for Self-Evolving Agents",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2602.02474",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2407.10805",
+       "title": "Think-on-Graph 2.0: Deep and Faithful Large Language Model Reasoning with Knowledge-guided Retrieval Augmented Generation",
        "year": 2024,
-       "abs_url": "https://arxiv.org/abs/2405.16444",
+       "abs_url": "https://arxiv.org/abs/2407.10805",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2504.18070",
+       "title": "PropRAG: Guiding Retrieval with Beam Search over Proposition Paths",
+       "year": 2025,
+       "abs_url": "https://arxiv.org/abs/2504.18070",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2604.23783",
+       "title": "S2G-RAG: Structured Sufficiency and Gap Judging for Iterative Retrieval-Augmented QA",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2604.23783",
        "source": "graph"
       }
      ]
@@ -1609,13 +1836,6 @@
      "event": "subgraph",
      "data": {
       "nodes": [
-       {
-        "id": "paper:2009.12756",
-        "type": "Paper",
-        "label": "Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval",
-        "arxiv_id": "2009.12756",
-        "year": 2020
-       },
        {
         "id": "paper:2210.03629",
         "type": "Paper",
@@ -1631,18 +1851,18 @@
         "year": 2022
        },
        {
-        "id": "paper:2407.10805",
+        "id": "paper:2203.15827",
         "type": "Paper",
-        "label": "Think-on-Graph 2.0: Deep and Faithful Large Language Model Reasoning with Knowledge-guided Retrieval Augmented Generation",
-        "arxiv_id": "2407.10805",
-        "year": 2024
+        "label": "LinkBERT: Pretraining Language Models with Document Links",
+        "arxiv_id": "2203.15827",
+        "year": 2022
        },
        {
-        "id": "paper:2502.06864",
+        "id": "paper:2403.10131",
         "type": "Paper",
-        "label": "Knowledge Graph-Guided Retrieval Augmented Generation",
-        "arxiv_id": "2502.06864",
-        "year": 2025
+        "label": "RAFT: Adapting Language Model to Domain Specific RAG",
+        "arxiv_id": "2403.10131",
+        "year": 2024
        },
        {
         "id": "paper:2405.16444",
@@ -1652,19 +1872,68 @@
         "year": 2024
        },
        {
+        "id": "paper:2009.12756",
+        "type": "Paper",
+        "label": "Answering Complex Open-Domain Questions with Multi-Hop Dense Retrieval",
+        "arxiv_id": "2009.12756",
+        "year": 2020
+       },
+       {
+        "id": "paper:2305.18323",
+        "type": "Paper",
+        "label": "ReWOO: Decoupling Reasoning from Observations for Efficient Augmented Language Models",
+        "arxiv_id": "2305.18323",
+        "year": 2023
+       },
+       {
+        "id": "paper:2502.06864",
+        "type": "Paper",
+        "label": "Knowledge Graph-Guided Retrieval Augmented Generation",
+        "arxiv_id": "2502.06864",
+        "year": 2025
+       },
+       {
+        "id": "paper:2602.02474",
+        "type": "Paper",
+        "label": "MemSkill: Learning and Evolving Memory Skills for Self-Evolving Agents",
+        "arxiv_id": "2602.02474",
+        "year": 2026
+       },
+       {
+        "id": "paper:2407.10805",
+        "type": "Paper",
+        "label": "Think-on-Graph 2.0: Deep and Faithful Large Language Model Reasoning with Knowledge-guided Retrieval Augmented Generation",
+        "arxiv_id": "2407.10805",
+        "year": 2024
+       },
+       {
+        "id": "paper:2504.18070",
+        "type": "Paper",
+        "label": "PropRAG: Guiding Retrieval with Beam Search over Proposition Paths",
+        "arxiv_id": "2504.18070",
+        "year": 2025
+       },
+       {
+        "id": "paper:2604.23783",
+        "type": "Paper",
+        "label": "S2G-RAG: Structured Sufficiency and Gap Judging for Iterative Retrieval-Augmented QA",
+        "arxiv_id": "2604.23783",
+        "year": 2026
+       },
+       {
         "id": "dataset:HotpotQA",
         "type": "Dataset",
         "label": "HotpotQA"
        },
        {
-        "id": "method:multi-hop dense retrieval",
+        "id": "method:KG$^2$RAG",
         "type": "Method",
-        "label": "multi-hop dense retrieval"
+        "label": "KG$^2$RAG"
        },
        {
-        "id": "dataset:multi-evidence FEVER",
+        "id": "dataset:COPA",
         "type": "Dataset",
-        "label": "multi-evidence FEVER"
+        "label": "COPA"
        },
        {
         "id": "dataset:TruthfulQA",
@@ -1682,9 +1951,69 @@
         "label": "Natural Questions"
        },
        {
-        "id": "dataset:OpenBookQA",
+        "id": "method:CacheBlend",
+        "type": "Method",
+        "label": "CacheBlend"
+       },
+       {
+        "id": "dataset:multi-evidence FEVER",
         "type": "Dataset",
-        "label": "OpenBookQA"
+        "label": "multi-evidence FEVER"
+       },
+       {
+        "id": "method:multi-hop dense retrieval",
+        "type": "Method",
+        "label": "multi-hop dense retrieval"
+       },
+       {
+        "id": "method:IRCoT",
+        "type": "Method",
+        "label": "IRCoT"
+       },
+       {
+        "id": "dataset:IIRC",
+        "type": "Dataset",
+        "label": "IIRC"
+       },
+       {
+        "id": "dataset:MuSiQue",
+        "type": "Dataset",
+        "label": "MuSiQue"
+       },
+       {
+        "id": "dataset:LongMemEval",
+        "type": "Dataset",
+        "label": "LongMemEval"
+       },
+       {
+        "id": "dataset:ALFWorld",
+        "type": "Dataset",
+        "label": "ALFWorld"
+       },
+       {
+        "id": "method:designer",
+        "type": "Method",
+        "label": "designer"
+       },
+       {
+        "id": "method:controller",
+        "type": "Method",
+        "label": "controller"
+       },
+       {
+        "id": "method:MemSkill",
+        "type": "Method",
+        "label": "MemSkill"
+       },
+       {
+        "id": "dataset:LoCoMo",
+        "type": "Dataset",
+        "label": "LoCoMo"
+       },
+       {
+        "id": "method:executor",
+        "type": "Method",
+        "label": "executor"
        },
        {
         "id": "method:tight-coupling of context and graph retrieval",
@@ -1697,11 +2026,6 @@
         "label": "collaboration between contexts and knowledge graphs"
        },
        {
-        "id": "method:Think-on-Graph 2.0",
-        "type": "Method",
-        "label": "Think-on-Graph 2.0"
-       },
-       {
         "id": "method:iterative knowledge retrieval process",
         "type": "Method",
         "label": "iterative knowledge retrieval process"
@@ -1712,29 +2036,104 @@
         "label": "knowledge-guided retrieval augmented generation"
        },
        {
-        "id": "dataset:COPA",
+        "id": "dataset:OpenbookQA",
         "type": "Dataset",
-        "label": "COPA"
+        "label": "OpenbookQA"
        },
        {
-        "id": "method:CacheBlend",
+        "id": "method:Think-on-Graph 2.0",
         "type": "Method",
-        "label": "CacheBlend"
+        "label": "Think-on-Graph 2.0"
        },
        {
-        "id": "method:IRCoT",
+        "id": "dataset:LIGO O3",
+        "type": "Dataset",
+        "label": "LIGO O3"
+       },
+       {
+        "id": "method:ReWOO",
         "type": "Method",
-        "label": "IRCoT"
+        "label": "ReWOO"
        },
        {
-        "id": "dataset:MuSiQue",
+        "id": "dataset:ImageNet",
         "type": "Dataset",
-        "label": "MuSiQue"
+        "label": "ImageNet"
        },
        {
-        "id": "dataset:IIRC",
+        "id": "method:context-rich propositions",
+        "type": "Method",
+        "label": "context-rich propositions"
+       },
+       {
+        "id": "method:PropRAG",
+        "type": "Method",
+        "label": "PropRAG"
+       },
+       {
+        "id": "method:beam search over proposition paths",
+        "type": "Method",
+        "label": "beam search over proposition paths"
+       },
+       {
+        "id": "dataset:TriviaQA",
         "type": "Dataset",
-        "label": "IIRC"
+        "label": "TriviaQA"
+       },
+       {
+        "id": "method:S2G-RAG",
+        "type": "Method",
+        "label": "S2G-RAG"
+       },
+       {
+        "id": "method:Evidence Context",
+        "type": "Method",
+        "label": "Evidence Context"
+       },
+       {
+        "id": "method:S2G-Judge",
+        "type": "Method",
+        "label": "S2G-Judge"
+       },
+       {
+        "id": "method:RAFT",
+        "type": "Method",
+        "label": "RAFT"
+       },
+       {
+        "id": "dataset:PubMed",
+        "type": "Dataset",
+        "label": "PubMed"
+       },
+       {
+        "id": "dataset:Gorilla",
+        "type": "Dataset",
+        "label": "Gorilla"
+       },
+       {
+        "id": "dataset:BioASQ",
+        "type": "Dataset",
+        "label": "BioASQ"
+       },
+       {
+        "id": "dataset:Wikipedia",
+        "type": "Dataset",
+        "label": "Wikipedia"
+       },
+       {
+        "id": "method:LinkBERT",
+        "type": "Method",
+        "label": "LinkBERT"
+       },
+       {
+        "id": "dataset:USMLE",
+        "type": "Dataset",
+        "label": "USMLE"
+       },
+       {
+        "id": "method:document relation prediction",
+        "type": "Method",
+        "label": "document relation prediction"
        },
        {
         "id": "method:ReAct",
@@ -1750,93 +2149,18 @@
         "id": "dataset:WebShop",
         "type": "Dataset",
         "label": "WebShop"
-       },
-       {
-        "id": "dataset:ALFWorld",
-        "type": "Dataset",
-        "label": "ALFWorld"
-       },
-       {
-        "id": "method:KG$^2$RAG",
-        "type": "Method",
-        "label": "KG$^2$RAG"
        }
       ],
       "links": [
        {
-        "source": "paper:2009.12756",
+        "source": "paper:2502.06864",
         "target": "dataset:HotpotQA",
         "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:2009.12756",
-        "target": "method:multi-hop dense retrieval",
+        "source": "paper:2502.06864",
+        "target": "method:KG$^2$RAG",
         "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2009.12756",
-        "target": "dataset:multi-evidence FEVER",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2407.10805",
-        "target": "dataset:TruthfulQA",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2407.10805",
-        "target": "dataset:MMLU",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2407.10805",
-        "target": "dataset:Natural Questions",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2407.10805",
-        "target": "dataset:OpenBookQA",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2407.10805",
-        "target": "method:tight-coupling of context and graph retrieval",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2407.10805",
-        "target": "dataset:HotpotQA",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2407.10805",
-        "target": "method:collaboration between contexts and knowledge graphs",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2407.10805",
-        "target": "method:Think-on-Graph 2.0",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2407.10805",
-        "target": "method:iterative knowledge retrieval process",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2407.10805",
-        "target": "method:knowledge-guided retrieval augmented generation",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2405.16444",
-        "target": "dataset:TruthfulQA",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2405.16444",
-        "target": "dataset:HotpotQA",
-        "type": "EVALUATES_ON"
        },
        {
         "source": "paper:2405.16444",
@@ -1845,12 +2169,12 @@
        },
        {
         "source": "paper:2405.16444",
-        "target": "method:CacheBlend",
-        "type": "PROPOSES"
+        "target": "dataset:TruthfulQA",
+        "type": "EVALUATES_ON"
        },
        {
         "source": "paper:2405.16444",
-        "target": "dataset:Natural Questions",
+        "target": "dataset:HotpotQA",
         "type": "EVALUATES_ON"
        },
        {
@@ -1859,13 +2183,38 @@
         "type": "EVALUATES_ON"
        },
        {
+        "source": "paper:2405.16444",
+        "target": "dataset:Natural Questions",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2405.16444",
+        "target": "method:CacheBlend",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2009.12756",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2009.12756",
+        "target": "dataset:multi-evidence FEVER",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2009.12756",
+        "target": "method:multi-hop dense retrieval",
+        "type": "PROPOSES"
+       },
+       {
         "source": "paper:2212.10509",
         "target": "method:IRCoT",
         "type": "PROPOSES"
        },
        {
         "source": "paper:2212.10509",
-        "target": "dataset:HotpotQA",
+        "target": "dataset:IIRC",
         "type": "EVALUATES_ON"
        },
        {
@@ -1875,18 +2224,238 @@
        },
        {
         "source": "paper:2212.10509",
-        "target": "dataset:IIRC",
+        "target": "dataset:HotpotQA",
         "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2602.02474",
+        "target": "dataset:LongMemEval",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2602.02474",
+        "target": "dataset:ALFWorld",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2602.02474",
+        "target": "method:designer",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2602.02474",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2602.02474",
+        "target": "method:controller",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2602.02474",
+        "target": "method:MemSkill",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2602.02474",
+        "target": "dataset:LoCoMo",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2602.02474",
+        "target": "method:executor",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "method:tight-coupling of context and graph retrieval",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "dataset:MMLU",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "method:collaboration between contexts and knowledge graphs",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "dataset:TruthfulQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "method:iterative knowledge retrieval process",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "dataset:Natural Questions",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "method:knowledge-guided retrieval augmented generation",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "dataset:OpenbookQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2407.10805",
+        "target": "method:Think-on-Graph 2.0",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2305.18323",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2305.18323",
+        "target": "dataset:MMLU",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2305.18323",
+        "target": "dataset:LIGO O3",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2305.18323",
+        "target": "method:ReWOO",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2305.18323",
+        "target": "dataset:ImageNet",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2504.18070",
+        "target": "dataset:MuSiQue",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2504.18070",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2504.18070",
+        "target": "method:context-rich propositions",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2504.18070",
+        "target": "method:PropRAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2504.18070",
+        "target": "method:beam search over proposition paths",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2604.23783",
+        "target": "dataset:TriviaQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2604.23783",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2604.23783",
+        "target": "method:S2G-RAG",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2604.23783",
+        "target": "method:Evidence Context",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2604.23783",
+        "target": "method:S2G-Judge",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2403.10131",
+        "target": "method:RAFT",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2403.10131",
+        "target": "dataset:PubMed",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2403.10131",
+        "target": "dataset:Gorilla",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2403.10131",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2203.15827",
+        "target": "dataset:BioASQ",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2203.15827",
+        "target": "dataset:PubMed",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2203.15827",
+        "target": "dataset:Wikipedia",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2203.15827",
+        "target": "method:LinkBERT",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2203.15827",
+        "target": "dataset:USMLE",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2203.15827",
+        "target": "dataset:TriviaQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2203.15827",
+        "target": "dataset:HotpotQA",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2203.15827",
+        "target": "method:document relation prediction",
+        "type": "PROPOSES"
        },
        {
         "source": "paper:2210.03629",
         "target": "method:ReAct",
         "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2210.03629",
-        "target": "dataset:HotpotQA",
-        "type": "EVALUATES_ON"
        },
        {
         "source": "paper:2210.03629",
@@ -1904,14 +2473,14 @@
         "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:2502.06864",
+        "source": "paper:2210.03629",
         "target": "dataset:HotpotQA",
         "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:2502.06864",
-        "target": "method:KG$^2$RAG",
-        "type": "PROPOSES"
+        "source": "paper:2504.18070",
+        "target": "paper:2009.12756",
+        "type": "CITES"
        },
        {
         "source": "paper:2212.10509",
@@ -1919,7 +2488,17 @@
         "type": "CITES"
        },
        {
+        "source": "paper:2604.23783",
+        "target": "paper:2212.10509",
+        "type": "CITES"
+       },
+       {
         "source": "paper:2407.10805",
+        "target": "paper:2212.10509",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2504.18070",
         "target": "paper:2212.10509",
         "type": "CITES"
        },
@@ -1930,6 +2509,11 @@
        },
        {
         "source": "paper:2212.10509",
+        "target": "paper:2210.03629",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2305.18323",
         "target": "paper:2210.03629",
         "type": "CITES"
        }
@@ -1952,14 +2536,14 @@
      "event": "step",
      "data": {
       "node": "graph",
-      "message": "Knowledge graph: ranked papers by citations (11 facts)"
+      "message": "Knowledge graph: ranked papers by citations (3 facts)"
      }
     },
     {
      "event": "step",
      "data": {
       "node": "search",
-      "message": "Searched 'hallucination AND cite COUNT>100 AND year>=2023': 6 papers"
+      "message": "Searched 'hallucination AND cite AND 2023:': 20 papers"
      }
     },
     {
@@ -1973,25 +2557,39 @@
      "event": "step",
      "data": {
       "node": "answer",
-      "message": "Wrote the answer with 4 verified citations"
+      "message": "Wrote the answer with 8 verified citations"
      }
     },
     {
      "event": "step",
      "data": {
       "node": "subgraph",
-      "message": "Built a graph of 10 nodes and 8 links"
+      "message": "Built a graph of 26 nodes and 21 links"
      }
     },
     {
      "event": "answer",
      "data": {
-      "text": "The most cited papers on hallucination since 2023 include:\n\n- [2401.01313] A Comprehensive Survey of Hallucination Mitigation Techniques in Large Language Models (2024): This paper provides a comprehensive overview of techniques to detect and mitigate hallucinations in LLMs, emphasizing their critical impact on real-world deployment and safety. It identifies hallucination as the primary barrier to reliable LLM use in production systems [2401.01313].\n\n- [2307.03987] A Stitch in Time Saves Nine: Detecting and Mitigating Hallucinations of LLMs by Validating Low-Confidence Generation (2023): This work proposes a method to detect and mitigate hallucinations during generation by validating low-confidence outputs using logit values, improving response reliability [2307.03987].\n\nNo other papers in the corpus explicitly focus on hallucination mitigation. While papers like [2312.10997] and [2310.11511] discuss hallucination as a challenge, they do not center on it. Thus, the most cited papers specifically addressing hallucination are [2401.01313] and [2307.03987]. The rest of the listed papers discuss related topics (e.g., reasoning, tool use, retrieval) but not hallucination directly. [2401.01313] is the only paper explicitly dedicated to hallucination mitigation. [2307.03987] is the only one with a direct method for detection and mitigation."
+      "text": "The most cited papers on hallucination since 2023 are:\n\n- [2302.04023] A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity (2023): cited by 1873 overall, making it the most cited paper on hallucination in the corpus [2302.04023].\n\n- [2605.07723] LLM hallucinations in the wild: Large-scale evidence from non-existent citations (2026): provides large-scale empirical evidence of hallucinated citations in scientific literature, with 146,932 estimated hallucinated citations in 2025 [2605.07723].\n\n- [2401.01313] A Comprehensive Survey of Hallucination Mitigation Techniques in Large Language Models (2024): offers a broad survey of techniques to mitigate hallucinations, highlighting the critical nature of the issue in real-world deployment [2401.01313].\n\n- [2401.01301] Large Legal Fictions: Profiling Legal Hallucinations in Large Language Models (2024): documents systematic legal hallucinations in public LLMs, showing at least 58% hallucination rates [2401.01301].\n\n- [2402.08021] Careless Whisper: Speech-to-Text Hallucination Harms (2024): reveals 1% of Whisper transcriptions contain hallucinated phrases with harmful content [2402.08021].\n\n- [2602.23452] CiteAudit: You Cited It, But Did You Read It? A Benchmark for Verifying Scientific References in the LLM Era (2026): introduces a benchmark for detecting fabricated citations, addressing citation integrity in the LLM era [2602.23452].\n\n- [2401.11817] Hallucination is Inevitable: An Innate Limitation of Large Language Models (2024): argues hallucination is fundamentally unavoidable due to limitations in learning theory [2401.11817].\n\nNote: [2411.16489] is cited only 5 times and has low overall citation count, thus not among the most cited [2411.16489]."
      }
     },
     {
      "event": "citations",
      "data": [
+      {
+       "arxiv_id": "2302.04023",
+       "title": "A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity",
+       "year": 2023,
+       "abs_url": "https://arxiv.org/abs/2302.04023",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2605.07723",
+       "title": "LLM hallucinations in the wild: Large-scale evidence from non-existent citations",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2605.07723",
+       "source": "search"
+      },
       {
        "arxiv_id": "2401.01313",
        "title": "A Comprehensive Survey of Hallucination Mitigation Techniques in Large Language Models",
@@ -2000,24 +2598,38 @@
        "source": "search"
       },
       {
-       "arxiv_id": "2307.03987",
-       "title": "A Stitch in Time Saves Nine: Detecting and Mitigating Hallucinations of LLMs by Validating Low-Confidence Generation",
-       "year": 2023,
-       "abs_url": "https://arxiv.org/abs/2307.03987",
+       "arxiv_id": "2401.01301",
+       "title": "Large Legal Fictions: Profiling Legal Hallucinations in Large Language Models",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2401.01301",
        "source": "search"
       },
       {
-       "arxiv_id": "2312.10997",
-       "title": "Retrieval-Augmented Generation for Large Language Models: A Survey",
-       "year": 2023,
-       "abs_url": "https://arxiv.org/abs/2312.10997",
-       "source": "graph"
+       "arxiv_id": "2402.08021",
+       "title": "Careless Whisper: Speech-to-Text Hallucination Harms",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2402.08021",
+       "source": "search"
       },
       {
-       "arxiv_id": "2310.11511",
-       "title": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
-       "year": 2023,
-       "abs_url": "https://arxiv.org/abs/2310.11511",
+       "arxiv_id": "2602.23452",
+       "title": "CiteAudit: You Cited It, But Did You Read It? A Benchmark for Verifying Scientific References in the LLM Era",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2602.23452",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "2401.11817",
+       "title": "Hallucination is Inevitable: An Innate Limitation of Large Language Models",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2401.11817",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "2411.16489",
+       "title": "O1 Replication Journey - Part 2: Surpassing O1-preview through Simple Distillation, Big Progress or Bitter Lesson?",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2411.16489",
        "source": "graph"
       }
      ]
@@ -2027,6 +2639,20 @@
      "data": {
       "nodes": [
        {
+        "id": "paper:2302.04023",
+        "type": "Paper",
+        "label": "A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity",
+        "arxiv_id": "2302.04023",
+        "year": 2023
+       },
+       {
+        "id": "paper:2605.07723",
+        "type": "Paper",
+        "label": "LLM hallucinations in the wild: Large-scale evidence from non-existent citations",
+        "arxiv_id": "2605.07723",
+        "year": 2026
+       },
+       {
         "id": "paper:2401.01313",
         "type": "Paper",
         "label": "A Comprehensive Survey of Hallucination Mitigation Techniques in Large Language Models",
@@ -2034,96 +2660,235 @@
         "year": 2024
        },
        {
-        "id": "paper:2307.03987",
+        "id": "paper:2401.01301",
         "type": "Paper",
-        "label": "A Stitch in Time Saves Nine: Detecting and Mitigating Hallucinations of LLMs by Validating Low-Confidence Generation",
-        "arxiv_id": "2307.03987",
-        "year": 2023
+        "label": "Large Legal Fictions: Profiling Legal Hallucinations in Large Language Models",
+        "arxiv_id": "2401.01301",
+        "year": 2024
        },
        {
-        "id": "paper:2312.10997",
+        "id": "paper:2402.08021",
         "type": "Paper",
-        "label": "Retrieval-Augmented Generation for Large Language Models: A Survey",
-        "arxiv_id": "2312.10997",
-        "year": 2023
+        "label": "Careless Whisper: Speech-to-Text Hallucination Harms",
+        "arxiv_id": "2402.08021",
+        "year": 2024
        },
        {
-        "id": "paper:2310.11511",
+        "id": "paper:2602.23452",
         "type": "Paper",
-        "label": "Self-RAG: Learning to Retrieve, Generate, and Critique through Self-Reflection",
-        "arxiv_id": "2310.11511",
-        "year": 2023
+        "label": "CiteAudit: You Cited It, But Did You Read It? A Benchmark for Verifying Scientific References in the LLM Era",
+        "arxiv_id": "2602.23452",
+        "year": 2026
        },
        {
-        "id": "method:detection technique based on logit output values",
+        "id": "paper:2401.11817",
+        "type": "Paper",
+        "label": "Hallucination is Inevitable: An Innate Limitation of Large Language Models",
+        "arxiv_id": "2401.11817",
+        "year": 2024
+       },
+       {
+        "id": "paper:2411.16489",
+        "type": "Paper",
+        "label": "O1 Replication Journey - Part 2: Surpassing O1-preview through Simple Distillation, Big Progress or Bitter Lesson?",
+        "arxiv_id": "2411.16489",
+        "year": 2024
+       },
+       {
+        "id": "method:SFT",
         "type": "Method",
-        "label": "detection technique based on logit output values"
+        "label": "SFT"
        },
        {
-        "id": "dataset:false premise questions",
-        "type": "Dataset",
-        "label": "false premise questions"
-       },
-       {
-        "id": "method:mitigation technique for hallucinations",
+        "id": "method:simple distillation from O1's API",
         "type": "Method",
-        "label": "mitigation technique for hallucinations"
+        "label": "simple distillation from O1's API"
        },
        {
-        "id": "dataset:article generation task",
+        "id": "dataset:AIME",
         "type": "Dataset",
-        "label": "article generation task"
+        "label": "AIME"
        },
        {
-        "id": "dataset:multi-hop questions",
+        "id": "dataset:PubMed Central",
         "type": "Dataset",
-        "label": "multi-hop questions"
+        "label": "PubMed Central"
        },
        {
-        "id": "method:Self-RAG",
+        "id": "dataset:bioRxiv",
+        "type": "Dataset",
+        "label": "bioRxiv"
+       },
+       {
+        "id": "dataset:arXiv",
+        "type": "Dataset",
+        "label": "arXiv"
+       },
+       {
+        "id": "dataset:SSRN",
+        "type": "Dataset",
+        "label": "SSRN"
+       },
+       {
+        "id": "dataset:MMLU",
+        "type": "Dataset",
+        "label": "MMLU"
+       },
+       {
+        "id": "dataset:Natural Questions",
+        "type": "Dataset",
+        "label": "Natural Questions"
+       },
+       {
+        "id": "method:formal world framework",
         "type": "Method",
-        "label": "Self-RAG"
+        "label": "formal world framework"
+       },
+       {
+        "id": "dataset:Open AI\u2019s Whisper",
+        "type": "Dataset",
+        "label": "Open AI\u2019s Whisper"
+       },
+       {
+        "id": "method:metadata extraction",
+        "type": "Method",
+        "label": "metadata extraction"
+       },
+       {
+        "id": "method:CiteAudit",
+        "type": "Method",
+        "label": "CiteAudit"
+       },
+       {
+        "id": "method:memory lookup",
+        "type": "Method",
+        "label": "memory lookup"
+       },
+       {
+        "id": "method:multi-agent verification pipeline",
+        "type": "Method",
+        "label": "multi-agent verification pipeline"
+       },
+       {
+        "id": "dataset:CiteAudit",
+        "type": "Dataset",
+        "label": "CiteAudit"
+       },
+       {
+        "id": "method:web-based retrieval",
+        "type": "Method",
+        "label": "web-based retrieval"
+       },
+       {
+        "id": "method:final judgment",
+        "type": "Method",
+        "label": "final judgment"
        }
       ],
       "links": [
        {
-        "source": "paper:2307.03987",
-        "target": "method:detection technique based on logit output values",
+        "source": "paper:2411.16489",
+        "target": "method:SFT",
         "type": "PROPOSES"
        },
        {
-        "source": "paper:2307.03987",
-        "target": "dataset:false premise questions",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2307.03987",
-        "target": "method:mitigation technique for hallucinations",
+        "source": "paper:2411.16489",
+        "target": "method:simple distillation from O1's API",
         "type": "PROPOSES"
        },
        {
-        "source": "paper:2307.03987",
-        "target": "dataset:article generation task",
+        "source": "paper:2411.16489",
+        "target": "dataset:AIME",
         "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:2307.03987",
-        "target": "dataset:multi-hop questions",
+        "source": "paper:2605.07723",
+        "target": "dataset:PubMed Central",
         "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:2310.11511",
-        "target": "method:Self-RAG",
+        "source": "paper:2605.07723",
+        "target": "dataset:bioRxiv",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2605.07723",
+        "target": "dataset:arXiv",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2605.07723",
+        "target": "dataset:SSRN",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2302.04023",
+        "target": "dataset:MMLU",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2302.04023",
+        "target": "dataset:Natural Questions",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2401.11817",
+        "target": "method:formal world framework",
         "type": "PROPOSES"
        },
        {
-        "source": "paper:2401.01313",
-        "target": "paper:2307.03987",
+        "source": "paper:2402.08021",
+        "target": "dataset:Open AI\u2019s Whisper",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2602.23452",
+        "target": "method:metadata extraction",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2602.23452",
+        "target": "method:CiteAudit",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2602.23452",
+        "target": "method:memory lookup",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2602.23452",
+        "target": "method:multi-agent verification pipeline",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2602.23452",
+        "target": "dataset:CiteAudit",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2602.23452",
+        "target": "method:web-based retrieval",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2602.23452",
+        "target": "method:final judgment",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2401.01301",
+        "target": "paper:2401.11817",
         "type": "CITES"
        },
        {
-        "source": "paper:2312.10997",
-        "target": "paper:2310.11511",
+        "source": "paper:2602.23452",
+        "target": "paper:2401.01313",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2401.01301",
+        "target": "paper:2401.01313",
         "type": "CITES"
        }
       ]
@@ -2145,7 +2910,7 @@
      "event": "step",
      "data": {
       "node": "search",
-      "message": "Searched 'HyDE zero-shot dense retrieval improvement': 6 papers"
+      "message": "Searched 'HyDE zero-shot dense retrieval improvement': 16 papers"
      }
     },
     {
@@ -2172,7 +2937,7 @@
     {
      "event": "answer",
      "data": {
-      "text": "HyDE improves zero-shot dense retrieval by introducing a two-step process: first, it uses a language model to generate a hypothetical document (a \"fake\" document) that follows the query's instruction, capturing relevance patterns without needing labeled data. This hypothetical document is then encoded by an unsupervised contrastive encoder (e.g., Contriever), which learns to match query and document representations based on the generated document's structure and content. Although the document is hallucinated, it effectively simulates relevance, enabling zero-shot retrieval without requiring any labeled relevance data. This approach bypasses the need for relevance labels, which are typically required in supervised retrieval, thus enabling effective zero-shot dense retrieval [2212.10496].\n\nThis method leverages the instruction-following capabilities of large language models to generate plausible, contextually relevant content, which the encoder then uses to learn semantic similarity. While the generated documents may contain hallucinations, the overall retrieval performance is improved because the model learns to associate queries with content that reflects plausible relevance patterns. This makes HyDE a practical solution for zero-shot dense retrieval in real-world, label-scarce settings."
+      "text": "HyDE improves zero-shot dense retrieval by introducing a hypothetical document generation step. Given a query, HyDE prompts an instruction-following language model (e.g., InstructGPT) to generate a hypothetical document that captures relevance patterns, even though it is \"fake\" and may contain hallucinations [2212.10496]. This hypothetical document is then encoded by an unsupervised contrastive encoder (e.g., Contriever), which learns to represent relevance without requiring labeled data. By using the language model\u2019s ability to generate plausible, contextually relevant content, HyDE effectively simulates relevance signals in a zero-shot setting, enabling the dense retriever to produce meaningful results without any labeled training data. This approach bypasses the need for relevance labels, making it suitable for fully zero-shot scenarios. The method leverages the language model\u2019s instruction-following capabilities to bridge the gap between query semantics and document relevance, thus enhancing retrieval performance in the absence of domain-specific supervision [2212.10496]."
      }
     },
     {
@@ -2229,7 +2994,7 @@
      "event": "step",
      "data": {
       "node": "search",
-      "message": "Searched 'agent memory recent papers': 6 papers"
+      "message": "Searched 'agent memory recent': 24 papers"
      }
     },
     {
@@ -2250,7 +3015,7 @@
      "event": "step",
      "data": {
       "node": "answer",
-      "message": "Wrote the answer with 9 verified citations"
+      "message": "Wrote the answer with 10 verified citations"
      }
     },
     {
@@ -2263,12 +3028,19 @@
     {
      "event": "answer",
      "data": {
-      "text": "The latest papers on agent memory (2024\u20132026) highlight evolving systems and evaluations beyond simple retrieval. Key works include:\n\n- [2610.07309] introduces a retrieval-admissibility verification framework to ensure memory content is policy-compliant and contextually appropriate, addressing risks of inadmissible data in long-term memory [2610.07309].  \n- [2607.13157] proposes Oracle Agent Memory as a database-native substrate for long-horizon agents, emphasizing lifecycle management, state scoping, and retrieval under latency [2607.13157].  \n- [2606.24775] critiques current evaluations of agent memory, arguing that end-to-end metrics obscure critical system-level concerns like cost and robustness under dynamic updates [2606.24775].  \n- [2605.27825] presents MRMMIA, a membership inference attack targeting chat agent memory, revealing privacy risks in stored user interactions [2605.27825].  \n- [2603.04428] enables persistent KV cache storage on edge devices, reducing redundant prefill via disk-based cache restoration [2603.04428].  \n- [2507.05257] identifies four core memory competencies\u2014accurate retrieval, test-time learning, long-range understanding, and selective forgetting\u2014lacking in current benchmarks [2507.05257].  \n- [2502.12110] proposes A-MEM, a dynamically organized memory system inspired by Zettelkasten, enabling adaptive knowledge structuring [2502.12110].  \n- [2512.13564] critiques fragmentation in agent memory research and calls for clearer taxonomies beyond long/short-term memory [2512.13564].  \n- [2408.03615] introduces a hybrid multimodal memory module for world knowledge and experience representation [2408.03615].  \n\nThese works collectively advance agent memory from retrieval mechanisms to structured, secure, and adaptive systems."
+      "text": "The latest papers on agent memory (2025\u20132026) highlight evolving research directions in memory design, evaluation, and security. Key works include:\n\n- [2611.05791] applies FlyHash\u2014a biological hashing mechanism\u2014to LLM agent memory, improving retrieval efficiency and neighbor preservation [2611.05791].  \n- [2610.07309] introduces a retrieval-admissibility framework to detect inadmissible memory access, ensuring compliance with policy and lifecycle constraints [2610.07309].  \n- [2607.13157] proposes Oracle Agent Memory as a database-native substrate for long-horizon agents, emphasizing lifecycle governance and state retention [2607.13157].  \n- [2606.24775] critiques current evaluation practices, calling for system-level analysis of memory costs, architecture, and robustness [2606.24775].  \n- [2605.27825] presents MRMMIA, a membership inference attack targeting chat agent memory, revealing privacy risks [2605.27825].  \n- [2605.18421] introduces EvoMemBench, a self-evolving benchmark assessing memory across scope and content dimensions [2605.18421].  \n- [2505.16067] empirically shows LLM agents exhibit experience-following behavior via memory addition/deletion [2505.16067].  \n- [2503.03704] proposes MINJA, a memory injection attack via query-only interactions [2503.03704].  \n- [2502.12110] introduces A-MEM, an agentic memory system using Zettelkasten principles for dynamic knowledge organization [2502.12110].  \n- [2603.18743] develops Memento-Skills, an agent that designs and improves other agents using structured, evolving memory [2603.18743].  \n\nThese works collectively advance agent memory from simple retrieval to dynamic, secure, and self-evolving systems."
      }
     },
     {
      "event": "citations",
      "data": [
+      {
+       "arxiv_id": "2611.05791",
+       "title": "FlyHash for LLM Agent Memory: An Empirical Validation and a New Application",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2611.05791",
+       "source": "live"
+      },
       {
        "arxiv_id": "2610.07309",
        "title": "The Right Memory in the Wrong Context: Verifying Retrieval Admissibility in Long-Term Agent Memory",
@@ -2298,17 +3070,24 @@
        "source": "live"
       },
       {
-       "arxiv_id": "2603.04428",
-       "title": "Agent Memory Below the Prompt: Persistent Q4 KV Cache for Multi-Agent LLM Inference on Edge Devices",
+       "arxiv_id": "2605.18421",
+       "title": "EvoMemBench: Benchmarking Agent Memory from a Self-Evolving Perspective",
        "year": 2026,
-       "abs_url": "https://arxiv.org/abs/2603.04428",
-       "source": "live"
+       "abs_url": "https://arxiv.org/abs/2605.18421",
+       "source": "search"
       },
       {
-       "arxiv_id": "2507.05257",
-       "title": "Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions",
+       "arxiv_id": "2505.16067",
+       "title": "How Memory Management Impacts LLM Agents: An Empirical Study of Experience-Following Behavior",
        "year": 2025,
-       "abs_url": "https://arxiv.org/abs/2507.05257",
+       "abs_url": "https://arxiv.org/abs/2505.16067",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "2503.03704",
+       "title": "Memory Injection Attacks on LLM Agents via Query-Only Interaction",
+       "year": 2025,
+       "abs_url": "https://arxiv.org/abs/2503.03704",
        "source": "search"
       },
       {
@@ -2319,17 +3098,10 @@
        "source": "search"
       },
       {
-       "arxiv_id": "2512.13564",
-       "title": "Memory in the Age of AI Agents",
-       "year": 2025,
-       "abs_url": "https://arxiv.org/abs/2512.13564",
-       "source": "search"
-      },
-      {
-       "arxiv_id": "2408.03615",
-       "title": "Optimus-1: Hybrid Multimodal Memory Empowered Agents Excel in Long-Horizon Tasks",
-       "year": 2024,
-       "abs_url": "https://arxiv.org/abs/2408.03615",
+       "arxiv_id": "2603.18743",
+       "title": "Memento-Skills: Let Agents Design Agents",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2603.18743",
        "source": "search"
       }
      ]
@@ -2339,10 +3111,24 @@
      "data": {
       "nodes": [
        {
-        "id": "paper:2507.05257",
+        "id": "paper:2605.18421",
         "type": "Paper",
-        "label": "Evaluating Memory in LLM Agents via Incremental Multi-Turn Interactions",
-        "arxiv_id": "2507.05257",
+        "label": "EvoMemBench: Benchmarking Agent Memory from a Self-Evolving Perspective",
+        "arxiv_id": "2605.18421",
+        "year": 2026
+       },
+       {
+        "id": "paper:2505.16067",
+        "type": "Paper",
+        "label": "How Memory Management Impacts LLM Agents: An Empirical Study of Experience-Following Behavior",
+        "arxiv_id": "2505.16067",
+        "year": 2025
+       },
+       {
+        "id": "paper:2503.03704",
+        "type": "Paper",
+        "label": "Memory Injection Attacks on LLM Agents via Query-Only Interaction",
+        "arxiv_id": "2503.03704",
         "year": 2025
        },
        {
@@ -2353,43 +3139,51 @@
         "year": 2025
        },
        {
-        "id": "paper:2512.13564",
+        "id": "paper:2603.18743",
         "type": "Paper",
-        "label": "Memory in the Age of AI Agents",
-        "arxiv_id": "2512.13564",
-        "year": 2025
+        "label": "Memento-Skills: Let Agents Design Agents",
+        "arxiv_id": "2603.18743",
+        "year": 2026
        },
        {
-        "id": "paper:2408.03615",
-        "type": "Paper",
-        "label": "Optimus-1: Hybrid Multimodal Memory Empowered Agents Excel in Long-Horizon Tasks",
-        "arxiv_id": "2408.03615",
-        "year": 2024
-       },
-       {
-        "id": "method:MemoryAgentBench",
+        "id": "method:regulating experience quality within the memory bank",
         "type": "Method",
-        "label": "MemoryAgentBench"
+        "label": "regulating experience quality within the memory bank"
        },
        {
-        "id": "dataset:MemoryAgentBench",
+        "id": "method:stateful prompts",
+        "type": "Method",
+        "label": "stateful prompts"
+       },
+       {
+        "id": "dataset:Humanity's Last Exam",
         "type": "Dataset",
-        "label": "MemoryAgentBench"
+        "label": "Humanity's Last Exam"
        },
        {
-        "id": "method:memory evolution",
+        "id": "method:SkillRouter",
         "type": "Method",
-        "label": "memory evolution"
+        "label": "SkillRouter"
        },
        {
-        "id": "method:Zettelkasten-inspired memory organization",
+        "id": "method:Read--Write Reflective Learning",
         "type": "Method",
-        "label": "Zettelkasten-inspired memory organization"
+        "label": "Read--Write Reflective Learning"
        },
        {
-        "id": "method:dynamic indexing and linking",
+        "id": "method:continual learning via externalised skills",
         "type": "Method",
-        "label": "dynamic indexing and linking"
+        "label": "continual learning via externalised skills"
+       },
+       {
+        "id": "method:Memento-Skills",
+        "type": "Method",
+        "label": "Memento-Skills"
+       },
+       {
+        "id": "dataset:General AI Assistants",
+        "type": "Dataset",
+        "label": "General AI Assistants"
        },
        {
         "id": "method:agentic memory system",
@@ -2397,75 +3191,85 @@
         "label": "agentic memory system"
        },
        {
-        "id": "method:memory automation",
+        "id": "method:memory evolution",
         "type": "Method",
-        "label": "memory automation"
+        "label": "memory evolution"
        },
        {
-        "id": "method:multi-agent memory",
+        "id": "method:dynamic indexing and linking",
         "type": "Method",
-        "label": "multi-agent memory"
+        "label": "dynamic indexing and linking"
        },
        {
-        "id": "method:reinforcement learning integration",
+        "id": "method:Zettelkasten-inspired memory organization",
         "type": "Method",
-        "label": "reinforcement learning integration"
+        "label": "Zettelkasten-inspired memory organization"
        },
        {
-        "id": "method:multimodal memory",
-        "type": "Method",
-        "label": "multimodal memory"
-       },
-       {
-        "id": "method:Hierarchical Directed Knowledge Graph",
-        "type": "Method",
-        "label": "Hierarchical Directed Knowledge Graph"
-       },
-       {
-        "id": "method:Knowledge-guided Planner",
-        "type": "Method",
-        "label": "Knowledge-guided Planner"
-       },
-       {
-        "id": "method:Abstracted Multimodal Experience Pool",
-        "type": "Method",
-        "label": "Abstracted Multimodal Experience Pool"
-       },
-       {
-        "id": "method:Hybrid Multimodal Memory module",
-        "type": "Method",
-        "label": "Hybrid Multimodal Memory module"
-       },
-       {
-        "id": "method:Experience-Driven Reflector",
-        "type": "Method",
-        "label": "Experience-Driven Reflector"
-       },
-       {
-        "id": "dataset:Minecraft",
+        "id": "dataset:EvoMemBench",
         "type": "Dataset",
-        "label": "Minecraft"
+        "label": "EvoMemBench"
+       },
+       {
+        "id": "method:EvoMemBench",
+        "type": "Method",
+        "label": "EvoMemBench"
+       },
+       {
+        "id": "method:MINJA",
+        "type": "Method",
+        "label": "MINJA"
        }
       ],
       "links": [
        {
-        "source": "paper:2507.05257",
-        "target": "method:MemoryAgentBench",
+        "source": "paper:2505.16067",
+        "target": "method:regulating experience quality within the memory bank",
         "type": "PROPOSES"
        },
        {
-        "source": "paper:2507.05257",
-        "target": "dataset:MemoryAgentBench",
+        "source": "paper:2603.18743",
+        "target": "method:stateful prompts",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2603.18743",
+        "target": "dataset:Humanity's Last Exam",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2603.18743",
+        "target": "method:SkillRouter",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2603.18743",
+        "target": "method:Read--Write Reflective Learning",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2603.18743",
+        "target": "method:continual learning via externalised skills",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2603.18743",
+        "target": "method:Memento-Skills",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2603.18743",
+        "target": "dataset:General AI Assistants",
         "type": "EVALUATES_ON"
        },
        {
         "source": "paper:2502.12110",
-        "target": "method:memory evolution",
+        "target": "method:agentic memory system",
         "type": "PROPOSES"
        },
        {
         "source": "paper:2502.12110",
-        "target": "method:Zettelkasten-inspired memory organization",
+        "target": "method:memory evolution",
         "type": "PROPOSES"
        },
        {
@@ -2475,61 +3279,31 @@
        },
        {
         "source": "paper:2502.12110",
-        "target": "method:agentic memory system",
+        "target": "method:Zettelkasten-inspired memory organization",
         "type": "PROPOSES"
        },
        {
-        "source": "paper:2512.13564",
-        "target": "method:memory automation",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2512.13564",
-        "target": "method:multi-agent memory",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2512.13564",
-        "target": "method:reinforcement learning integration",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2512.13564",
-        "target": "method:multimodal memory",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2408.03615",
-        "target": "method:Hierarchical Directed Knowledge Graph",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2408.03615",
-        "target": "method:Knowledge-guided Planner",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2408.03615",
-        "target": "method:Abstracted Multimodal Experience Pool",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2408.03615",
-        "target": "method:Hybrid Multimodal Memory module",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2408.03615",
-        "target": "method:Experience-Driven Reflector",
-        "type": "PROPOSES"
-       },
-       {
-        "source": "paper:2408.03615",
-        "target": "dataset:Minecraft",
+        "source": "paper:2605.18421",
+        "target": "dataset:EvoMemBench",
         "type": "EVALUATES_ON"
        },
        {
-        "source": "paper:2507.05257",
+        "source": "paper:2605.18421",
+        "target": "method:EvoMemBench",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2503.03704",
+        "target": "method:MINJA",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2605.18421",
+        "target": "paper:2502.12110",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2505.16067",
         "target": "paper:2502.12110",
         "type": "CITES"
        }
@@ -2559,7 +3333,7 @@
      "event": "step",
      "data": {
       "node": "search",
-      "message": "Searched 'ReAct Reflexion comparison': 6 papers"
+      "message": "Searched 'ReAct Reflexion comparison': 16 papers"
      }
     },
     {
@@ -2586,7 +3360,7 @@
     {
      "event": "answer",
      "data": {
-      "text": "- **ReAct** (2022) [2210.03629] synergizes reasoning and acting by interleaving chain-of-thought reasoning with action generation, enabling models to query external sources or environments. It is evaluated on tasks like question answering, fact verification, and interactive decision making (HotpotQA, Fever, WebShop, ALFWorld).  \n- **Reflexion** (2023) [2303.11366] improves upon GPT-4 by using verbal reinforcement learning\u2014agents reflect on feedback and store it in episodic memory to improve future decisions. It focuses on coding and sequential reasoning, evaluated on HumanEval.\n\n| Method | Paper | Core idea | Evaluated on | Notes |\n|--------|-------|----------|-------------|-------|\n| ReAct | [2210.03629] | Interleaves reasoning and acting; uses reasoning traces to update action plans and interact with environments | HotpotQA, Fever, WebShop, ALFWorld | Tasks: QA, fact verification, interactive decision making |\n| Reflexion | [2303.11366] | Uses verbal reflection and episodic memory to learn from feedback without model fine-tuning | HumanEval | Tasks: coding, sequential decision-making, language reasoning |\n\n*Note: Both methods focus on agent-like behavior but differ in learning mechanism (ReAct: reasoning-acting loop; Reflexion: verbal reinforcement via reflection).*"
+      "text": "**Comparison of ReAct and Reflexion**\n\n- **ReAct** [2210.03629] synergizes reasoning and acting in LLMs via interleaved reasoning traces and actions, improving fact verification and interactive decision-making on tasks like Fever, WebShop, and ALFWorld. It builds on chain-of-thought reasoning and is used in downstream agent systems.\n\n- **Reflexion** [2303.11366] uses verbal reinforcement learning to enable language agents to learn from trial-and-error via linguistic feedback, focusing on language reasoning and coding tasks in HumanEval. It does not rely on model fine-tuning, making it efficient for sequential decision-making.\n\n| Method | Paper | Core idea | Evaluated on | Notes |\n|--------|-------|----------|-------------|-------|\n| ReAct | [2210.03629] | Interleaved reasoning and acting; reasoning traces guide action plans | Fever, WebShop, ALFWorld, HotpotQA | Tasks: fact verification, QA, interactive decision making; improves chain-of-thought reasoning |\n| Reflexion | [2303.11366] | Verbal reinforcement learning via reflective text in episodic memory | HumanEval | Tasks: language reasoning, coding; learns from feedback without model fine-tuning |\n\n*Note: No direct comparison of performance or design in the sources; evaluation domains differ significantly.*"
      }
     },
     {
@@ -2632,11 +3406,6 @@
         "label": "ReAct"
        },
        {
-        "id": "dataset:HotpotQA",
-        "type": "Dataset",
-        "label": "HotpotQA"
-       },
-       {
         "id": "dataset:Fever",
         "type": "Dataset",
         "label": "Fever"
@@ -2650,6 +3419,11 @@
         "id": "dataset:ALFWorld",
         "type": "Dataset",
         "label": "ALFWorld"
+       },
+       {
+        "id": "dataset:HotpotQA",
+        "type": "Dataset",
+        "label": "HotpotQA"
        },
        {
         "id": "method:Reflexion",
@@ -2670,11 +3444,6 @@
        },
        {
         "source": "paper:2210.03629",
-        "target": "dataset:HotpotQA",
-        "type": "EVALUATES_ON"
-       },
-       {
-        "source": "paper:2210.03629",
         "target": "dataset:Fever",
         "type": "EVALUATES_ON"
        },
@@ -2686,6 +3455,11 @@
        {
         "source": "paper:2210.03629",
         "target": "dataset:ALFWorld",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2210.03629",
+        "target": "dataset:HotpotQA",
         "type": "EVALUATES_ON"
        },
        {
@@ -2749,7 +3523,7 @@
     {
      "event": "answer",
      "data": {
-      "text": "The authors who wrote the most papers in the corpus are Zhi-Yuan Liu, Ji-Rong Wen, and Jimmy Lin, each with 10 papers.  \n\nNo other author has a paper count exceeding 9.  \n\nThe remaining authors have fewer papers, with the next highest counts being 9 (W. Zhao) and 8 (Yang Liu).  \n\nThus, Zhi-Yuan Liu, Ji-Rong Wen, and Jimmy Lin are tied for the highest paper count."
+      "text": "The authors who wrote the most papers in the corpus are:\n\n- S. Levine with 97 papers.\n- Y. Chen with 92 papers.\n- X. Chen with 73 papers.\n- H. Chen with 72 papers.\n- D. Brown with 71 papers.\n\nThese authors have the highest paper counts in the dataset. The data shows that S. Levine and Y. Chen are the top two contributors, each with over 90 papers. The remaining authors have fewer publications, with the next highest counts at 60 papers or less.\n\nNote: All entries in the knowledge graph are attributed to the same arXiv ID, which may indicate a single corpus or dataset. However, no individual paper or author is cited with a different arXiv ID, so the source of the data is not fully specified. This limits the ability to verify or cross-reference the counts independently."
      }
     },
     {
@@ -2761,6 +3535,826 @@
      "data": {
       "nodes": [],
       "links": []
+     }
+    }
+   ]
+  },
+  {
+   "question": "How do physics-informed neural networks work?",
+   "events": [
+    {
+     "event": "step",
+     "data": {
+      "node": "plan",
+      "message": "Planned: lookup question; entities: physics-informed neural networks"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "search",
+      "message": "Searched 'physics-informed neural networks how work': 20 papers"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "check",
+      "message": "Evidence looks sufficient"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "answer",
+      "message": "Wrote the answer with 9 verified citations"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "subgraph",
+      "message": "Built a graph of 24 nodes and 21 links"
+     }
+    },
+    {
+     "event": "answer",
+     "data": {
+      "text": "Physics-Informed Neural Networks (PINNs) are neural networks trained to solve partial differential equations (PDEs) by embedding physical laws directly into the loss function. They minimize both the discrepancy between predicted outputs and observed data and the residual of the governing PDEs, ensuring solutions satisfy physical constraints [1711.10561]. PINNs operate as data-efficient universal function approximators that naturally encode known physical laws, such as conservation laws or symmetries, during training [2001.04536].\n\nPINNs are used to solve PDEs, fractional equations, integral-differential equations, and stochastic PDEs, offering an alternative to traditional numerical methods like the finite element method [2201.05624] [2310.10776]. They require less training data and simpler architectures while achieving high accuracy, especially in domains like power systems and building thermal modeling [1911.03737] [2111.12066].\n\nHowever, PINNs may suffer from model misspecification\u2014incorrectly encoding physical laws\u2014leading to poor predictions in complex systems [2310.10776]. Recent advances include KKT-hPINN, which enforces hard linear constraints via projection, and PPINN, which decomposes long-time PDE problems into short-time subproblems to reduce computational cost [2402.07251] [1909.10145].\n\nA comprehensive numerical analysis of PINNs has been provided, covering approximation, generalization, and training errors [2402.10926]."
+     }
+    },
+    {
+     "event": "citations",
+     "data": [
+      {
+       "arxiv_id": "1711.10561",
+       "title": "Physics Informed Deep Learning (Part I): Data-driven Solutions of Nonlinear Partial Differential Equations",
+       "year": 2017,
+       "abs_url": "https://arxiv.org/abs/1711.10561",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "2001.04536",
+       "title": "Understanding and mitigating gradient pathologies in physics-informed neural networks",
+       "year": 2020,
+       "abs_url": "https://arxiv.org/abs/2001.04536",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "2201.05624",
+       "title": "Scientific Machine Learning Through Physics\u2013Informed Neural Networks: Where we are and What\u2019s Next",
+       "year": 2022,
+       "abs_url": "https://arxiv.org/abs/2201.05624",
+       "source": "entity"
+      },
+      {
+       "arxiv_id": "2310.10776",
+       "title": "Correcting model misspecification in physics-informed neural networks (PINNs)",
+       "year": 2023,
+       "abs_url": "https://arxiv.org/abs/2310.10776",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "1911.03737",
+       "title": "Physics-Informed Neural Networks for Power Systems",
+       "year": 2019,
+       "abs_url": "https://arxiv.org/abs/1911.03737",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "2111.12066",
+       "title": "Physics Informed Neural Networks for Control Oriented Thermal Modeling of Buildings",
+       "year": 2021,
+       "abs_url": "https://arxiv.org/abs/2111.12066",
+       "source": "entity"
+      },
+      {
+       "arxiv_id": "2402.07251",
+       "title": "Physics-Informed Neural Networks with Hard Linear Equality Constraints",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2402.07251",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "1909.10145",
+       "title": "PPINN: Parareal Physics-Informed Neural Network for time-dependent PDEs",
+       "year": 2019,
+       "abs_url": "https://arxiv.org/abs/1909.10145",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "2402.10926",
+       "title": "Numerical analysis of physics-informed neural networks and related models in physics-informed machine learning",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2402.10926",
+       "source": "search"
+      }
+     ]
+    },
+    {
+     "event": "subgraph",
+     "data": {
+      "nodes": [
+       {
+        "id": "paper:1711.10561",
+        "type": "Paper",
+        "label": "Physics Informed Deep Learning (Part I): Data-driven Solutions of Nonlinear Partial Differential Equations",
+        "arxiv_id": "1711.10561",
+        "year": 2017
+       },
+       {
+        "id": "paper:2001.04536",
+        "type": "Paper",
+        "label": "Understanding and mitigating gradient pathologies in physics-informed neural networks",
+        "arxiv_id": "2001.04536",
+        "year": 2020
+       },
+       {
+        "id": "paper:2201.05624",
+        "type": "Paper",
+        "label": "Scientific Machine Learning Through Physics\u2013Informed Neural Networks: Where we are and What\u2019s Next",
+        "arxiv_id": "2201.05624",
+        "year": 2022
+       },
+       {
+        "id": "paper:2310.10776",
+        "type": "Paper",
+        "label": "Correcting model misspecification in physics-informed neural networks (PINNs)",
+        "arxiv_id": "2310.10776",
+        "year": 2023
+       },
+       {
+        "id": "paper:1911.03737",
+        "type": "Paper",
+        "label": "Physics-Informed Neural Networks for Power Systems",
+        "arxiv_id": "1911.03737",
+        "year": 2019
+       },
+       {
+        "id": "paper:2111.12066",
+        "type": "Paper",
+        "label": "Physics Informed Neural Networks for Control Oriented Thermal Modeling of Buildings",
+        "arxiv_id": "2111.12066",
+        "year": 2021
+       },
+       {
+        "id": "paper:2402.07251",
+        "type": "Paper",
+        "label": "Physics-Informed Neural Networks with Hard Linear Equality Constraints",
+        "arxiv_id": "2402.07251",
+        "year": 2024
+       },
+       {
+        "id": "paper:1909.10145",
+        "type": "Paper",
+        "label": "PPINN: Parareal Physics-Informed Neural Network for time-dependent PDEs",
+        "arxiv_id": "1909.10145",
+        "year": 2019
+       },
+       {
+        "id": "paper:2402.10926",
+        "type": "Paper",
+        "label": "Numerical analysis of physics-informed neural networks and related models in physics-informed machine learning",
+        "arxiv_id": "2402.10926",
+        "year": 2024
+       },
+       {
+        "id": "dataset:Aspen models of an extractive distillation subsystem",
+        "type": "Dataset",
+        "label": "Aspen models of an extractive distillation subsystem"
+       },
+       {
+        "id": "dataset:Aspen models of a chemical plant",
+        "type": "Dataset",
+        "label": "Aspen models of a chemical plant"
+       },
+       {
+        "id": "method:KKT-hPINN",
+        "type": "Method",
+        "label": "KKT-hPINN"
+       },
+       {
+        "id": "dataset:simulated data",
+        "type": "Dataset",
+        "label": "simulated data"
+       },
+       {
+        "id": "dataset:real-world data",
+        "type": "Dataset",
+        "label": "real-world data"
+       },
+       {
+        "id": "method:B-PINNs",
+        "type": "Method",
+        "label": "B-PINNs"
+       },
+       {
+        "id": "method:ensemble PINNs",
+        "type": "Method",
+        "label": "ensemble PINNs"
+       },
+       {
+        "id": "method:PINNs",
+        "type": "Method",
+        "label": "PINNs"
+       },
+       {
+        "id": "method:unified framework for error analysis of PINNs",
+        "type": "Method",
+        "label": "unified framework for error analysis of PINNs"
+       },
+       {
+        "id": "method:novel neural network architecture",
+        "type": "Method",
+        "label": "novel neural network architecture"
+       },
+       {
+        "id": "method:learning rate annealing algorithm",
+        "type": "Method",
+        "label": "learning rate annealing algorithm"
+       },
+       {
+        "id": "method:PPINN",
+        "type": "Method",
+        "label": "PPINN"
+       },
+       {
+        "id": "method:CPINN",
+        "type": "Method",
+        "label": "CPINN"
+       },
+       {
+        "id": "method:variational hp-VPINN",
+        "type": "Method",
+        "label": "variational hp-VPINN"
+       },
+       {
+        "id": "method:PCNN",
+        "type": "Method",
+        "label": "PCNN"
+       }
+      ],
+      "links": [
+       {
+        "source": "paper:2402.07251",
+        "target": "dataset:Aspen models of an extractive distillation subsystem",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2402.07251",
+        "target": "dataset:Aspen models of a chemical plant",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2402.07251",
+        "target": "method:KKT-hPINN",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2111.12066",
+        "target": "dataset:simulated data",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2111.12066",
+        "target": "dataset:real-world data",
+        "type": "EVALUATES_ON"
+       },
+       {
+        "source": "paper:2310.10776",
+        "target": "method:B-PINNs",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2310.10776",
+        "target": "method:ensemble PINNs",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:1711.10561",
+        "target": "method:PINNs",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2402.10926",
+        "target": "method:unified framework for error analysis of PINNs",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2001.04536",
+        "target": "method:novel neural network architecture",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2001.04536",
+        "target": "method:learning rate annealing algorithm",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:1909.10145",
+        "target": "method:PPINN",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:1911.03737",
+        "target": "method:PINNs",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2201.05624",
+        "target": "method:CPINN",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2201.05624",
+        "target": "method:variational hp-VPINN",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2201.05624",
+        "target": "method:PCNN",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2201.05624",
+        "target": "paper:1711.10561",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2201.05624",
+        "target": "paper:1909.10145",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2201.05624",
+        "target": "paper:1911.03737",
+        "type": "CITES"
+       },
+       {
+        "source": "method:KKT-hPINN",
+        "target": "method:PINNs",
+        "type": "IMPROVES_ON"
+       },
+       {
+        "source": "method:B-PINNs",
+        "target": "method:PINNs",
+        "type": "IMPROVES_ON"
+       }
+      ]
+     }
+    }
+   ]
+  },
+  {
+   "question": "What is trending in quantum computing?",
+   "events": [
+    {
+     "event": "step",
+     "data": {
+      "node": "plan",
+      "message": "Planned: trend question"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "graph",
+      "message": "Knowledge graph: computed trends for Quantum computing (13 facts)"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "search",
+      "message": "Searched 'quantum computing trending': 12 papers"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "live",
+      "message": "Live arXiv search: 5 recent papers"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "check",
+      "message": "Evidence looks sufficient"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "answer",
+      "message": "Wrote the answer with 10 verified citations"
+     }
+    },
+    {
+     "event": "step",
+     "data": {
+      "node": "subgraph",
+      "message": "Built a graph of 33 nodes and 25 links"
+     }
+    },
+    {
+     "event": "answer",
+     "data": {
+      "text": "In quantum computing, quantum error correction (QEC) is trending, with its appearance rising from 9.5% to 13.6% of papers in 2024\u20132026 compared to 2021\u20132023. Lattice surgery and stabilizer codes, previously absent, now appear in 3.9% and 2.9% of recent papers, respectively, indicating growing interest in fault-tolerant architectures. Surface code usage has declined from 9.5% to 4.9%, suggesting a shift toward more efficient or alternative QEC methods. Breakout papers highlight practical implementations: surface code memories with below-threshold performance [2408.13687], fault-tolerant neutral-atom architectures [2506.20661], and manufacturable photonic platforms [2404.17570]. Scalable atomic qubit systems (6,100 qubits) [2403.12021] and distributed quantum computing via optical networks [2407.00835] are also gaining traction. Additionally, Shor\u2019s algorithm feasibility with 10,000 atomic qubits [2603.28627] signals progress toward practical applications. Variational quantum computing faces challenges from barren plateaus [2405.00781], while software tools like Qiskit [2405.08810] remain central to development. Benchmarking and application co-design are emphasized as critical for progress [2407.08828, 2511.09124].  \n [2408.13687] [2506.20661] [2404.17570] [2403.12021] [2407.00835] [2603.28627] [2405.00781] [2511.09124]"
+     }
+    },
+    {
+     "event": "citations",
+     "data": [
+      {
+       "arxiv_id": "2408.13687",
+       "title": "Quantum error correction below the surface code threshold",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2408.13687",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2506.20661",
+       "title": "A fault-tolerant neutral-atom architecture for universal quantum computation",
+       "year": 2025,
+       "abs_url": "https://arxiv.org/abs/2506.20661",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2404.17570",
+       "title": "A manufacturable platform for photonic quantum computing",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2404.17570",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2403.12021",
+       "title": "A tweezer array with 6,100 highly coherent atomic qubits",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2403.12021",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2407.00835",
+       "title": "Distributed quantum computing across an optical network link",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2407.00835",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2603.28627",
+       "title": "Shor's algorithm is possible with as few as 10,000 reconfigurable atomic qubits",
+       "year": 2026,
+       "abs_url": "https://arxiv.org/abs/2603.28627",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2405.00781",
+       "title": "Barren plateaus in variational quantum computing",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2405.00781",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2405.08810",
+       "title": "Quantum computing with Qiskit",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2405.08810",
+       "source": "graph"
+      },
+      {
+       "arxiv_id": "2407.08828",
+       "title": "Benchmarking quantum computers",
+       "year": 2024,
+       "abs_url": "https://arxiv.org/abs/2407.08828",
+       "source": "search"
+      },
+      {
+       "arxiv_id": "2511.09124",
+       "title": "The Grand Challenge of Quantum Applications",
+       "year": 2025,
+       "abs_url": "https://arxiv.org/abs/2511.09124",
+       "source": "search"
+      }
+     ]
+    },
+    {
+     "event": "subgraph",
+     "data": {
+      "nodes": [
+       {
+        "id": "paper:2408.13687",
+        "type": "Paper",
+        "label": "Quantum error correction below the surface code threshold",
+        "arxiv_id": "2408.13687",
+        "year": 2024
+       },
+       {
+        "id": "paper:2506.20661",
+        "type": "Paper",
+        "label": "A fault-tolerant neutral-atom architecture for universal quantum computation",
+        "arxiv_id": "2506.20661",
+        "year": 2025
+       },
+       {
+        "id": "paper:2404.17570",
+        "type": "Paper",
+        "label": "A manufacturable platform for photonic quantum computing",
+        "arxiv_id": "2404.17570",
+        "year": 2024
+       },
+       {
+        "id": "paper:2403.12021",
+        "type": "Paper",
+        "label": "A tweezer array with 6,100 highly coherent atomic qubits",
+        "arxiv_id": "2403.12021",
+        "year": 2024
+       },
+       {
+        "id": "paper:2407.00835",
+        "type": "Paper",
+        "label": "Distributed quantum computing across an optical network link",
+        "arxiv_id": "2407.00835",
+        "year": 2024
+       },
+       {
+        "id": "paper:2603.28627",
+        "type": "Paper",
+        "label": "Shor's algorithm is possible with as few as 10,000 reconfigurable atomic qubits",
+        "arxiv_id": "2603.28627",
+        "year": 2026
+       },
+       {
+        "id": "paper:2405.00781",
+        "type": "Paper",
+        "label": "Barren plateaus in variational quantum computing",
+        "arxiv_id": "2405.00781",
+        "year": 2024
+       },
+       {
+        "id": "paper:2405.08810",
+        "type": "Paper",
+        "label": "Quantum computing with Qiskit",
+        "arxiv_id": "2405.08810",
+        "year": 2024
+       },
+       {
+        "id": "paper:2407.08828",
+        "type": "Paper",
+        "label": "Benchmarking quantum computers",
+        "arxiv_id": "2407.08828",
+        "year": 2024
+       },
+       {
+        "id": "paper:2511.09124",
+        "type": "Paper",
+        "label": "The Grand Challenge of Quantum Applications",
+        "arxiv_id": "2511.09124",
+        "year": 2025
+       },
+       {
+        "id": "method:pick-up/drop-off operations",
+        "type": "Method",
+        "label": "pick-up/drop-off operations"
+       },
+       {
+        "id": "method:coherence-preserving qubit transport",
+        "type": "Method",
+        "label": "coherence-preserving qubit transport"
+       },
+       {
+        "id": "method:zone-based quantum computing",
+        "type": "Method",
+        "label": "zone-based quantum computing"
+       },
+       {
+        "id": "method:five-stage framework",
+        "type": "Method",
+        "label": "five-stage framework"
+       },
+       {
+        "id": "method:fabrication-tolerant photon sources",
+        "type": "Method",
+        "label": "fabrication-tolerant photon sources"
+       },
+       {
+        "id": "method:monolithically integrated silicon-photonics-based modules",
+        "type": "Method",
+        "label": "monolithically integrated silicon-photonics-based modules"
+       },
+       {
+        "id": "method:low-loss chip-to-fibre coupling",
+        "type": "Method",
+        "label": "low-loss chip-to-fibre coupling"
+       },
+       {
+        "id": "method:low-loss silicon nitride (SiN) waveguides and components",
+        "type": "Method",
+        "label": "low-loss silicon nitride (SiN) waveguides and components"
+       },
+       {
+        "id": "method:high-efficiency photon-number-resolving detectors",
+        "type": "Method",
+        "label": "high-efficiency photon-number-resolving detectors"
+       },
+       {
+        "id": "method:Qiskit",
+        "type": "Method",
+        "label": "Qiskit"
+       },
+       {
+        "id": "method:transversal teleportation with three-dimensional [[15,1,3]] codes",
+        "type": "Method",
+        "label": "transversal teleportation with three-dimensional [[15,1,3]] codes"
+       },
+       {
+        "id": "method:machine learning decoding",
+        "type": "Method",
+        "label": "machine learning decoding"
+       },
+       {
+        "id": "method:mid-circuit qubit reuse",
+        "type": "Method",
+        "label": "mid-circuit qubit reuse"
+       },
+       {
+        "id": "method:reconfigurable arrays of neutral atoms",
+        "type": "Method",
+        "label": "reconfigurable arrays of neutral atoms"
+       },
+       {
+        "id": "method:distance-7 surface code",
+        "type": "Method",
+        "label": "distance-7 surface code"
+       },
+       {
+        "id": "method:distance-5 surface code",
+        "type": "Method",
+        "label": "distance-5 surface code"
+       },
+       {
+        "id": "method:real-time decoder",
+        "type": "Method",
+        "label": "real-time decoder"
+       },
+       {
+        "id": "method:distributed controlled-Z (CZ) gate",
+        "type": "Method",
+        "label": "distributed controlled-Z (CZ) gate"
+       },
+       {
+        "id": "method:distributed iSWAP and SWAP circuits",
+        "type": "Method",
+        "label": "distributed iSWAP and SWAP circuits"
+       },
+       {
+        "id": "method:deterministic quantum gate teleportation",
+        "type": "Method",
+        "label": "deterministic quantum gate teleportation"
+       },
+       {
+        "id": "method:circuit design",
+        "type": "Method",
+        "label": "circuit design"
+       },
+       {
+        "id": "method:high-rate quantum error-correcting codes",
+        "type": "Method",
+        "label": "high-rate quantum error-correcting codes"
+       },
+       {
+        "id": "method:efficient logical instruction sets",
+        "type": "Method",
+        "label": "efficient logical instruction sets"
+       }
+      ],
+      "links": [
+       {
+        "source": "paper:2403.12021",
+        "target": "method:pick-up/drop-off operations",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2403.12021",
+        "target": "method:coherence-preserving qubit transport",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2403.12021",
+        "target": "method:zone-based quantum computing",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2511.09124",
+        "target": "method:five-stage framework",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2404.17570",
+        "target": "method:fabrication-tolerant photon sources",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2404.17570",
+        "target": "method:monolithically integrated silicon-photonics-based modules",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2404.17570",
+        "target": "method:low-loss chip-to-fibre coupling",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2404.17570",
+        "target": "method:low-loss silicon nitride (SiN) waveguides and components",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2404.17570",
+        "target": "method:high-efficiency photon-number-resolving detectors",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2405.08810",
+        "target": "method:Qiskit",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2506.20661",
+        "target": "method:transversal teleportation with three-dimensional [[15,1,3]] codes",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2506.20661",
+        "target": "method:machine learning decoding",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2506.20661",
+        "target": "method:mid-circuit qubit reuse",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2506.20661",
+        "target": "method:reconfigurable arrays of neutral atoms",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2408.13687",
+        "target": "method:distance-7 surface code",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2408.13687",
+        "target": "method:distance-5 surface code",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2408.13687",
+        "target": "method:real-time decoder",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.00835",
+        "target": "method:distributed controlled-Z (CZ) gate",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.00835",
+        "target": "method:distributed iSWAP and SWAP circuits",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2407.00835",
+        "target": "method:deterministic quantum gate teleportation",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2603.28627",
+        "target": "method:circuit design",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2603.28627",
+        "target": "method:high-rate quantum error-correcting codes",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2603.28627",
+        "target": "method:efficient logical instruction sets",
+        "type": "PROPOSES"
+       },
+       {
+        "source": "paper:2506.20661",
+        "target": "paper:2403.12021",
+        "type": "CITES"
+       },
+       {
+        "source": "paper:2506.20661",
+        "target": "paper:2408.13687",
+        "type": "CITES"
+       }
+      ]
      }
     }
    ]

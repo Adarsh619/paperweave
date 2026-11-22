@@ -1,4 +1,4 @@
-import type { ChatEvent, Paper, Subgraph } from "./types";
+import type { ChatEvent, Paper, Subgraph, Trends, Turn } from "./types";
 
 export const API_URL = (process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8010").replace(/\/$/, "");
 
@@ -27,11 +27,16 @@ export async function streamChat(
   onEvent: (event: ChatEvent) => void,
   signal?: AbortSignal,
   onOpen?: () => void,
+  history: Turn[] = [],
 ): Promise<void> {
   const res = await fetch(`${API_URL}/api/chat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ question }),
+    // The backend accepts the last 3 turns, answers up to 6000 characters.
+    body: JSON.stringify({
+      question,
+      history: history.slice(-3).map((t) => ({ question: t.question, answer: t.answer.slice(0, 6000) })),
+    }),
     signal,
   });
   onOpen?.();
@@ -68,4 +73,6 @@ async function getJson<T>(path: string): Promise<T> {
 }
 
 export const getPaper = (id: string) => getJson<Paper>(`/api/papers/${id}`);
+export const getTrends = (field?: string) =>
+  getJson<Trends>(`/api/trends${field ? `?field=${encodeURIComponent(field)}` : ""}`);
 export const getPaperGraph = (id: string) => getJson<Subgraph>(`/api/graph/paper/${id}`);

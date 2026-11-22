@@ -1,7 +1,8 @@
 """The agent's nodes. Each takes the state and returns the fields it changes.
 
-    plan -> retrieve -> check --(thin evidence, < MAX_REWRITES)--> rewrite -> retrieve
-                              \\--(enough)--> answer -> subgraph -> END
+    plan --(off topic)--> decline -> END
+      \\--> retrieve -> check --(thin evidence, < MAX_REWRITES)--> rewrite -> retrieve
+                             \\--(enough)--> answer -> subgraph -> END
 """
 
 import re
@@ -15,7 +16,23 @@ from app.tools import arxiv_live, graph_query, vector_search
 from app.tools import cypher_templates as T
 from app.tools.cypher_guard import CypherRejected
 
-GRAPH_INTENTS = {"lineage", "compare", "dataset", "top_cited", "graph"}
+GRAPH_INTENTS = {"lineage", "compare", "dataset", "top_cited", "graph", "trend"}
+
+# Only obvious non-research requests; the planner LLM handles subtler ones.
+OFF_TOPIC = re.compile(
+    r"\b(weather|recipe|joke|stock price|horoscope|lottery"
+    r"|write (me )?(an? )?(email|essay|poem|story|cover letter)"
+    r"|fix (my|this) (code|bug)|how do i install)\b"
+)
+
+DECLINE = """PaperWeave only answers questions about research papers in its library: AI (language models, \
+RAG, agents, retrieval, vision, image generation, reinforcement learning, robotics, speech), computer \
+science, physics, and math & statistics. It can't help with general questions, coding, writing or news.
+
+Try something like:
+- What improved on RAG, and which datasets did those papers use?
+- Compare GraphRAG, RAPTOR and HippoRAG
+- What are the latest papers on agent memory?"""
 
 
 def _step(node: str, message: str) -> dict:
@@ -26,10 +43,14 @@ def heuristic_plan(question: str) -> Plan:
     """Keyword fallback if the planner LLM fails, so a question always gets an answer."""
     q = question.lower()
     year = re.search(r"\b(?:since|after|from)\s+(20\d\d)\b", q)
-    if re.search(r"\b(vs\.?|versus|compare|comparison|difference)\b", q):
+    if OFF_TOPIC.search(q):
+        intent = "off_topic"
+    elif re.search(r"\b(vs\.?|versus|compare|comparison|difference)\b", q):
         intent = "compare"
     elif re.search(r"\b(improv\w*|built on|build on|extend\w*|lineage|successor)\b", q):
         intent = "lineage"
+    elif re.search(r"\b(trend\w*|rising|growing|emerging|hot topics?)\b", q):
+        intent = "trend"
     elif re.search(r"\b(latest|newest|this (week|month|year))\b", q):
         intent = "recent"
     elif re.search(r"\b(most cited|influential|top papers)\b", q):
@@ -42,8 +63,38 @@ def heuristic_plan(question: str) -> Plan:
                 needs_live=intent == "recent")
 
 
+# Small planners call specialist physics questions off-topic. Real off-topic questions score
+# <= 0.46 against the library (MiniLM cosine), wrongly declined physics ones >= 0.56.
+LIBRARY_MATCH = 0.5
+
+
+def _library_has_match(question: str) -> bool:
+    try:
+        return vector_search.best_match(question) >= LIBRARY_MATCH
+    except Exception:  # noqa: BLE001 - no vector DB: trust the planner
+        return False
+
+
+def standalone_question(question: str, history: list[dict]) -> str:
+    """Turn a follow-up ("compare the second one with RAPTOR") into a self-contained question."""
+    transcript = "\n\n".join(f"User: {t['question']}\nAssistant: {t['answer'][:1500]}" for t in history[-3:])
+    try:
+        reply = llm.chat("router").invoke([
+            SystemMessage(prompts.CONTEXTUALIZE),
+            HumanMessage(f"Conversation so far:\n{transcript}\n\nLatest message: {question}"),
+        ])
+        return reply.content.strip().strip('"') or question
+    except Exception:  # noqa: BLE001 - fall back to the message as typed
+        return question
+
+
 def plan(state: AgentState) -> dict:
     question = state["question"]
+    steps = []
+    if state.get("history"):
+        question = standalone_question(question, state["history"])
+        if question != state["question"]:
+            steps.append(_step("plan", f"Read as a follow-up: {question!r}"))
     try:
         result = llm.structured("router", Plan).invoke(
             [SystemMessage(prompts.PLANNER), HumanMessage(question)]
@@ -51,14 +102,39 @@ def plan(state: AgentState) -> dict:
         how = "planned"
     except Exception:  # noqa: BLE001 - any provider/parse failure falls back to keywords
         result, how = heuristic_plan(question), "planned (keyword fallback)"
+    if result.min_year is not None and not 1990 <= result.min_year <= 2100:  # small planners emit junk like 2
+        result = result.model_copy(update={"min_year": None})
+    if result.intent == "off_topic" and not OFF_TOPIC.search(question.lower()) and _library_has_match(question):
+        result = result.model_copy(update={"intent": "lookup", "search_query": result.search_query or question[:200]})
+        steps.append(_step("plan", "The planner called this off-topic, but the library has closely matching papers"))
     entities = f"; entities: {', '.join(result.entities)}" if result.entities else ""
     return {
+        "question": question,
         "plan": result.model_dump(),
         "attempts": 0,
         "papers": {},
         "facts": [],
-        "steps": [_step("plan", f"{how.capitalize()}: {result.intent} question{entities}")],
+        "steps": steps + [_step("plan", f"{how.capitalize()}: {result.intent} question{entities}")],
     }
+
+
+def route_after_plan(state: AgentState) -> str:
+    return "decline" if state["plan"]["intent"] == "off_topic" else "retrieve"
+
+
+def decline(state: AgentState) -> dict:
+    """Off-topic questions get a fixed, friendly pointer to what PaperWeave covers: no retrieval, no LLM."""
+    return {"answer": DECLINE, "citations": [], "subgraph": {"nodes": [], "links": []},
+            "steps": [_step("answer", "Not a research-paper question; explained what PaperWeave covers")]}
+
+
+_TOPIC_PHRASE = re.compile(r"\b(?:on|about|in|for)\s+([a-z0-9][\w\s+&-]*?)\s*(?:\b(?:since|after|from|in|of|this|last)\b|[?.!]|$)")
+
+
+def _topic_phrase(question: str) -> str | None:
+    """'most cited papers on hallucination since 2023?' -> 'hallucination'."""
+    m = _TOPIC_PHRASE.search(question.lower())
+    return m.group(1).strip() if m and m.group(1).strip() not in {"the corpus", "the library", "corpus"} else None
 
 
 def _graph_tools(p: dict, question: str) -> tuple[graph_query.GraphResult, str]:
@@ -74,9 +150,15 @@ def _graph_tools(p: dict, question: str) -> tuple[graph_query.GraphResult, str]:
         return graph_query.compare(entities[:4]), f"compared {', '.join(entities[:4])}"
     if intent == "dataset" and entities:
         return graph_query.dataset_users(entities[0]), f"looked up papers evaluating on {entities[0]}"
+    # Small planners often drop the topic ("most cited papers on hallucination" -> no entities),
+    # so fall back to the question's own words.
     if intent == "top_cited":
-        topic = entities[0] if entities else None
+        topic = entities[0] if entities else _topic_phrase(question)
         return graph_query.top_cited(p.get("min_year"), topic), "ranked papers by citations"
+    if intent == "trend":
+        field, topic = graph_query.resolve_scope(entities[0] if entities else question)
+        scope = topic or field
+        return graph_query.trend_facts(scope), f"computed trends for {scope or 'the whole library'}"
     if intent == "graph":
         query = llm.structured("router", CypherQuery).invoke([
             SystemMessage(prompts.TEXT_TO_CYPHER.format(schema=graph_query.SCHEMA_FOR_LLM)),
@@ -123,7 +205,14 @@ def retrieve(state: AgentState) -> dict:
     # A generated-Cypher answer (authors, counts) stands on its own; unrelated search hits
     # would only distract the answer LLM.
     if not (p["intent"] == "graph" and facts and not gaps):
-        hits = vector_search.search(p["search_query"], limit=6, min_year=p.get("min_year"))
+        # Fill the rest of the context budget. The question as asked goes first: the planner's
+        # keywords can lose what makes it specific ("first detection" of gravitational waves).
+        # After a rewrite, the new keywords go first instead.
+        budget = max(6, config.MAX_CONTEXT_PAPERS - len(papers))
+        queries = [state["question"], p["search_query"]]
+        if state.get("attempts"):
+            queries.reverse()
+        hits = [h for q in dict.fromkeys(queries) for h in vector_search.search(q, limit=budget, min_year=p.get("min_year"))]
         for h in hits:
             papers.setdefault(h["arxiv_id"], {**h, "source": "search"})
         steps.append(_step("search", f"Searched {p['search_query']!r}: {len(hits)} papers"))
@@ -134,7 +223,9 @@ def retrieve(state: AgentState) -> dict:
         live, source = arxiv_live.search(p["search_query"])
         for h in live:
             papers.setdefault(h["arxiv_id"], {**h, "source": "live"})
-        steps.append(_step("live", f"Live {source} search: {len(live)} recent papers"))
+        message = f"Live {source} search: {len(live)} recent papers" if source != "none" else \
+            "Live search unavailable (arXiv and Semantic Scholar didn't respond); using the library only"
+        steps.append(_step("live", message))
 
     return {"papers": papers, "facts": facts, "gaps": gaps, "steps": steps}
 

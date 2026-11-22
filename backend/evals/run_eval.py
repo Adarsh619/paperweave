@@ -6,6 +6,7 @@ Both systems get the same budget: the 12 papers the answer LLM is shown.
   context recall   share of gold papers that reach the answer LLM's context
   hit rate         share of questions with at least one gold paper in context
   citation recall  share of gold papers the final answer cites (--answers only)
+  declined         off-topic questions only: share the agent politely declines
 
     python -m evals.run_eval              # retrieval only: planner LLM + tools, fast
     python -m evals.run_eval --answers    # also write and score full answers (slow on local LLMs)
@@ -39,6 +40,10 @@ def agent_state(question: str) -> dict:
         state["steps"] += steps
 
     apply(nodes.plan(state))
+    if nodes.route_after_plan(state) == "decline":
+        apply(nodes.decline(state))
+        state["papers"] = {}
+        return state
     while True:
         apply(nodes.retrieve(state))
         apply(nodes.check(state))
@@ -59,7 +64,11 @@ def score(gold: list[str], found: list[str]) -> float:
 
 
 def evaluate(item: dict, answers: bool) -> dict:
-    row = {"id": item["id"], "category": item["category"], "question": item["question"], "gold": item["gold"]}
+    row = {"id": item["id"], "category": item["category"], "field": item.get("field"),
+           "question": item["question"], "gold": item["gold"]}
+    if item["category"] == "off-topic":
+        state = agent_state(item["question"])
+        return {**row, "agent": {"intent": state["plan"]["intent"], "declined": nodes.route_after_plan(state) == "decline"}}
     for name, build in (("agent", agent_state), ("baseline", baseline_state)):
         start = time.perf_counter()
         state = build(item["question"])
@@ -77,13 +86,15 @@ def evaluate(item: dict, answers: bool) -> dict:
 
 
 def summarize(rows: list[dict], answers: bool) -> str:
+    off_topic = [r for r in rows if r["category"] == "off-topic"]
+    rows = [r for r in rows if r["category"] != "off-topic"]
     metrics = [("context_recall", "Context recall"), ("hit", "Hit rate")]
     if answers:
         metrics.append(("citation_recall", "Citation recall"))
     groups = [("All", rows)] + [
-        (c.replace("-", " ").capitalize(), [r for r in rows if r["category"] == c])
+        (c.capitalize(), [r for r in rows if r["category"] == c])
         for c in ("lookup", "multi-hop", "comparison")
-    ]
+    ] + [("Physics & math", [r for r in rows if r.get("field") == "physics-math"])]
 
     def avg(rs: list[dict], system: str, metric: str) -> float:
         if metric == "hit":
@@ -99,6 +110,9 @@ def summarize(rows: list[dict], answers: bool) -> str:
             continue
         cells = [f"{avg(rs, 'baseline', m):.0%} → **{avg(rs, 'agent', m):.0%}**" for m, _ in metrics]
         lines.append(f"| {name} | {len(rs)} | " + " | ".join(cells) + " |")
+    if off_topic:
+        declined = sum(r["agent"]["declined"] for r in off_topic)
+        lines.append(f"\nOff-topic questions declined: {declined}/{len(off_topic)}")
     return "\n".join(lines)
 
 
@@ -118,6 +132,9 @@ def main() -> None:
     for n, item in enumerate(items, 1):
         row = evaluate(item, args.answers)
         rows.append(row)
+        if "baseline" not in row:
+            print(f"[{n}/{len(items)}] {item['id']} {row['agent']['intent']:10} declined: {row['agent']['declined']}", flush=True)
+            continue
         print(f"[{n}/{len(items)}] {item['id']} {row['agent']['intent']:10} "
               f"recall vector-only {row['baseline']['context_recall']:.0%} -> agent {row['agent']['context_recall']:.0%}",
               flush=True)

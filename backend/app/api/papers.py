@@ -1,8 +1,9 @@
 """Paper cards and per-paper graphs for the UI."""
 
-from fastapi import APIRouter, HTTPException, Path
+from fastapi import APIRouter, HTTPException, Path, Query
 
 from app import stores
+from app.tools import graph_query
 
 router = APIRouter()
 ArxivId = Path(pattern=r"^\d{4}\.\d{4,5}$", description="versionless arXiv ID, e.g. 2005.11401")
@@ -33,6 +34,12 @@ WITH p, entities, cites, inc ORDER BY inc.citation_count DESC
 RETURN p {.arxiv_id, .title, .year} AS paper, entities, cites,
        collect(inc {.arxiv_id, .title, .year})[..10] AS cited_by
 """
+
+
+@router.get("/api/trends")
+def trends(field: str | None = Query(None, max_length=60), topic: str | None = Query(None, max_length=60)):
+    """Data-driven trends for the whole library, one field, or one topic. No forecasts."""
+    return graph_query.trends(field, topic)
 
 
 @router.get("/api/papers/{arxiv_id}")

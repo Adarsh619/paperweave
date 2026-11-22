@@ -38,3 +38,6 @@ backend/.cache/
 
 # Local Claude Code launch config
 .claude/
+
+# Semantic Scholar search cache (fetch_papers.py)
+data/.s2_cache/

@@ -22,15 +22,25 @@ flowchart LR
   A --> G[Groq / Gemini]
 ```
 
-**Status:** Weeks 1–3 are built. Week 1 (data pipeline) is done. The graph holds 500 papers, 4,829 authors, 4,172 citations and 2,653 LLM-extracted methods, datasets and tasks in Neo4j. Papers are indexed in Qdrant for hybrid (dense + BM25) search, and `rebuild.py` restores both databases from the `data/` snapshot. Week 2 (agent + backend) is built: a LangGraph agent with graph, search and live arXiv tools behind a streaming FastAPI API. Week 3 is the Next.js frontend, evals and deployment.
+**Status:** v2 is built: the data pipeline, a LangGraph agent behind a streaming FastAPI API, the Next.js frontend and the evals. The committed snapshot holds **9,153 papers across 30 topics** in AI, CS, physics and math, with 88,968 citation links and 55,756 extracted methods, datasets and tasks. The graph is about 126K nodes and 333K relationships, inside AuraDB Free's limits.
+
+v2 added, over v1's 500 AI/LLM papers:
+- coverage of AI, CS, physics and math
+- follow-up questions, a trends page and an off-topic guard
+- an editorial redesign with a home-page explainer
+
+Not yet deployed.
 
 ## Features
 
 - **Agent that plans before it retrieves.** Each question gets the right tools: knowledge-graph queries, hybrid vector search and live arXiv search. If the evidence is thin, it rewrites the query and retries.
-- **Knowledge graph of 500 influential AI/LLM papers**, with citations, methods, datasets, tasks and "improves on" links extracted by a local LLM.
+- **Knowledge graph of influential arXiv papers across 30 topics** in AI, computer science, physics and math (9,153 papers), with citations, methods, datasets, tasks and "improves on" links extracted by a local LLM.
+- **Follow-up questions** ("which datasets did the second one use?"): the agent rewrites them into standalone questions using the conversation so far.
+- **Trends from the papers**: fastest-growing topics, methods taking a growing share of papers, and breakout papers. Measurements, never forecasts.
+- **Stays on topic**: off-topic requests (chat, coding, writing, news) get a polite pointer to what it covers instead of a made-up answer.
 - **Streaming answers with verified arXiv citations.** Garbled IDs are repaired and invented ones removed. Comparison questions get a table.
 - **Interactive graph view** of the papers and methods behind each answer, with paper cards and per-paper citation graphs.
-- **Evals against vector-only RAG** on 30 golden questions (see [Results](#evaluation)).
+- **Evals against vector-only RAG** on 43 golden questions, including physics & math and off-topic ones (see [Results](#evaluation)).
 - **Public demo with no login**, built for free tiers: saved example answers work even while the backend sleeps.
 
 ## Tech stack
@@ -82,7 +92,16 @@ python -m venv .venv
 .venv/Scripts/python pipeline/check_graph.py                    # sanity checks
 .venv/Scripts/python pipeline/load_qdrant.py                    # hybrid vector index (idempotent)
 .venv/Scripts/python pipeline/check_search.py                   # dense vs BM25 vs hybrid results
+.venv/Scripts/python pipeline/export_stats.py                   # coverage counts for the website
 ```
+
+Or run everything unattended. Each step resumes where it stopped, so re-run it after an interruption:
+
+```bash
+bash pipeline/build_all.sh
+```
+
+The topics to cover live in `TOPICS` in [`pipeline/config.py`](pipeline/config.py): each has a field, a Semantic Scholar query and landmark seed papers. `fetch_papers.py` takes the most cited papers per topic **per year** (equal quotas). That keeps recent work from being crowded out, and it makes per-year shares comparable for the trends page. A full 10K-paper build takes several hours of fetching without a free `S2_API_KEY`, then about 18 hours of extraction on a 4 GB laptop GPU (the 9,153-paper snapshot took about 17 hours, over three sittings).
 
 ### Rebuild the databases from the snapshot
 
@@ -111,7 +130,9 @@ plan → retrieve → check ──(evidence thin, max 2 retries)──► rewrit
                        └──(enough)──► answer → subgraph
 ```
 
-- **plan**: a fast LLM classifies the question (lineage, compare, dataset, top-cited, recent, graph or lookup) and pulls out the names it mentions. If the LLM fails, a keyword fallback takes over.
+- **plan**: a fast LLM classifies the question (lineage, compare, dataset, top-cited, recent, trend, graph, lookup or off-topic) and pulls out the names it mentions. If the LLM fails, a keyword fallback takes over.
+  - Follow-ups arrive with the last few turns and are first rewritten into a standalone question.
+  - Off-topic questions go straight to a fixed, polite explanation of what PaperWeave covers.
 - **retrieve**: code, not the LLM, runs the tools that fit the plan:
   - Cypher templates for lineage, comparisons, dataset users and top-cited papers
   - LLM-written Cypher for other graph questions, behind a read-only guard
@@ -146,9 +167,11 @@ LLMs are tried in order: Groq, then Gemini, then local Ollama. Put `GROQ_API_KEY
 
 ## Frontend
 
-A Next.js app with three pages:
-- **Home:** an ask box and 10 example questions.
-- **`/ask?q=...`:** the agent's steps stream in as a timeline, then a markdown answer with clickable citations, a sources list and the interactive graph behind the answer. Clicking a paper opens its card.
+A Next.js app with five pages:
+- **Home:** what it is and who it's for, a real saved answer shown inline, example questions, and coverage per field and topic (from `public/stats.json`).
+- **`/trends`:** topic growth, rising methods and breakout papers, filterable by field.
+- **`/about`:** how the pipeline and agent work, the evaluation, and the stack.
+- **`/ask?q=...`:** the agent's steps stream in as a timeline, then a markdown answer with clickable citations, a sources list and the interactive graph behind the answer. Clicking a paper opens its card. A follow-up box continues the conversation.
 - **`/paper/[id]`:** the paper's abstract, entities and citation neighborhood.
 
 Example questions are served from [`frontend/public/examples.json`](frontend/public/examples.json), generated by `backend/scripts/export_examples.py`. They load instantly and work even when the backend is asleep. If the backend takes more than 4 seconds to respond at all, a "waking up the server" banner explains the free-tier cold start.
@@ -160,21 +183,37 @@ npm install
 npm run dev                       # http://localhost:3000
 ```
 
+**Design.** An editorial "paper & ink" look: warm paper and ink with one vermilion accent, a deep ink-blue dark mode and serif headings. Colors are tokens in `app/globals.css`, and the trends chart colors are checked for color-blind safety. Animated pieces come from [React Bits](https://reactbits.dev) (MIT + Commons Clause), vendored in `components/reactbits/`:
+- the woven "Threads" hero background
+- the blur-in headline
+- spotlight cards
+- count-up numbers
+
+All animation respects the OS "reduce motion" setting.
+
 ## Evaluation
 
-[`backend/evals/golden.jsonl`](backend/evals/golden.jsonl) holds 30 questions: 10 lookups, 10 multi-hop and 10 comparisons. Each lists the papers a correct answer must draw on, chosen from what's known about the papers rather than from the extracted graph. Both systems get the same budget: the 12 papers shown to the answer LLM.
+[`backend/evals/golden.jsonl`](backend/evals/golden.jsonl) holds 43 questions:
+- 30 on AI research: 10 lookups, 10 multi-hop and 10 comparisons
+- 10 on physics & math, such as quantum error correction, LIGO, DESI and conformal prediction
+- 3 off-topic questions the agent should decline
+
+Each scored question lists the papers a correct answer must draw on, chosen from what's known about the papers rather than from the extracted graph. Both systems get the same budget: the 12 papers shown to the answer LLM.
 
 - **Vector-only RAG:** the question goes straight into the same hybrid (MiniLM + BM25) search.
 - **PaperWeave agent:** planning, graph tools, per-entity search, then the evidence check and retries.
 
-**Results** (30 questions, local `qwen3:4b-instruct` via Ollama for planning and answers):
+**Results** (9,153-paper library; local `qwen3:4b-instruct` via Ollama for planning and answers):
 
 | Questions | n | Context recall: vector-only → agent | Hit rate: vector-only → agent | Citation recall: vector-only → agent |
 |---|---|---|---|---|
-| All | 30 | 71% → **79%** | 83% → **90%** | 70% → **76%** |
-| Lookup | 10 | 100% → **100%** | 100% → **100%** | 100% → **100%** |
-| Multi-hop | 10 | 30% → **43%** | 60% → **70%** | 27% → **34%** |
-| Comparison | 10 | 82% → **95%** | 90% → **100%** | 82% → **95%** |
+| All | 40 | 71% → **82%** | 85% → **92%** | 69% → **78%** |
+| Lookup | 17 | 100% → **100%** | 100% → **100%** | 100% → **94%** |
+| Multi-hop | 11 | 32% → **42%** | 55% → **73%** | 29% → **39%** |
+| Comparison | 12 | 65% → **92%** | 92% → **100%** | 61% → **92%** |
+| Physics & math | 10 | 95% → **95%** | 100% → **100%** | 95% → **95%** |
+
+Off-topic questions declined: **3/3**. The physics & math row overlaps the others: its questions are also counted under lookup, multi-hop or comparison.
 
 - **Context recall:** the share of gold papers in the answer LLM's context.
 - **Hit rate:** the share of questions with at least one gold paper in context.
@@ -182,17 +221,19 @@ npm run dev                       # http://localhost:3000
 
 What the numbers show:
 - **The graph helps most where vector search can't follow links.**
-  - "Which papers build on *Attention Is All You Need*?" went from 0% to 100%, via citation edges.
-  - "Which methods improved on standard RAG?" went from 0% to 60%, via `IMPROVES_ON` edges.
-  - Comparisons went from 82% to 95%: the agent finds each method's defining paper even when the name never appears in its abstract, as with DPR.
-- **Lookups are already easy.** Both systems find the one relevant paper every time.
-- **Multi-hop is the weak spot, mostly because of the small planner.**
-  - The 4B model classified 5 of the 10 multi-hop questions as plain lookups, so they never reached the graph tools.
-  - It marked one as "recent", which brought in live arXiv results instead.
-  - One question ("Which methods decide when to retrieve?") dropped from 33% to 0%.
-  - Two lineage questions have links the extracted graph doesn't contain.
-  - The planner should improve with Groq's Llama 3.3 70B. Re-run with `GROQ_API_KEY` set to measure it.
-- **Latency:** on a laptop GPU, the agent takes about 55 s per question and vector-only RAG about 45 s, almost all of it local LLM time. Groq should bring both down to a few seconds.
+  - Comparisons went from 65% to 92%: the agent finds each method's defining paper even when the name never appears in its abstract, as with DPR.
+  - "Which papers build on *Attention Is All You Need*?" went from 0% to 60%, via citation edges.
+  - "Which retrieval-augmented models were evaluated on Natural Questions?" went from 20% to 100%, via `EVALUATES_ON` edges.
+- **Lookups stay easy, also outside AI.** Both systems find the one relevant paper for every lookup, including all the physics and math ones.
+- **The library grew 18× (500 → 9,153 papers), and it's harder for multi-hop.**
+  - More close neighbours compete for the 12 context slots.
+  - Three lineage questions (what builds on DPR, on ReAct, and what Llama 2 built on) score 0%: the extracted graph lacks those links.
+- **The small planner is still the weak spot.**
+  - It classifies some multi-hop questions as plain lookups, so they never reach the graph tools.
+  - The first v2 run showed it also calls specialist physics questions "off-topic". The agent now overrules that when the library has a closely matching paper (cosine ≥ 0.5). Real off-topic questions score at most 0.46.
+  - It also searches the question as asked, not only its own keywords, which lost two physics papers.
+  - Re-run with `GROQ_API_KEY` set to measure the planner with Groq's Llama 3.3 70B.
+- **Latency:** on a laptop GPU, the agent takes about 60 s per question and vector-only RAG about 45 s, almost all of it local LLM time. Groq should bring both down to a few seconds.
 
 Per-question results are in [`backend/evals/results.json`](backend/evals/results.json).
 
@@ -215,7 +256,7 @@ Step-by-step guide: [docs/DEPLOY.md](docs/DEPLOY.md). The Render blueprint is [`
 
 ## Notes on the pipeline
 
-Entity extraction runs a local LLM through [Ollama](https://ollama.com) (`qwen3:4b-instruct` by default; change `OLLAMA_MODEL` in `.env`). It takes about 6–11 seconds per paper on a 4 GB laptop GPU (about 50 minutes for 500 papers) and is resumable: re-running skips papers already done. `normalize.py` merges spellings of the same entity (for example "Hotpot QA" and "HotpotQA", or "NQ" and "Natural Questions") and drops vague names. Review `data/entity_index.jsonl` to see what was merged.
+Entity extraction runs a local LLM through [Ollama](https://ollama.com) (`qwen3:4b-instruct` by default; change `OLLAMA_MODEL` in `.env`). It takes about 6–11 seconds per paper on a 4 GB laptop GPU (about 7 s on average across the 9,153 papers) and is resumable: re-running skips papers already done. `normalize.py` merges spellings of the same entity (for example "Hotpot QA" and "HotpotQA", or "NQ" and "Natural Questions") and drops vague names. Review `data/entity_index.jsonl` to see what was merged.
 
 `load_qdrant.py` stores each paper's title and abstract as one point with two vectors: a MiniLM embedding (meaning) and a BM25 sparse vector (exact terms such as "HotpotQA"). Search runs both and merges the rankings with Reciprocal Rank Fusion. Locally, `fastembed` computes the vectors on your CPU; the first run downloads about 100 MB of models. On Qdrant Cloud, set `QDRANT_CLOUD_INFERENCE=true` and the server embeds the text instead, so the backend never loads a model.
 

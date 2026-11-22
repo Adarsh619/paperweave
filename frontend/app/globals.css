@@ -1,32 +1,40 @@
 @import "tailwindcss";
 
+/* "Paper & ink": a research journal, not a dashboard. One accent (vermilion), warm neutrals. */
 :root {
-  --background: #fbfbfa;
-  --surface: #ffffff;
-  --foreground: #1c1c1e;
-  --muted: #6b6b70;
-  --border: #e6e5e1;
-  --accent: #4f46e5;
-  --accent-soft: #eef0ff;
-  --paper: #4f46e5;
-  --method: #9333ea;
-  --dataset: #d97706;
-  --task: #0d9488;
+  --background: #f5f1e8;
+  --surface: #fbf9f3;
+  --foreground: #1d1b18;
+  --muted: #625c53;
+  --border: #e0d9cb;
+  --accent: #b4432c;
+  --on-accent: #ffffff;
+  --accent-soft: #f3e2db;
+  --paper: #2b4c7e;
+  --method: #b4432c;
+  --dataset: #a8740a;
+  --task: #2a7f62;
+  /* Trends diverging pair, validated (dataviz validate_palette.js) against --surface. */
+  --rise: #2f6db5;
+  --fall: #b4432c;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0e0f12;
-    --surface: #16181d;
-    --foreground: #ececee;
-    --muted: #9a9aa3;
-    --border: #2a2c33;
-    --accent: #8b8cf6;
-    --accent-soft: #1f2036;
-    --paper: #8b8cf6;
-    --method: #c084fc;
-    --dataset: #fbbf24;
-    --task: #2dd4bf;
+    --background: #0e1522;
+    --surface: #152033;
+    --foreground: #ece6da;
+    --muted: #a3abb9;
+    --border: #25324a;
+    --accent: #f0876a;
+    --on-accent: #1d0f0a;
+    --accent-soft: #2a2230;
+    --paper: #8fb0e0;
+    --method: #f0876a;
+    --dataset: #e0b252;
+    --task: #5cc4a0;
+    --rise: #5b8fd6;
+    --fall: #e0694a;
   }
 }
 
@@ -37,11 +45,15 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
   --color-accent-soft: var(--accent-soft);
+  --font-serif: var(--font-fraunces);
   --color-paper: var(--paper);
   --color-method: var(--method);
   --color-dataset: var(--dataset);
   --color-task: var(--task);
+  --color-rise: var(--rise);
+  --color-fall: var(--fall);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }

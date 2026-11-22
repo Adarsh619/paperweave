@@ -29,8 +29,16 @@ cache = AnswerCache(config.CACHE_PATH, config.CACHE_TTL_S)
 limiter = RateLimiter(config.RATE_LIMIT_PER_HOUR)
 
 
+class Turn(BaseModel):
+    question: str = Field(max_length=500)
+    answer: str = Field(max_length=6000)
+
+
 class ChatRequest(BaseModel):
     question: str = Field(min_length=3, max_length=500)
+    # Earlier turns, sent by the browser so follow-ups work without server-side sessions
+    # (free-tier servers restart and sleep, which would wipe them).
+    history: list[Turn] = Field(default_factory=list, max_length=3)
 
 
 def client_ip(request: Request) -> str:
@@ -43,12 +51,12 @@ def sse(event: str, data) -> str:
     return f"event: {event}\ndata: {json.dumps(data)}\n\n"
 
 
-async def agent_events(question: str) -> AsyncIterator[tuple[str, object]]:
+async def agent_events(question: str, history: list[dict]) -> AsyncIterator[tuple[str, object]]:
     """Run the agent, yielding (event, data). Steps come from node updates; tokens from the
     answer node's LLM stream."""
     final: dict = {}
     async for mode, chunk in build().astream(
-        {"question": question}, {"recursion_limit": 20}, stream_mode=["updates", "messages"]
+        {"question": question, "history": history}, {"recursion_limit": 20}, stream_mode=["updates", "messages"]
     ):
         if mode == "messages":
             message, meta = chunk
@@ -67,7 +75,9 @@ async def agent_events(question: str) -> AsyncIterator[tuple[str, object]]:
 @router.post("/api/chat")
 async def chat(body: ChatRequest, request: Request):
     question = body.question.strip()
-    cached = cache.get(question)
+    history = [t.model_dump() for t in body.history]
+    # A follow-up's meaning depends on the conversation, so only standalone questions are cached.
+    cached = None if history else cache.get(question)
     if cached is None:
         allowed, retry_after = limiter.check(client_ip(request))
         if not allowed:
@@ -86,7 +96,7 @@ async def chat(body: ChatRequest, request: Request):
             return
         events = []
         try:
-            async for event, data in agent_events(question):
+            async for event, data in agent_events(question, history):
                 yield sse(event, data)
                 if event != "token":  # tokens are replaced by the final answer event
                     events.append({"event": event, "data": data})
@@ -94,7 +104,8 @@ async def chat(body: ChatRequest, request: Request):
             log.exception("agent failed for question %r", question)
             yield sse("error", {"message": "Something went wrong while answering. Please try again."})
             return
-        cache.put(question, events)
+        if not history:
+            cache.put(question, events)
         yield sse("done", {"cached": False})
 
     # X-Accel-Buffering stops proxies from holding the stream back until it ends.

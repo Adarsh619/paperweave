@@ -40,6 +40,7 @@ def to_point(paper: dict, entities: dict) -> models.PointStruct:
             "methods": entities.get("methods_proposed", []) + entities.get("methods_used", []),
             "datasets": entities.get("datasets", []),
             "tasks": entities.get("tasks", []),
+            "topics": paper.get("topics", []),
         },
     )
 

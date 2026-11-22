@@ -28,7 +28,13 @@ def request(http: httpx.Client, method: str, path: str, **kwargs) -> dict | list
         if wait > 0:
             time.sleep(wait)
         _last_request = time.monotonic()
-        resp = http.request(method, path, **kwargs)
+        try:
+            resp = http.request(method, path, **kwargs)
+        except httpx.TransportError as exc:  # dropped/reset connections on flaky networks
+            backoff = 10 * (attempt + 1)
+            print(f"  network error ({type(exc).__name__}); retrying in {backoff}s")
+            time.sleep(backoff)
+            continue
         # S2 throttles with 429 and sometimes 5xx.
         if resp.status_code == 429 or resp.status_code >= 500:
             backoff = 10 * (attempt + 1)

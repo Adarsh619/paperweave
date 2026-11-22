@@ -62,6 +62,12 @@ The whole stack runs on free tiers. Each step needs an account you create yourse
 
 This step needs no Semantic Scholar or Ollama calls. Run it again any time a free database is wiped.
 
+**Size check.** Before loading, `rebuild.py` estimates the node and relationship counts from the snapshot. Against AuraDB (a `neo4j+s://` address), it refuses to load if they exceed the Free limits (200K nodes / 400K relationships). The 9,153-paper snapshot comes to about 126K nodes and 333K relationships, so it fits with some room. If it ever doesn't, either:
+- shrink the corpus (`fetch_papers.py --max-papers`), or
+- store authors as a list on each paper instead of as Author nodes.
+
+Re-run `pipeline/export_stats.py` after a rebuild, so the website's coverage numbers match.
+
 ## 5. Backend on Render
 
 1. On https://dashboard.render.com, choose **New → Blueprint** and pick the GitHub repo. Render reads [`render.yaml`](../render.yaml).
@@ -70,7 +76,7 @@ This step needs no Semantic Scholar or Ollama calls. Run it again any time a fre
    - `QDRANT_URL`, `QDRANT_API_KEY`
    - `GROQ_API_KEY`, `GOOGLE_API_KEY`
    - `CORS_ORIGINS`: the Vercel URL from step 6. Set it to `*` for now and fix it after.
-3. After the deploy, open `https://<service>.onrender.com/health`. It should return `{"status": "ok", "papers": 500, ...}`.
+3. After the deploy, open `https://<service>.onrender.com/health`. It should return `{"status": "ok", "papers": 9153, ...}`.
 
 ## 6. Frontend on Vercel
 

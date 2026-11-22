@@ -1,0 +1,159 @@
+{
+ "totals": {
+  "papers": 9153,
+  "citations": 88968,
+  "entities": 55756
+ },
+ "fields": [
+  {
+   "name": "AI: language models",
+   "papers": 1340,
+   "topics": [
+    {
+     "name": "Language model foundations",
+     "papers": 303
+    },
+    {
+     "name": "Retrieval-augmented generation",
+     "papers": 178
+    },
+    {
+     "name": "Knowledge graphs + LLMs",
+     "papers": 171
+    },
+    {
+     "name": "LLM agents",
+     "papers": 160
+    },
+    {
+     "name": "Dense retrieval",
+     "papers": 248
+    },
+    {
+     "name": "Long context",
+     "papers": 185
+    },
+    {
+     "name": "Hallucination",
+     "papers": 209
+    }
+   ]
+  },
+  {
+   "name": "AI: beyond language",
+   "papers": 3175,
+   "topics": [
+    {
+     "name": "Computer vision",
+     "papers": 349
+    },
+    {
+     "name": "Image generation",
+     "papers": 367
+    },
+    {
+     "name": "Multimodal models",
+     "papers": 421
+    },
+    {
+     "name": "Reinforcement learning",
+     "papers": 417
+    },
+    {
+     "name": "Robotics",
+     "papers": 470
+    },
+    {
+     "name": "Speech",
+     "papers": 363
+    },
+    {
+     "name": "Graph neural networks",
+     "papers": 360
+    },
+    {
+     "name": "Alignment & interpretability",
+     "papers": 320
+    },
+    {
+     "name": "Efficient ML",
+     "papers": 367
+    }
+   ]
+  },
+  {
+   "name": "Computer science",
+   "papers": 1846,
+   "topics": [
+    {
+     "name": "Security & privacy",
+     "papers": 379
+    },
+    {
+     "name": "Distributed systems",
+     "papers": 360
+    },
+    {
+     "name": "Databases",
+     "papers": 349
+    },
+    {
+     "name": "Code & software engineering",
+     "papers": 399
+    },
+    {
+     "name": "Algorithms & theory",
+     "papers": 386
+    }
+   ]
+  },
+  {
+   "name": "Physics",
+   "papers": 2070,
+   "topics": [
+    {
+     "name": "Quantum computing",
+     "papers": 348
+    },
+    {
+     "name": "Condensed matter",
+     "papers": 351
+    },
+    {
+     "name": "Astrophysics & cosmology",
+     "papers": 349
+    },
+    {
+     "name": "Particle physics",
+     "papers": 383
+    },
+    {
+     "name": "Gravitational waves",
+     "papers": 397
+    },
+    {
+     "name": "Machine learning for physics",
+     "papers": 391
+    }
+   ]
+  },
+  {
+   "name": "Math & statistics",
+   "papers": 1074,
+   "topics": [
+    {
+     "name": "Optimization",
+     "papers": 375
+    },
+    {
+     "name": "Probability & stochastic processes",
+     "papers": 359
+    },
+    {
+     "name": "Statistics & causal inference",
+     "papers": 366
+    }
+   ]
+  }
+ ]
+}

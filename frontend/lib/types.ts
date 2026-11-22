@@ -34,7 +34,32 @@ export type ChatEvent =
 
 export type Example = { question: string; events: ChatEvent[] };
 
+/** An earlier question and its answer, sent with follow-ups (POST /api/chat "history"). */
+export type Turn = { question: string; answer: string };
+
 export type ExamplesFile = { generated: string; model: string; examples: Example[] };
+
+/** frontend/public/stats.json, written by pipeline/export_stats.py. */
+export type CoverageStats = {
+  totals: { papers: number; citations: number; entities: number };
+  fields: { name: string; papers: number; topics: { name: string; papers: number }[] }[];
+};
+
+/** GET /api/trends: data-driven, no forecasts. */
+export type Trends = {
+  field: string | null;
+  recent_years: [number, number];
+  earlier_years: [number, number];
+  topics: { topic: string; field: string; papers: number; growth: number | null }[];
+  rising_methods: {
+    method: string;
+    recent_papers: number;
+    share_recent: number;
+    share_earlier: number;
+    change: number;
+  }[];
+  breakout_papers: { arxiv_id: string; title: string; year: number; citations: number; per_year: number }[];
+};
 
 export type Paper = {
   arxiv_id: string;

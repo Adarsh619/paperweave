@@ -1,0 +1,300 @@
+{"topic": "Language model foundations", "field": "AI: language models", "year": 2017, "total": 4}
+{"topic": "Language model foundations", "field": "AI: language models", "year": 2018, "total": 28}
+{"topic": "Language model foundations", "field": "AI: language models", "year": 2019, "total": 152}
+{"topic": "Language model foundations", "field": "AI: language models", "year": 2020, "total": 360}
+{"topic": "Language model foundations", "field": "AI: language models", "year": 2021, "total": 696}
+{"topic": "Language model foundations", "field": "AI: language models", "year": 2022, "total": 1059}
+{"topic": "Language model foundations", "field": "AI: language models", "year": 2023, "total": 2100}
+{"topic": "Language model foundations", "field": "AI: language models", "year": 2024, "total": 3312}
+{"topic": "Language model foundations", "field": "AI: language models", "year": 2025, "total": 4544}
+{"topic": "Language model foundations", "field": "AI: language models", "year": 2026, "total": 5488}
+{"topic": "Retrieval-augmented generation", "field": "AI: language models", "year": 2017, "total": 0}
+{"topic": "Retrieval-augmented generation", "field": "AI: language models", "year": 2018, "total": 0}
+{"topic": "Retrieval-augmented generation", "field": "AI: language models", "year": 2019, "total": 0}
+{"topic": "Retrieval-augmented generation", "field": "AI: language models", "year": 2020, "total": 3}
+{"topic": "Retrieval-augmented generation", "field": "AI: language models", "year": 2021, "total": 10}
+{"topic": "Retrieval-augmented generation", "field": "AI: language models", "year": 2022, "total": 17}
+{"topic": "Retrieval-augmented generation", "field": "AI: language models", "year": 2023, "total": 171}
+{"topic": "Retrieval-augmented generation", "field": "AI: language models", "year": 2024, "total": 2376}
+{"topic": "Retrieval-augmented generation", "field": "AI: language models", "year": 2025, "total": 6514}
+{"topic": "Retrieval-augmented generation", "field": "AI: language models", "year": 2026, "total": 8173}
+{"topic": "Knowledge graphs + LLMs", "field": "AI: language models", "year": 2017, "total": 0}
+{"topic": "Knowledge graphs + LLMs", "field": "AI: language models", "year": 2018, "total": 0}
+{"topic": "Knowledge graphs + LLMs", "field": "AI: language models", "year": 2019, "total": 1}
+{"topic": "Knowledge graphs + LLMs", "field": "AI: language models", "year": 2020, "total": 2}
+{"topic": "Knowledge graphs + LLMs", "field": "AI: language models", "year": 2021, "total": 6}
+{"topic": "Knowledge graphs + LLMs", "field": "AI: language models", "year": 2022, "total": 17}
+{"topic": "Knowledge graphs + LLMs", "field": "AI: language models", "year": 2023, "total": 294}
+{"topic": "Knowledge graphs + LLMs", "field": "AI: language models", "year": 2024, "total": 1120}
+{"topic": "Knowledge graphs + LLMs", "field": "AI: language models", "year": 2025, "total": 2335}
+{"topic": "Knowledge graphs + LLMs", "field": "AI: language models", "year": 2026, "total": 2821}
+{"topic": "LLM agents", "field": "AI: language models", "year": 2017, "total": 0}
+{"topic": "LLM agents", "field": "AI: language models", "year": 2018, "total": 0}
+{"topic": "LLM agents", "field": "AI: language models", "year": 2019, "total": 0}
+{"topic": "LLM agents", "field": "AI: language models", "year": 2020, "total": 0}
+{"topic": "LLM agents", "field": "AI: language models", "year": 2021, "total": 1}
+{"topic": "LLM agents", "field": "AI: language models", "year": 2022, "total": 4}
+{"topic": "LLM agents", "field": "AI: language models", "year": 2023, "total": 138}
+{"topic": "LLM agents", "field": "AI: language models", "year": 2024, "total": 808}
+{"topic": "LLM agents", "field": "AI: language models", "year": 2025, "total": 2351}
+{"topic": "LLM agents", "field": "AI: language models", "year": 2026, "total": 6370}
+{"topic": "Dense retrieval", "field": "AI: language models", "year": 2017, "total": 13}
+{"topic": "Dense retrieval", "field": "AI: language models", "year": 2018, "total": 14}
+{"topic": "Dense retrieval", "field": "AI: language models", "year": 2019, "total": 24}
+{"topic": "Dense retrieval", "field": "AI: language models", "year": 2020, "total": 45}
+{"topic": "Dense retrieval", "field": "AI: language models", "year": 2021, "total": 124}
+{"topic": "Dense retrieval", "field": "AI: language models", "year": 2022, "total": 202}
+{"topic": "Dense retrieval", "field": "AI: language models", "year": 2023, "total": 235}
+{"topic": "Dense retrieval", "field": "AI: language models", "year": 2024, "total": 224}
+{"topic": "Dense retrieval", "field": "AI: language models", "year": 2025, "total": 299}
+{"topic": "Dense retrieval", "field": "AI: language models", "year": 2026, "total": 656}
+{"topic": "Long context", "field": "AI: language models", "year": 2017, "total": 6}
+{"topic": "Long context", "field": "AI: language models", "year": 2018, "total": 6}
+{"topic": "Long context", "field": "AI: language models", "year": 2019, "total": 2}
+{"topic": "Long context", "field": "AI: language models", "year": 2020, "total": 8}
+{"topic": "Long context", "field": "AI: language models", "year": 2021, "total": 11}
+{"topic": "Long context", "field": "AI: language models", "year": 2022, "total": 15}
+{"topic": "Long context", "field": "AI: language models", "year": 2023, "total": 88}
+{"topic": "Long context", "field": "AI: language models", "year": 2024, "total": 483}
+{"topic": "Long context", "field": "AI: language models", "year": 2025, "total": 909}
+{"topic": "Long context", "field": "AI: language models", "year": 2026, "total": 1218}
+{"topic": "Hallucination", "field": "AI: language models", "year": 2017, "total": 0}
+{"topic": "Hallucination", "field": "AI: language models", "year": 2018, "total": 0}
+{"topic": "Hallucination", "field": "AI: language models", "year": 2019, "total": 2}
+{"topic": "Hallucination", "field": "AI: language models", "year": 2020, "total": 1}
+{"topic": "Hallucination", "field": "AI: language models", "year": 2021, "total": 2}
+{"topic": "Hallucination", "field": "AI: language models", "year": 2022, "total": 9}
+{"topic": "Hallucination", "field": "AI: language models", "year": 2023, "total": 440}
+{"topic": "Hallucination", "field": "AI: language models", "year": 2024, "total": 1827}
+{"topic": "Hallucination", "field": "AI: language models", "year": 2025, "total": 3633}
+{"topic": "Hallucination", "field": "AI: language models", "year": 2026, "total": 5269}
+{"topic": "Computer vision", "field": "AI: beyond language", "year": 2017, "total": 5372}
+{"topic": "Computer vision", "field": "AI: beyond language", "year": 2018, "total": 7802}
+{"topic": "Computer vision", "field": "AI: beyond language", "year": 2019, "total": 10830}
+{"topic": "Computer vision", "field": "AI: beyond language", "year": 2020, "total": 12983}
+{"topic": "Computer vision", "field": "AI: beyond language", "year": 2021, "total": 15897}
+{"topic": "Computer vision", "field": "AI: beyond language", "year": 2022, "total": 18893}
+{"topic": "Computer vision", "field": "AI: beyond language", "year": 2023, "total": 23345}
+{"topic": "Computer vision", "field": "AI: beyond language", "year": 2024, "total": 28939}
+{"topic": "Computer vision", "field": "AI: beyond language", "year": 2025, "total": 35153}
+{"topic": "Computer vision", "field": "AI: beyond language", "year": 2026, "total": 29311}
+{"topic": "Image generation", "field": "AI: beyond language", "year": 2017, "total": 1105}
+{"topic": "Image generation", "field": "AI: beyond language", "year": 2018, "total": 1414}
+{"topic": "Image generation", "field": "AI: beyond language", "year": 2019, "total": 1702}
+{"topic": "Image generation", "field": "AI: beyond language", "year": 2020, "total": 1860}
+{"topic": "Image generation", "field": "AI: beyond language", "year": 2021, "total": 2020}
+{"topic": "Image generation", "field": "AI: beyond language", "year": 2022, "total": 2453}
+{"topic": "Image generation", "field": "AI: beyond language", "year": 2023, "total": 6573}
+{"topic": "Image generation", "field": "AI: beyond language", "year": 2024, "total": 11579}
+{"topic": "Image generation", "field": "AI: beyond language", "year": 2025, "total": 16324}
+{"topic": "Image generation", "field": "AI: beyond language", "year": 2026, "total": 13963}
+{"topic": "Multimodal models", "field": "AI: beyond language", "year": 2017, "total": 151}
+{"topic": "Multimodal models", "field": "AI: beyond language", "year": 2018, "total": 211}
+{"topic": "Multimodal models", "field": "AI: beyond language", "year": 2019, "total": 308}
+{"topic": "Multimodal models", "field": "AI: beyond language", "year": 2020, "total": 382}
+{"topic": "Multimodal models", "field": "AI: beyond language", "year": 2021, "total": 513}
+{"topic": "Multimodal models", "field": "AI: beyond language", "year": 2022, "total": 819}
+{"topic": "Multimodal models", "field": "AI: beyond language", "year": 2023, "total": 2055}
+{"topic": "Multimodal models", "field": "AI: beyond language", "year": 2024, "total": 5176}
+{"topic": "Multimodal models", "field": "AI: beyond language", "year": 2025, "total": 12041}
+{"topic": "Multimodal models", "field": "AI: beyond language", "year": 2026, "total": 18130}
+{"topic": "Reinforcement learning", "field": "AI: beyond language", "year": 2017, "total": 2886}
+{"topic": "Reinforcement learning", "field": "AI: beyond language", "year": 2018, "total": 5080}
+{"topic": "Reinforcement learning", "field": "AI: beyond language", "year": 2019, "total": 7941}
+{"topic": "Reinforcement learning", "field": "AI: beyond language", "year": 2020, "total": 10175}
+{"topic": "Reinforcement learning", "field": "AI: beyond language", "year": 2021, "total": 12146}
+{"topic": "Reinforcement learning", "field": "AI: beyond language", "year": 2022, "total": 13603}
+{"topic": "Reinforcement learning", "field": "AI: beyond language", "year": 2023, "total": 16923}
+{"topic": "Reinforcement learning", "field": "AI: beyond language", "year": 2024, "total": 21530}
+{"topic": "Reinforcement learning", "field": "AI: beyond language", "year": 2025, "total": 34203}
+{"topic": "Reinforcement learning", "field": "AI: beyond language", "year": 2026, "total": 35168}
+{"topic": "Robotics", "field": "AI: beyond language", "year": 2017, "total": 5878}
+{"topic": "Robotics", "field": "AI: beyond language", "year": 2018, "total": 7138}
+{"topic": "Robotics", "field": "AI: beyond language", "year": 2019, "total": 8449}
+{"topic": "Robotics", "field": "AI: beyond language", "year": 2020, "total": 8949}
+{"topic": "Robotics", "field": "AI: beyond language", "year": 2021, "total": 9288}
+{"topic": "Robotics", "field": "AI: beyond language", "year": 2022, "total": 9164}
+{"topic": "Robotics", "field": "AI: beyond language", "year": 2023, "total": 10594}
+{"topic": "Robotics", "field": "AI: beyond language", "year": 2024, "total": 13428}
+{"topic": "Robotics", "field": "AI: beyond language", "year": 2025, "total": 17450}
+{"topic": "Robotics", "field": "AI: beyond language", "year": 2026, "total": 17286}
+{"topic": "Speech", "field": "AI: beyond language", "year": 2017, "total": 3230}
+{"topic": "Speech", "field": "AI: beyond language", "year": 2018, "total": 3591}
+{"topic": "Speech", "field": "AI: beyond language", "year": 2019, "total": 3896}
+{"topic": "Speech", "field": "AI: beyond language", "year": 2020, "total": 3776}
+{"topic": "Speech", "field": "AI: beyond language", "year": 2021, "total": 3840}
+{"topic": "Speech", "field": "AI: beyond language", "year": 2022, "total": 3870}
+{"topic": "Speech", "field": "AI: beyond language", "year": 2023, "total": 4204}
+{"topic": "Speech", "field": "AI: beyond language", "year": 2024, "total": 4771}
+{"topic": "Speech", "field": "AI: beyond language", "year": 2025, "total": 5769}
+{"topic": "Speech", "field": "AI: beyond language", "year": 2026, "total": 5081}
+{"topic": "Graph neural networks", "field": "AI: beyond language", "year": 2017, "total": 66}
+{"topic": "Graph neural networks", "field": "AI: beyond language", "year": 2018, "total": 290}
+{"topic": "Graph neural networks", "field": "AI: beyond language", "year": 2019, "total": 1306}
+{"topic": "Graph neural networks", "field": "AI: beyond language", "year": 2020, "total": 2887}
+{"topic": "Graph neural networks", "field": "AI: beyond language", "year": 2021, "total": 4669}
+{"topic": "Graph neural networks", "field": "AI: beyond language", "year": 2022, "total": 6363}
+{"topic": "Graph neural networks", "field": "AI: beyond language", "year": 2023, "total": 8263}
+{"topic": "Graph neural networks", "field": "AI: beyond language", "year": 2024, "total": 10777}
+{"topic": "Graph neural networks", "field": "AI: beyond language", "year": 2025, "total": 14773}
+{"topic": "Graph neural networks", "field": "AI: beyond language", "year": 2026, "total": 13213}
+{"topic": "Alignment & interpretability", "field": "AI: beyond language", "year": 2017, "total": 36}
+{"topic": "Alignment & interpretability", "field": "AI: beyond language", "year": 2018, "total": 117}
+{"topic": "Alignment & interpretability", "field": "AI: beyond language", "year": 2019, "total": 272}
+{"topic": "Alignment & interpretability", "field": "AI: beyond language", "year": 2020, "total": 512}
+{"topic": "Alignment & interpretability", "field": "AI: beyond language", "year": 2021, "total": 744}
+{"topic": "Alignment & interpretability", "field": "AI: beyond language", "year": 2022, "total": 966}
+{"topic": "Alignment & interpretability", "field": "AI: beyond language", "year": 2023, "total": 1762}
+{"topic": "Alignment & interpretability", "field": "AI: beyond language", "year": 2024, "total": 3573}
+{"topic": "Alignment & interpretability", "field": "AI: beyond language", "year": 2025, "total": 9361}
+{"topic": "Alignment & interpretability", "field": "AI: beyond language", "year": 2026, "total": 10672}
+{"topic": "Efficient ML", "field": "AI: beyond language", "year": 2017, "total": 144}
+{"topic": "Efficient ML", "field": "AI: beyond language", "year": 2018, "total": 314}
+{"topic": "Efficient ML", "field": "AI: beyond language", "year": 2019, "total": 647}
+{"topic": "Efficient ML", "field": "AI: beyond language", "year": 2020, "total": 1134}
+{"topic": "Efficient ML", "field": "AI: beyond language", "year": 2021, "total": 1631}
+{"topic": "Efficient ML", "field": "AI: beyond language", "year": 2022, "total": 2089}
+{"topic": "Efficient ML", "field": "AI: beyond language", "year": 2023, "total": 2740}
+{"topic": "Efficient ML", "field": "AI: beyond language", "year": 2024, "total": 3655}
+{"topic": "Efficient ML", "field": "AI: beyond language", "year": 2025, "total": 5054}
+{"topic": "Efficient ML", "field": "AI: beyond language", "year": 2026, "total": 4766}
+{"topic": "Security & privacy", "field": "Computer science", "year": 2017, "total": 1103}
+{"topic": "Security & privacy", "field": "Computer science", "year": 2018, "total": 1780}
+{"topic": "Security & privacy", "field": "Computer science", "year": 2019, "total": 2691}
+{"topic": "Security & privacy", "field": "Computer science", "year": 2020, "total": 4255}
+{"topic": "Security & privacy", "field": "Computer science", "year": 2021, "total": 5989}
+{"topic": "Security & privacy", "field": "Computer science", "year": 2022, "total": 7695}
+{"topic": "Security & privacy", "field": "Computer science", "year": 2023, "total": 10485}
+{"topic": "Security & privacy", "field": "Computer science", "year": 2024, "total": 14050}
+{"topic": "Security & privacy", "field": "Computer science", "year": 2025, "total": 19914}
+{"topic": "Security & privacy", "field": "Computer science", "year": 2026, "total": 17511}
+{"topic": "Distributed systems", "field": "Computer science", "year": 2017, "total": 12292}
+{"topic": "Distributed systems", "field": "Computer science", "year": 2018, "total": 12636}
+{"topic": "Distributed systems", "field": "Computer science", "year": 2019, "total": 11928}
+{"topic": "Distributed systems", "field": "Computer science", "year": 2020, "total": 10969}
+{"topic": "Distributed systems", "field": "Computer science", "year": 2021, "total": 10181}
+{"topic": "Distributed systems", "field": "Computer science", "year": 2022, "total": 8565}
+{"topic": "Distributed systems", "field": "Computer science", "year": 2023, "total": 9229}
+{"topic": "Distributed systems", "field": "Computer science", "year": 2024, "total": 10288}
+{"topic": "Distributed systems", "field": "Computer science", "year": 2025, "total": 12044}
+{"topic": "Distributed systems", "field": "Computer science", "year": 2026, "total": 8308}
+{"topic": "Databases", "field": "Computer science", "year": 2017, "total": 1131}
+{"topic": "Databases", "field": "Computer science", "year": 2018, "total": 1096}
+{"topic": "Databases", "field": "Computer science", "year": 2019, "total": 1098}
+{"topic": "Databases", "field": "Computer science", "year": 2020, "total": 1019}
+{"topic": "Databases", "field": "Computer science", "year": 2021, "total": 864}
+{"topic": "Databases", "field": "Computer science", "year": 2022, "total": 805}
+{"topic": "Databases", "field": "Computer science", "year": 2023, "total": 925}
+{"topic": "Databases", "field": "Computer science", "year": 2024, "total": 1309}
+{"topic": "Databases", "field": "Computer science", "year": 2025, "total": 1950}
+{"topic": "Databases", "field": "Computer science", "year": 2026, "total": 2014}
+{"topic": "Code & software engineering", "field": "Computer science", "year": 2017, "total": 3478}
+{"topic": "Code & software engineering", "field": "Computer science", "year": 2018, "total": 3741}
+{"topic": "Code & software engineering", "field": "Computer science", "year": 2019, "total": 3575}
+{"topic": "Code & software engineering", "field": "Computer science", "year": 2020, "total": 3281}
+{"topic": "Code & software engineering", "field": "Computer science", "year": 2021, "total": 2897}
+{"topic": "Code & software engineering", "field": "Computer science", "year": 2022, "total": 2594}
+{"topic": "Code & software engineering", "field": "Computer science", "year": 2023, "total": 3193}
+{"topic": "Code & software engineering", "field": "Computer science", "year": 2024, "total": 4255}
+{"topic": "Code & software engineering", "field": "Computer science", "year": 2025, "total": 6164}
+{"topic": "Code & software engineering", "field": "Computer science", "year": 2026, "total": 6908}
+{"topic": "Algorithms & theory", "field": "Computer science", "year": 2017, "total": 7514}
+{"topic": "Algorithms & theory", "field": "Computer science", "year": 2018, "total": 8052}
+{"topic": "Algorithms & theory", "field": "Computer science", "year": 2019, "total": 8516}
+{"topic": "Algorithms & theory", "field": "Computer science", "year": 2020, "total": 8354}
+{"topic": "Algorithms & theory", "field": "Computer science", "year": 2021, "total": 7780}
+{"topic": "Algorithms & theory", "field": "Computer science", "year": 2022, "total": 7028}
+{"topic": "Algorithms & theory", "field": "Computer science", "year": 2023, "total": 7864}
+{"topic": "Algorithms & theory", "field": "Computer science", "year": 2024, "total": 10014}
+{"topic": "Algorithms & theory", "field": "Computer science", "year": 2025, "total": 14081}
+{"topic": "Algorithms & theory", "field": "Computer science", "year": 2026, "total": 11402}
+{"topic": "Quantum computing", "field": "Physics", "year": 2017, "total": 1215}
+{"topic": "Quantum computing", "field": "Physics", "year": 2018, "total": 1589}
+{"topic": "Quantum computing", "field": "Physics", "year": 2019, "total": 1972}
+{"topic": "Quantum computing", "field": "Physics", "year": 2020, "total": 2274}
+{"topic": "Quantum computing", "field": "Physics", "year": 2021, "total": 2833}
+{"topic": "Quantum computing", "field": "Physics", "year": 2022, "total": 2994}
+{"topic": "Quantum computing", "field": "Physics", "year": 2023, "total": 3800}
+{"topic": "Quantum computing", "field": "Physics", "year": 2024, "total": 5052}
+{"topic": "Quantum computing", "field": "Physics", "year": 2025, "total": 6291}
+{"topic": "Quantum computing", "field": "Physics", "year": 2026, "total": 5073}
+{"topic": "Condensed matter", "field": "Physics", "year": 2017, "total": 4950}
+{"topic": "Condensed matter", "field": "Physics", "year": 2018, "total": 5182}
+{"topic": "Condensed matter", "field": "Physics", "year": 2019, "total": 5123}
+{"topic": "Condensed matter", "field": "Physics", "year": 2020, "total": 4895}
+{"topic": "Condensed matter", "field": "Physics", "year": 2021, "total": 4890}
+{"topic": "Condensed matter", "field": "Physics", "year": 2022, "total": 4080}
+{"topic": "Condensed matter", "field": "Physics", "year": 2023, "total": 4004}
+{"topic": "Condensed matter", "field": "Physics", "year": 2024, "total": 3892}
+{"topic": "Condensed matter", "field": "Physics", "year": 2025, "total": 4401}
+{"topic": "Condensed matter", "field": "Physics", "year": 2026, "total": 3789}
+{"topic": "Astrophysics & cosmology", "field": "Physics", "year": 2017, "total": 9889}
+{"topic": "Astrophysics & cosmology", "field": "Physics", "year": 2018, "total": 10746}
+{"topic": "Astrophysics & cosmology", "field": "Physics", "year": 2019, "total": 10575}
+{"topic": "Astrophysics & cosmology", "field": "Physics", "year": 2020, "total": 9995}
+{"topic": "Astrophysics & cosmology", "field": "Physics", "year": 2021, "total": 9609}
+{"topic": "Astrophysics & cosmology", "field": "Physics", "year": 2022, "total": 8740}
+{"topic": "Astrophysics & cosmology", "field": "Physics", "year": 2023, "total": 8812}
+{"topic": "Astrophysics & cosmology", "field": "Physics", "year": 2024, "total": 9652}
+{"topic": "Astrophysics & cosmology", "field": "Physics", "year": 2025, "total": 10664}
+{"topic": "Astrophysics & cosmology", "field": "Physics", "year": 2026, "total": 10834}
+{"topic": "Particle physics", "field": "Physics", "year": 2017, "total": 3374}
+{"topic": "Particle physics", "field": "Physics", "year": 2018, "total": 3281}
+{"topic": "Particle physics", "field": "Physics", "year": 2019, "total": 3031}
+{"topic": "Particle physics", "field": "Physics", "year": 2020, "total": 2604}
+{"topic": "Particle physics", "field": "Physics", "year": 2021, "total": 2351}
+{"topic": "Particle physics", "field": "Physics", "year": 2022, "total": 2105}
+{"topic": "Particle physics", "field": "Physics", "year": 2023, "total": 1689}
+{"topic": "Particle physics", "field": "Physics", "year": 2024, "total": 1820}
+{"topic": "Particle physics", "field": "Physics", "year": 2025, "total": 1929}
+{"topic": "Particle physics", "field": "Physics", "year": 2026, "total": 1468}
+{"topic": "Gravitational waves", "field": "Physics", "year": 2017, "total": 2208}
+{"topic": "Gravitational waves", "field": "Physics", "year": 2018, "total": 2486}
+{"topic": "Gravitational waves", "field": "Physics", "year": 2019, "total": 2733}
+{"topic": "Gravitational waves", "field": "Physics", "year": 2020, "total": 2792}
+{"topic": "Gravitational waves", "field": "Physics", "year": 2021, "total": 2608}
+{"topic": "Gravitational waves", "field": "Physics", "year": 2022, "total": 2507}
+{"topic": "Gravitational waves", "field": "Physics", "year": 2023, "total": 2786}
+{"topic": "Gravitational waves", "field": "Physics", "year": 2024, "total": 2866}
+{"topic": "Gravitational waves", "field": "Physics", "year": 2025, "total": 3448}
+{"topic": "Gravitational waves", "field": "Physics", "year": 2026, "total": 3374}
+{"topic": "Machine learning for physics", "field": "Physics", "year": 2017, "total": 214}
+{"topic": "Machine learning for physics", "field": "Physics", "year": 2018, "total": 340}
+{"topic": "Machine learning for physics", "field": "Physics", "year": 2019, "total": 603}
+{"topic": "Machine learning for physics", "field": "Physics", "year": 2020, "total": 927}
+{"topic": "Machine learning for physics", "field": "Physics", "year": 2021, "total": 1255}
+{"topic": "Machine learning for physics", "field": "Physics", "year": 2022, "total": 1595}
+{"topic": "Machine learning for physics", "field": "Physics", "year": 2023, "total": 2126}
+{"topic": "Machine learning for physics", "field": "Physics", "year": 2024, "total": 2890}
+{"topic": "Machine learning for physics", "field": "Physics", "year": 2025, "total": 4420}
+{"topic": "Machine learning for physics", "field": "Physics", "year": 2026, "total": 6160}
+{"topic": "Optimization", "field": "Math & statistics", "year": 2017, "total": 1471}
+{"topic": "Optimization", "field": "Math & statistics", "year": 2018, "total": 1540}
+{"topic": "Optimization", "field": "Math & statistics", "year": 2019, "total": 1685}
+{"topic": "Optimization", "field": "Math & statistics", "year": 2020, "total": 1756}
+{"topic": "Optimization", "field": "Math & statistics", "year": 2021, "total": 1413}
+{"topic": "Optimization", "field": "Math & statistics", "year": 2022, "total": 1262}
+{"topic": "Optimization", "field": "Math & statistics", "year": 2023, "total": 1237}
+{"topic": "Optimization", "field": "Math & statistics", "year": 2024, "total": 1223}
+{"topic": "Optimization", "field": "Math & statistics", "year": 2025, "total": 1321}
+{"topic": "Optimization", "field": "Math & statistics", "year": 2026, "total": 1337}
+{"topic": "Probability & stochastic processes", "field": "Math & statistics", "year": 2017, "total": 3462}
+{"topic": "Probability & stochastic processes", "field": "Math & statistics", "year": 2018, "total": 3451}
+{"topic": "Probability & stochastic processes", "field": "Math & statistics", "year": 2019, "total": 3417}
+{"topic": "Probability & stochastic processes", "field": "Math & statistics", "year": 2020, "total": 3292}
+{"topic": "Probability & stochastic processes", "field": "Math & statistics", "year": 2021, "total": 2869}
+{"topic": "Probability & stochastic processes", "field": "Math & statistics", "year": 2022, "total": 2329}
+{"topic": "Probability & stochastic processes", "field": "Math & statistics", "year": 2023, "total": 2067}
+{"topic": "Probability & stochastic processes", "field": "Math & statistics", "year": 2024, "total": 2226}
+{"topic": "Probability & stochastic processes", "field": "Math & statistics", "year": 2025, "total": 2354}
+{"topic": "Probability & stochastic processes", "field": "Math & statistics", "year": 2026, "total": 2355}
+{"topic": "Statistics & causal inference", "field": "Math & statistics", "year": 2017, "total": 842}
+{"topic": "Statistics & causal inference", "field": "Math & statistics", "year": 2018, "total": 913}
+{"topic": "Statistics & causal inference", "field": "Math & statistics", "year": 2019, "total": 993}
+{"topic": "Statistics & causal inference", "field": "Math & statistics", "year": 2020, "total": 1045}
+{"topic": "Statistics & causal inference", "field": "Math & statistics", "year": 2021, "total": 997}
+{"topic": "Statistics & causal inference", "field": "Math & statistics", "year": 2022, "total": 961}
+{"topic": "Statistics & causal inference", "field": "Math & statistics", "year": 2023, "total": 980}
+{"topic": "Statistics & causal inference", "field": "Math & statistics", "year": 2024, "total": 1150}
+{"topic": "Statistics & causal inference", "field": "Math & statistics", "year": 2025, "total": 1502}
+{"topic": "Statistics & causal inference", "field": "Math & statistics", "year": 2026, "total": 1539}

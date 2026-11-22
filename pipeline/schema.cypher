@@ -6,8 +6,11 @@
 //         (Paper)-[:PROPOSES]->(Method), (Paper)-[:USES]->(Method),
 //         (Paper)-[:EVALUATES_ON]->(Dataset),
 //         (Paper)-[:ADDRESSES]->(Task), (Method)-[:IMPROVES_ON]->(Method)
+//         (Paper)-[:IN_TOPIC]->(Topic)-[:PART_OF]->(Field)   (Topic.years/counts: field-wide volume)
 
 CREATE CONSTRAINT paper_id IF NOT EXISTS FOR (p:Paper) REQUIRE p.arxiv_id IS UNIQUE;
+CREATE CONSTRAINT topic_name IF NOT EXISTS FOR (t:Topic) REQUIRE t.name IS UNIQUE;
+CREATE CONSTRAINT field_name IF NOT EXISTS FOR (f:Field) REQUIRE f.name IS UNIQUE;
 CREATE CONSTRAINT author_name IF NOT EXISTS FOR (a:Author) REQUIRE a.name IS UNIQUE;
 CREATE CONSTRAINT method_name IF NOT EXISTS FOR (m:Method) REQUIRE m.name IS UNIQUE;
 CREATE CONSTRAINT dataset_name IF NOT EXISTS FOR (d:Dataset) REQUIRE d.name IS UNIQUE;

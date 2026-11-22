@@ -11,10 +11,11 @@ from app.agent.state import AgentState
 @lru_cache
 def build():
     g = StateGraph(AgentState)
-    for name in ("plan", "retrieve", "check", "rewrite", "answer", "subgraph"):
+    for name in ("plan", "decline", "retrieve", "check", "rewrite", "answer", "subgraph"):
         g.add_node(name, getattr(nodes, name))
     g.add_edge(START, "plan")
-    g.add_edge("plan", "retrieve")
+    g.add_conditional_edges("plan", nodes.route_after_plan, {"decline": "decline", "retrieve": "retrieve"})
+    g.add_edge("decline", END)
     g.add_edge("retrieve", "check")
     g.add_conditional_edges("check", nodes.route_after_check, {"rewrite": "rewrite", "answer": "answer"})
     g.add_edge("rewrite", "retrieve")

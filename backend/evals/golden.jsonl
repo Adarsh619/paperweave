@@ -28,3 +28,16 @@
 {"id": "C08", "category": "comparison", "question": "Compare Chain-of-Thought and Tree of Thoughts", "gold": ["2201.11903", "2305.10601"]}
 {"id": "C09", "category": "comparison", "question": "Compare Longformer and RoFormer for handling long sequences", "gold": ["2004.05150", "2104.09864"]}
 {"id": "C10", "category": "comparison", "question": "Compare Atlas and RETRO", "gold": ["2208.03299", "2112.04426"]}
+{"id": "P01", "category": "lookup", "field": "physics-math", "question": "What did the programmable superconducting processor experiment claim about quantum supremacy?", "gold": ["1910.11333"]}
+{"id": "P02", "category": "lookup", "field": "physics-math", "question": "What did the experiment on quantum error correction below the surface code threshold show?", "gold": ["2408.13687"]}
+{"id": "P03", "category": "lookup", "field": "physics-math", "question": "What did LIGO observe in the first detection of gravitational waves from a binary black hole merger?", "gold": ["1602.03837"]}
+{"id": "P04", "category": "lookup", "field": "physics-math", "question": "What do the DESI DR2 baryon acoustic oscillation measurements say about dark energy?", "gold": ["2503.14738"]}
+{"id": "P05", "category": "lookup", "field": "physics-math", "question": "What charge order was found in the kagome superconductor KV3Sb5?", "gold": ["2012.15709"]}
+{"id": "P06", "category": "lookup", "field": "physics-math", "question": "How does Adam adapt the learning rate for each parameter?", "gold": ["1412.6980"]}
+{"id": "P07", "category": "lookup", "field": "physics-math", "question": "How can conformal prediction keep its coverage guarantee under covariate shift?", "gold": ["1904.06019"]}
+{"id": "P08", "category": "comparison", "field": "physics-math", "question": "Compare noise-induced barren plateaus with the effect of barren plateaus on gradient-free optimization", "gold": ["2007.14384", "2011.12245"]}
+{"id": "P09", "category": "multi-hop", "field": "physics-math", "question": "Which papers reported the X-ray, ultraviolet and optical counterparts of the neutron star merger GW170817?", "gold": ["1710.05433", "1710.05437", "1710.05443"]}
+{"id": "P10", "category": "comparison", "field": "physics-math", "question": "Compare conformal prediction under covariate shift with distributional conformal prediction", "gold": ["1909.07889", "1904.06019"]}
+{"id": "X01", "category": "off-topic", "question": "What's the weather in Mumbai tomorrow?", "gold": []}
+{"id": "X02", "category": "off-topic", "question": "Write a Python function that reverses a linked list", "gold": []}
+{"id": "X03", "category": "off-topic", "question": "Who won the 2011 cricket World Cup?", "gold": []}

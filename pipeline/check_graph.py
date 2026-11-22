@@ -28,6 +28,11 @@ CHECKS = {
     "papers with no entities": (
         "MATCH (p:Paper) WHERE NOT (p)-[:PROPOSES|USES|EVALUATES_ON|ADDRESSES]->() RETURN count(p) AS n"
     ),
+    "topics": "MATCH (t:Topic) RETURN count(t) AS n",
+    "papers with no topic": "MATCH (p:Paper) WHERE NOT (p)-[:IN_TOPIC]->() RETURN count(p) AS n",
+    "topics without volume stats": "MATCH (t:Topic) WHERE size(coalesce(t.years, [])) = 0 RETURN count(t) AS n",
+    "all nodes (AuraDB Free: 200,000)": "MATCH (n) RETURN count(n) AS n",
+    "all relationships (AuraDB Free: 400,000)": "MATCH ()-[r]->() RETURN count(r) AS n",
 }
 
 TOP_ENTITIES = """
@@ -59,7 +64,7 @@ def main() -> None:
     with GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USER, NEO4J_PASSWORD)) as driver:
         records = lambda q: driver.execute_query(q).records  # noqa: E731
         for label, query in CHECKS.items():
-            print(f"{label:32} {records(query)[0]['n']}")
+            print(f"{label:42} {records(query)[0]['n']}")
 
         print("\nMost cited within the corpus:")
         for r in records(TOP_CITED_IN_CORPUS):

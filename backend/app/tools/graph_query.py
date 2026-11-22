@@ -4,6 +4,7 @@ plus the arxiv_ids it touched, so the answer step can cite them."""
 import json
 import re
 from dataclasses import dataclass, field
+from datetime import date
 
 from app import stores
 from app.tools import cypher_templates as T
@@ -24,8 +25,12 @@ def resolve_entity(name: str, prefer: str | None = None) -> dict | None:
     """Map a name from the question to a graph entity: exact/alias match, then substring.
     prefer ("Method", "Dataset", "Task") breaks ambiguity: "Retrieval-Augmented Generation"
     is both a task and an alias of the RAG method."""
-    rows = (stores.read(T.RESOLVE_ENTITY, name=name, prefer=prefer)
-            or stores.read(T.RESOLVE_ENTITY_FUZZY, name=name, prefer=prefer))
+    rows = stores.read(T.RESOLVE_ENTITY, name=name, prefer=prefer)
+    # People write "Corrective RAG"; abstracts write "Corrective Retrieval Augmented Generation".
+    spelled = re.sub(r"\bRAG\b", "Retrieval Augmented Generation", name, flags=re.I)
+    if not rows and spelled != name:
+        rows = stores.read(T.RESOLVE_ENTITY, name=spelled, prefer=prefer)
+    rows = rows or stores.read(T.RESOLVE_ENTITY_FUZZY, name=name, prefer=prefer)
     return rows[0] if rows else None
 
 
@@ -57,10 +62,12 @@ def _title_match(entity: dict) -> list[dict]:
 
 
 def _origin(proposed_in: list[dict], entity: dict | None = None) -> list[dict]:
-    """The earliest proposing paper. Extraction sometimes marks later papers that only
-    apply a method (e.g. RAG) as proposing it; the first one is the real origin.
+    """The most cited proposing paper. Extraction sometimes marks papers that only apply a
+    method (e.g. RAG) as proposing it, and unrelated papers reuse names (two "GraphRAG"s);
+    the real origin is almost always the most cited. Ties go to the earliest.
     With no proposing paper in the graph, fall back to a title match."""
-    papers = sorted((p for p in proposed_in if p["arxiv_id"]), key=lambda p: p["year"] or 9999)
+    papers = sorted((p for p in proposed_in if p["arxiv_id"]),
+                    key=lambda p: (-(p.get("citations") or 0), p["year"] or 9999))
     if not papers and entity:
         return _title_match(entity)
     return papers[:1]
@@ -145,10 +152,111 @@ def top_cited(min_year: int | None = None, topic: str | None = None) -> GraphRes
 
 
 SCHEMA_FOR_LLM = """Nodes: (:Paper {arxiv_id, title, abstract, year, venue, citation_count}),
-(:Author {name}), (:Method {name, aliases}), (:Dataset {name, aliases}), (:Task {name})
+(:Author {name}), (:Method {name, aliases}), (:Dataset {name, aliases}), (:Task {name}),
+(:Topic {name}), (:Field {name})
 Relationships: (Author)-[:WROTE {position}]->(Paper), (Paper)-[:CITES]->(Paper),
 (Paper)-[:PROPOSES]->(Method), (Paper)-[:USES]->(Method), (Paper)-[:EVALUATES_ON]->(Dataset),
-(Paper)-[:ADDRESSES]->(Task), (Method)-[:IMPROVES_ON {papers}]->(Method)"""
+(Paper)-[:ADDRESSES]->(Task), (Method)-[:IMPROVES_ON {papers}]->(Method),
+(Paper)-[:IN_TOPIC]->(Topic), (Topic)-[:PART_OF]->(Field)"""
+
+
+# --- Trends: what the data shows, never forecasts. ---
+
+RECENT_YEARS = 3  # "recent" = this year and the 2 before; "earlier" = the 3 years before that
+MIN_RECENT_PAPERS = 3  # a rising method must appear in at least this many recent papers
+
+
+def growth(years: list[int], counts: list[int], this_year: int) -> float | None:
+    """Change in yearly paper volume: last 2 complete years vs the 2 before (the current year
+    is still filling up, so it's left out). None when there isn't enough history."""
+    by_year = dict(zip(years, counts))
+    recent = [by_year.get(this_year - 1), by_year.get(this_year - 2)]
+    prior = [by_year.get(this_year - 3), by_year.get(this_year - 4)]
+    if None in recent or None in prior or not sum(prior):
+        return None
+    return (sum(recent) - sum(prior)) / sum(prior)
+
+
+def rising_methods(period_papers: dict[str, int], rows: list[dict], limit: int = 8) -> list[dict]:
+    """Methods whose share of papers grew most from the earlier to the recent period."""
+    counts: dict[str, dict[str, int]] = {}
+    for r in rows:
+        counts.setdefault(r["method"], {})[r["period"]] = r["papers"]
+    recent_total, earlier_total = period_papers.get("recent", 0), period_papers.get("earlier", 0)
+    if not recent_total or not earlier_total:
+        return []
+    out = []
+    for method, c in counts.items():
+        n_recent = c.get("recent", 0)
+        if n_recent < MIN_RECENT_PAPERS:
+            continue
+        share_recent, share_earlier = n_recent / recent_total, c.get("earlier", 0) / earlier_total
+        out.append({"method": method, "recent_papers": n_recent, "share_recent": share_recent,
+                    "share_earlier": share_earlier, "change": share_recent - share_earlier})
+    return sorted(out, key=lambda m: m["change"], reverse=True)[:limit]
+
+
+def trends(field: str | None = None, topic: str | None = None, this_year: int | None = None) -> dict:
+    this_year = this_year or date.today().year
+    params = {"field": field, "topic": topic, "this_year": this_year,
+              "recent_from": this_year - RECENT_YEARS + 1, "from_year": this_year - 2 * RECENT_YEARS + 1}
+    topics = []
+    for r in stores.read(T.TOPIC_VOLUME, field=field, topic=topic):
+        g = growth(r["years"] or [], r["counts"] or [], this_year)
+        topics.append({**r, "growth": g})
+    topics.sort(key=lambda t: (t["growth"] is None, -(t["growth"] or 0)))
+    period_papers = {r["period"]: r["papers"] for r in stores.read(T.PERIOD_PAPERS, **params)}
+    return {
+        "field": field,
+        "topic": topic,
+        "recent_years": [params["recent_from"], this_year],
+        "earlier_years": [params["from_year"], params["recent_from"] - 1],
+        "topics": topics,
+        "rising_methods": rising_methods(period_papers, stores.read(T.PERIOD_METHODS, **params)),
+        "breakout_papers": stores.read(T.BREAKOUT_PAPERS, **params),
+    }
+
+
+def resolve_scope(name: str | None) -> tuple[str | None, str | None]:
+    """Map a name from the question to (field, topic): "physics" -> the Physics field."""
+    if not name:
+        return None, None
+    key = name.lower()
+    rows = stores.read(T.TOPIC_NAMES)
+    # Exact names first, so "Physics" is the field, not "Machine learning for physics".
+    for r in rows:
+        if key == r["topic"].lower():
+            return None, r["topic"]
+        if key == r["field"].lower():
+            return r["field"], None
+    for r in rows:
+        if key in r["topic"].lower() or r["topic"].lower() in key:
+            return None, r["topic"]
+    for r in rows:
+        if key in r["field"].lower() or r["field"].lower() in key:
+            return r["field"], None
+    return None, None
+
+
+def trend_facts(scope: str | None) -> GraphResult:
+    """Trend data as citable facts for the agent's answer."""
+    field, topic = resolve_scope(scope)
+    data = trends(field, topic)
+    out = GraphResult()
+    where = topic or field or "the whole library"
+    r0, r1 = data["recent_years"]
+    e0, e1 = data["earlier_years"]
+    for t in [t for t in data["topics"] if t["growth"] is not None][:6]:
+        out.add(f"Field-wide papers on {t['topic']} changed by {t['growth']:+.0%} "
+                f"(last 2 complete years vs the 2 before; Semantic Scholar counts).")
+    for m in data["rising_methods"]:
+        out.add(f"In {where}, {m['method']} appears in {m['share_recent']:.1%} of {r0}-{r1} papers "
+                f"vs {m['share_earlier']:.1%} in {e0}-{e1}.")
+    for p in data["breakout_papers"]:
+        out.add(f"Breakout paper: {_paper(p)}, {p['citations']} citations (~{p['per_year']:.0f}/year).", p["arxiv_id"])
+    if not out.facts:
+        out.add(f"No trend data for {where} yet.")
+    return out
 
 
 def run_llm_cypher(cypher: str) -> GraphResult:

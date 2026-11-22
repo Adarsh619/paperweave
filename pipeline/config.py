@@ -39,61 +39,173 @@ QDRANT_COLLECTION = os.getenv("QDRANT_COLLECTION", "papers")
 DENSE_MODEL = os.getenv("QDRANT_DENSE_MODEL", "sentence-transformers/all-MiniLM-L6-v2")  # 384-dim, cosine
 SPARSE_MODEL = os.getenv("QDRANT_SPARSE_MODEL", "Qdrant/bm25")  # keyword scores; Qdrant applies IDF
 
-# Landmark papers always included, so the graph has well-known anchors and
-# lineage questions ("what built on RAG?") have answers.
-SEED_ARXIV_IDS = [
-    # Foundations
-    "1706.03762",  # Attention Is All You Need
-    "1810.04805",  # BERT
-    "1910.10683",  # T5
-    "2005.14165",  # GPT-3
-    "2203.02155",  # InstructGPT
-    "2303.08774",  # GPT-4 Technical Report
-    "2302.13971",  # LLaMA
-    "2307.09288",  # Llama 2
-    "2310.06825",  # Mistral 7B
-    "2106.09685",  # LoRA
-    "2104.09864",  # RoFormer (RoPE)
-    "2004.05150",  # Longformer
-    "2205.14135",  # FlashAttention
-    # Retrieval
-    "1908.10084",  # Sentence-BERT
-    "2004.04906",  # Dense Passage Retrieval
-    "2004.12832",  # ColBERT
-    "2212.10496",  # HyDE
-    # Retrieval-augmented generation
-    "2002.08909",  # REALM
-    "2005.11401",  # RAG (Lewis et al.)
-    "2007.01282",  # Fusion-in-Decoder
-    "2112.04426",  # RETRO
-    "2208.03299",  # Atlas
-    "2307.03172",  # Lost in the Middle
-    "2310.11511",  # Self-RAG
-    "2312.10997",  # RAG survey (Gao et al.)
-    "2401.15884",  # Corrective RAG
-    "2401.18059",  # RAPTOR
-    "2403.14403",  # Adaptive-RAG
-    "2404.16130",  # GraphRAG (From Local to Global)
-    "2405.14831",  # HippoRAG
-    "2410.05779",  # LightRAG
-    "2309.15217",  # RAGAS
-    # Reasoning and agents
-    "2201.11903",  # Chain-of-Thought
-    "2210.03629",  # ReAct
-    "2302.04761",  # Toolformer
-    "2303.11366",  # Reflexion
-    "2304.03442",  # Generative Agents
-    "2305.10601",  # Tree of Thoughts
-]
+TOPIC_STATS_FILE = DATA_DIR / "topic_stats.jsonl"  # field-wide paper counts per topic and year
 
-# Topic searches that fill the corpus beyond the seeds (Semantic Scholar bulk
-# search syntax). Results are sorted by citation count, so each topic
-# contributes its most influential arXiv papers.
-TOPIC_QUERIES = [
-    '"retrieval-augmented generation"',
-    '"knowledge graph" + ("large language model" | LLM)',
-    '("LLM agent" | "language agent" | "autonomous agent") + ("large language model" | LLM)',
-    '"dense retrieval" | "passage retrieval"',
-    '"long context" + "language model"',
-    'hallucination + ("large language model" | LLM)',
-]
+# Fields group topics on the site ("Coverage") and in the graph: (:Topic)-[:PART_OF]->(:Field).
+LLM = "AI: language models"
+AI = "AI: beyond language"
+CS = "Computer science"
+PHYSICS = "Physics"
+MATH = "Math & statistics"
+
+# Each topic: its field, a Semantic Scholar bulk-search query, the S2 field of study to
+# filter on, and landmark seed papers that are always included (so lineage questions
+# like "what built on RAG?" have anchors). fetch_papers.py takes the most cited arXiv
+# papers per topic *per year*, so recent years aren't crowded out by older classics.
+TOPICS: dict[str, dict] = {
+    "Language model foundations": {
+        "field": LLM, "fos": "Computer Science",
+        "query": '"language model" + (pretraining | "instruction tuning" | "scaling laws")',
+        "seeds": ["1706.03762", "1810.04805", "1910.10683", "2005.14165", "2203.02155", "2303.08774",
+                  "2302.13971", "2307.09288", "2310.06825", "2106.09685", "2104.09864", "2004.05150",
+                  "2205.14135"],
+    },
+    "Retrieval-augmented generation": {
+        "field": LLM, "fos": "Computer Science",
+        "query": '"retrieval-augmented generation"',
+        "seeds": ["2002.08909", "2005.11401", "2007.01282", "2112.04426", "2208.03299", "2307.03172",
+                  "2310.11511", "2312.10997", "2401.15884", "2401.18059", "2403.14403", "2309.15217"],
+    },
+    "Knowledge graphs + LLMs": {
+        "field": LLM, "fos": "Computer Science",
+        "query": '"knowledge graph" + ("large language model" | LLM)',
+        "seeds": ["2404.16130", "2405.14831", "2410.05779"],
+    },
+    "LLM agents": {
+        "field": LLM, "fos": "Computer Science",
+        "query": '("LLM agent" | "language agent" | "autonomous agent") + ("large language model" | LLM)',
+        "seeds": ["2201.11903", "2210.03629", "2302.04761", "2303.11366", "2304.03442", "2305.10601"],
+    },
+    "Dense retrieval": {
+        "field": LLM, "fos": "Computer Science",
+        "query": '"dense retrieval" | "passage retrieval"',
+        "seeds": ["1908.10084", "2004.04906", "2004.12832", "2212.10496"],
+    },
+    "Long context": {
+        "field": LLM, "fos": "Computer Science",
+        "query": '"long context" + "language model"',
+        "seeds": [],
+    },
+    "Hallucination": {
+        "field": LLM, "fos": "Computer Science",
+        "query": 'hallucination + ("large language model" | LLM)',
+        "seeds": [],
+    },
+    "Computer vision": {
+        "field": AI, "fos": "Computer Science",
+        "query": '"object detection" | "semantic segmentation" | "image classification" | "vision transformer"',
+        "seeds": ["1512.03385", "2010.11929", "2304.02643"],  # ResNet, ViT, Segment Anything
+    },
+    "Image generation": {
+        "field": AI, "fos": "Computer Science",
+        "query": '"diffusion model" | "text-to-image" | "image generation"',
+        "seeds": ["2006.11239", "2112.10752"],  # DDPM, latent diffusion (Stable Diffusion)
+    },
+    "Multimodal models": {
+        "field": AI, "fos": "Computer Science",
+        "query": '"vision-language" | "multimodal large language model" | "visual question answering"',
+        "seeds": ["2103.00020"],  # CLIP
+    },
+    "Reinforcement learning": {
+        "field": AI, "fos": "Computer Science",
+        "query": '"reinforcement learning"',
+        "seeds": ["1312.5602", "1707.06347"],  # DQN, PPO
+    },
+    "Robotics": {
+        "field": AI, "fos": "Computer Science",
+        "query": 'robot + (learning | manipulation | navigation)',
+        "seeds": [],
+    },
+    "Speech": {
+        "field": AI, "fos": "Computer Science",
+        "query": '"speech recognition" | "text-to-speech" | "speech synthesis"',
+        "seeds": ["2006.11477", "2212.04356"],  # wav2vec 2.0, Whisper
+    },
+    "Graph neural networks": {
+        "field": AI, "fos": "Computer Science",
+        "query": '"graph neural network" | "graph convolutional network"',
+        "seeds": ["1609.02907", "1710.10903"],  # GCN, GAT
+    },
+    "Alignment & interpretability": {
+        "field": AI, "fos": "Computer Science",
+        "query": '"AI alignment" | "AI safety" | "mechanistic interpretability" | "explainable AI"',
+        "seeds": ["2212.08073", "2305.18290"],  # Constitutional AI, DPO
+    },
+    "Efficient ML": {
+        "field": AI, "fos": "Computer Science",
+        "query": '"model compression" | "knowledge distillation" | "network quantization" | "network pruning"',
+        "seeds": ["1910.01108", "2210.17323", "2305.14314"],  # DistilBERT, GPTQ, QLoRA
+    },
+    "Security & privacy": {
+        "field": CS, "fos": "Computer Science",
+        "query": '"differential privacy" | "federated learning" | "adversarial attack" | "malware detection"',
+        "seeds": [],
+    },
+    "Distributed systems": {
+        "field": CS, "fos": "Computer Science",
+        "query": '"distributed systems" | "cloud computing" | "serverless" | "distributed training"',
+        "seeds": [],
+    },
+    "Databases": {
+        "field": CS, "fos": "Computer Science",
+        "query": '"query optimization" | "database systems" | "vector database" | "text-to-SQL"',
+        "seeds": [],
+    },
+    "Code & software engineering": {
+        "field": CS, "fos": "Computer Science",
+        "query": '"code generation" | "program synthesis" | "software engineering"',
+        "seeds": ["2107.03374"],  # Codex
+    },
+    "Algorithms & theory": {
+        "field": CS, "fos": "Computer Science",
+        "query": '"approximation algorithm" | "computational complexity" | "graph algorithm"',
+        "seeds": [],
+    },
+    "Quantum computing": {
+        "field": PHYSICS, "fos": "Physics",
+        "query": '"quantum computing" | "quantum algorithm" | "quantum error correction"',
+        "seeds": ["1910.11333"],  # quantum supremacy (Sycamore)
+    },
+    "Condensed matter": {
+        "field": PHYSICS, "fos": "Physics",
+        "query": 'superconductivity | "topological insulator" | "condensed matter"',
+        "seeds": [],
+    },
+    "Astrophysics & cosmology": {
+        "field": PHYSICS, "fos": "Physics",
+        "query": 'cosmology | "dark matter" | "dark energy" | exoplanet',
+        "seeds": ["1807.06209"],  # Planck 2018 cosmological parameters
+    },
+    "Particle physics": {
+        "field": PHYSICS, "fos": "Physics",
+        "query": '"Higgs boson" | "Large Hadron Collider" | "particle physics"',
+        "seeds": ["1207.7214"],  # ATLAS Higgs discovery
+    },
+    "Gravitational waves": {
+        "field": PHYSICS, "fos": "Physics",
+        "query": '"gravitational waves" | "black hole merger"',
+        "seeds": ["1602.03837"],  # GW150914
+    },
+    "Machine learning for physics": {
+        "field": PHYSICS, "fos": "Physics",
+        "query": '"physics-informed neural network" | "neural network quantum states" | "machine learning" + physics',
+        "seeds": ["1606.02318", "1711.10561"],  # neural quantum states, PINNs
+    },
+    "Optimization": {
+        "field": MATH, "fos": "Mathematics",
+        "query": '"stochastic gradient descent" | "convex optimization" | "nonconvex optimization"',
+        "seeds": ["1412.6980"],  # Adam
+    },
+    "Probability & stochastic processes": {
+        "field": MATH, "fos": "Mathematics",
+        "query": '"stochastic process" | "random matrix" | "Markov chain"',
+        "seeds": [],
+    },
+    "Statistics & causal inference": {
+        "field": MATH, "fos": "Mathematics",
+        "query": '"causal inference" | "bayesian inference" | "conformal prediction"',
+        "seeds": ["2107.07511"],  # conformal prediction tutorial
+    },
+}
+
+SEED_ARXIV_IDS = [s for t in TOPICS.values() for s in t["seeds"]]

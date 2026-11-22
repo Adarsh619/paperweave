@@ -5,7 +5,7 @@ from typing import Annotated, Literal, TypedDict
 
 from pydantic import BaseModel, Field
 
-Intent = Literal["lookup", "lineage", "compare", "dataset", "top_cited", "recent", "graph"]
+Intent = Literal["lookup", "lineage", "compare", "dataset", "top_cited", "recent", "graph", "trend", "off_topic"]
 
 
 class Plan(BaseModel):
@@ -26,6 +26,7 @@ class CypherQuery(BaseModel):
 
 class AgentState(TypedDict, total=False):
     question: str
+    history: list[dict]  # earlier turns of this conversation: [{question, answer}], oldest first
     plan: dict
     papers: dict[str, dict]  # arxiv_id -> paper shown to the answer LLM (insertion order = priority)
     facts: list[str]  # graph facts, each citing papers as [arxiv_id]

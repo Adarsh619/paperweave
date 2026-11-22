@@ -12,6 +12,14 @@ DENSE = "dense"
 SPARSE = "bm25"
 
 
+def best_match(query: str) -> float:
+    """Cosine similarity (MiniLM) of the closest paper: a cheap "is this in the library at all?" signal."""
+    points = stores.qdrant().query_points(
+        config.QDRANT_COLLECTION, query=models.Document(text=query, model=config.DENSE_MODEL), using=DENSE, limit=1
+    ).points
+    return points[0].score if points else 0.0
+
+
 def search(query: str, limit: int = 6, min_year: int | None = None) -> list[dict]:
     flt = None
     if min_year:
